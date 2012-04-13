@@ -86,7 +86,8 @@ INSTALLED_APPS = (
     'testshop.myshop',
 )
 
-PLUGSHOP_PRODUCT_MODEL = 'testshop.myshop.models.Product'
+PLUGSHOP_PRODUCT_MODEL  = 'testshop.myshop.models.Product'
+#PLUGSHOP_GROUP_MODEL    = 'testshop.myshop.models.ProductGroup'
 
 LOGGING = {
     'version': 1,

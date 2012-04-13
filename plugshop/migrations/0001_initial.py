@@ -123,17 +123,10 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'myshop.group': {
-            'Meta': {'object_name': 'Group'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '80'}),
-            'sort': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '1'})
-        },
         'myshop.product': {
             'Meta': {'ordering': "['-created_at']", 'object_name': 'Product'},
             'created_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['myshop.Group']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_available': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),

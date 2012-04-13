@@ -1,22 +1,39 @@
 import datetime
-from django.db import models
-from django.utils.translation import ugettext as _
 
 from django.db import models
 from django.db.models import get_model
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.utils.translation import ugettext as _
 
-from plugshop.models import Option
+from mptt.models import MPTTModel, TreeForeignKey
+
+from plugshop import settings as shop_settings
+from plugshop.utils import load_class
+
+# class ProductGroupAbstract(MPTTModel):
+#     class Meta:
+#         abstract = True
+#         verbose_name = _('Product group')
+#         verbose_name_plural = _('Product groups')
+# 
+#     class MPTTMeta:
+#         ordering = ['pk', 'lft']
+# 
+#     parent = TreeForeignKey('self', null=True, blank=True)
+#     name = models.CharField(blank=False, max_length=80)
+# 
+#     def __unicode__(self):
+#         return self.name
+
+#GROUP_CLASS = load_class(shop_settings.GROUP_MODEL)
 
 class ProductAbstract(models.Model):
     """docstring for Product"""
-
     class Meta:
         abstract = True
         verbose_name, verbose_name_plural = _('product'), _('Products')
         ordering = ['-created_at']
 
+    #groups = models.ManyToManyField(GROUP_CLASS, blank=True)
     name = models.CharField(_('Name'), blank=False, max_length=200)
     slug = models.SlugField(_('Slug'), blank=False, unique=True)
     description  = models.TextField(_('Description'), blank=True)
@@ -30,7 +47,7 @@ class ProductAbstract(models.Model):
     # options = models.ManyToManyField(Option, 
     #                 through=get_model('plugshop', 'ProductOption'), 
     #                 related_name="product_options")
-    
+
     def get_options(self):
         P = get_model('plugshop', 'ProductOption')
         return P.objects.filter(product=self)

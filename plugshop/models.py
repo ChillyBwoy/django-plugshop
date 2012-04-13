@@ -1,12 +1,13 @@
 # encoding: utf-8
 import datetime
-import plugshop.utils as utils
 
 from django.db import models
+
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 
 from plugshop import settings as shop_settings
+from plugshop.utils import load_class
 
 OPTION_TYPE_CHOICES = (
     ('str', _('string')),
@@ -22,8 +23,6 @@ OPTION_TYPE_WIDGETS = (
     ('radio', _('radio buttons')),
 )
 OPTION_TYPE_CHOICES_DEFAULT = 'str'
-
-
 STATUS_CHOICES = (
     ('created', _('Created')),
     ('aproved', _('Confirmed')),
@@ -32,7 +31,6 @@ STATUS_CHOICES = (
 )
 
 class Option(models.Model):
-
     class Meta:
         verbose_name, verbose_name_plural = _("Option"), _("Options")
 
@@ -44,7 +42,7 @@ class Option(models.Model):
     def __unicode__(self):
         return self.name
 
-PRODUCT_CLASS = utils.load_class(shop_settings.PRODUCT_MODEL)
+PRODUCT_CLASS = load_class(shop_settings.PRODUCT_MODEL)
 
 class ProductOption(models.Model):
 
@@ -141,4 +139,4 @@ class OrderProduct(models.Model):
 
     def __unicode__(self):
         return "%s x %s" % (self.product.name, self.quantity)
-
+        
