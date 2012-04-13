@@ -44,5 +44,3 @@ class ProductImage(models.Model):
                     product=self.product
                 ).update(is_cover=False)
         return super(ProductImage, self).save(*args, **kwargs)
-
-
