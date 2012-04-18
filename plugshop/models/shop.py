@@ -29,9 +29,11 @@ STATUS_CHOICES = (
     ('denied', _('Denied')),
     ('delivered', _('Delivered')),
 )
+PRODUCT_CLASS = load_class(shop_settings.PRODUCT_MODEL)
 
 class Option(models.Model):
     class Meta:
+        app_label = 'plugshop'
         verbose_name, verbose_name_plural = _("Option"), _("Options")
 
     name = models.CharField(_('Name'), blank=False, max_length=200, unique=True)
@@ -42,11 +44,11 @@ class Option(models.Model):
     def __unicode__(self):
         return self.name
 
-PRODUCT_CLASS = load_class(shop_settings.PRODUCT_MODEL)
 
 class ProductOption(models.Model):
 
     class Meta:
+        app_label = 'plugshop'
         verbose_name = _("Product option")
         verbose_name_plural = _("Product options")
 
@@ -62,6 +64,7 @@ class ProductOption(models.Model):
 class ShippingType(models.Model):
 
     class Meta:
+        app_label = 'plugshop'
         verbose_name, verbose_name_plural = _('Shipping type'), _('Shipping type')
 
     name = models.CharField(_('Name'), blank=False, max_length=100)
@@ -79,14 +82,11 @@ class ShippingType(models.Model):
 
 
 class ShippingAddress(models.Model):
-
     class Meta:
+        app_label = 'plugshop'
         verbose_name, verbose_name_plural = _('Address'), _('Addresses')
 
     user = models.ForeignKey(User)
-    name = models.CharField(_('Name'), blank=False, max_length=80)
-    state = models.CharField(_('State/Province'), blank=False, max_length=100)
-    city = models.CharField(_('City'), blank=False, max_length=100)
     address = models.TextField(_('Address'), blank=False)
     is_default = models.BooleanField(default=False)
 
@@ -100,6 +100,11 @@ class ShippingAddress(models.Model):
         return super(ShippingAddress, self).save(*args, **kwargs)
 
 class Order(models.Model):
+    
+    class Meta:
+        app_label = 'plugshop'
+        verbose_name, verbose_name_plural = _('order'), _('Orders')
+    
     user = models.ForeignKey(User, blank=True, related_name="ordered_by_user")
     shipping_type = models.ForeignKey(ShippingType, blank=True, 
                                 verbose_name=_('Shipping type'))
@@ -109,9 +114,6 @@ class Order(models.Model):
                                 choices=STATUS_CHOICES, default='created')
     created_at = models.DateTimeField(_('Date'), blank=False, 
                                         default=datetime.datetime.now)
-
-    class Meta:
-        verbose_name, verbose_name_plural = _('order'), _('Orders')
 
     def __unicode__(self):
         return str(self.num)
@@ -129,6 +131,7 @@ class Order(models.Model):
 class OrderProduct(models.Model):
 
     class Meta:
+        app_label = 'plugshop'
         verbose_name = _('Order product')
         verbose_name_plural = _('Order product')
 

@@ -56,7 +56,7 @@ class Cart(list):
     def price_total(self):
         return sum([p.price_total() for p in self])
 
-    def products(self):
+    def get_products(self):
         return [{'product': p.product.pk, 'quantity': p.quantity} for p in self]
 
 

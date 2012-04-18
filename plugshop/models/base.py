@@ -9,22 +9,22 @@ from mptt.models import MPTTModel, TreeForeignKey
 from plugshop import settings as shop_settings
 from plugshop.utils import load_class
 
-# class ProductGroupAbstract(MPTTModel):
-#     class Meta:
-#         abstract = True
-#         verbose_name = _('Product group')
-#         verbose_name_plural = _('Product groups')
-# 
-#     class MPTTMeta:
-#         ordering = ['pk', 'lft']
-# 
-#     parent = TreeForeignKey('self', null=True, blank=True)
-#     name = models.CharField(blank=False, max_length=80)
-# 
-#     def __unicode__(self):
-#         return self.name
+class ProductGroupAbstract(MPTTModel):
+    class Meta:
+        abstract = True
+        verbose_name = _('Product group')
+        verbose_name_plural = _('Product groups')
 
-#GROUP_CLASS = load_class(shop_settings.GROUP_MODEL)
+    class MPTTMeta:
+        ordering = ['pk', 'lft']
+
+    parent = TreeForeignKey('self', null=True, blank=True)
+    name = models.CharField(blank=False, max_length=80)
+
+    def __unicode__(self):
+        return self.name
+
+GROUP_CLASS = load_class(shop_settings.GROUP_MODEL)
 
 class ProductAbstract(models.Model):
     """docstring for Product"""
@@ -33,7 +33,7 @@ class ProductAbstract(models.Model):
         verbose_name, verbose_name_plural = _('product'), _('Products')
         ordering = ['-created_at']
 
-    #groups = models.ManyToManyField(GROUP_CLASS, blank=True)
+    groups = models.ManyToManyField(GROUP_CLASS, blank=True)
     name = models.CharField(_('Name'), blank=False, max_length=200)
     slug = models.SlugField(_('Slug'), blank=False, unique=True)
     description  = models.TextField(_('Description'), blank=True)

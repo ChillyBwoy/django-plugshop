@@ -53,7 +53,7 @@ admin.site.register(Option, OptionAdmin)
 
 class OrderProductInline(admin.TabularInline):
     model = OrderProduct
-    extra = 1
+    extra = 0
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = (
