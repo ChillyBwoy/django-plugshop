@@ -18,7 +18,7 @@ class ProductOptionsAbstract(models.Model):
     product = models.ForeignKey(load_class(settings.PRODUCT_MODEL))
     option = models.ForeignKey(load_class(settings.OPTION_MODEL))
     value = models.CharField(_('Value'), blank=False, max_length=200)
-    sort = models.PositiveSmallIntegerField(_('Order'), default=1)
+    sort = models.PositiveSmallIntegerField(_('Sort'), default=1)
 
     def __unicode__(self):
         return "(%s) %s = '%s'" % (self.option.type, self.option.name,

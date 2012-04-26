@@ -15,8 +15,6 @@ class ProductAbstract(models.Model):
         verbose_name  = _('product')
         verbose_name_plural = _('Products')
 
-    groups = models.ManyToManyField(load_class(settings.GROUP_MODEL), 
-                                    blank=True)
     name = models.CharField(_('Name'), blank=False, max_length=200)
     slug = models.SlugField(_('Slug'), blank=False, unique=True)
     description  = models.TextField(_('Description'), blank=True)
@@ -25,11 +23,13 @@ class ProductAbstract(models.Model):
     is_active = models.BooleanField(_('Is active'), default=True)
     created_at = models.DateTimeField(_('Created at'), blank=True, null=True, 
                                         default=datetime.datetime.now)
-    sort = models.PositiveSmallIntegerField(_('Order'), default=1)
-    options = models.ManyToManyField(load_class(settings.OPTION_MODEL),
-                            through=load_class(settings.PRODUCT_OPTIONS_MODEL),
-                            related_name="product_options",
-                            verbose_name=_('Product options'))
+    sort = models.PositiveSmallIntegerField(_('Sort'), default=1)
+    # groups = models.ManyToManyField(load_class(settings.GROUP_MODEL), 
+    #                                 blank=True)
+    # options = models.ManyToManyField(load_class(settings.OPTION_MODEL),
+    #                         through=load_class(settings.PRODUCT_OPTIONS_MODEL),
+    #                         related_name="product_options",
+    #                         verbose_name=_('Product options'))
 
     def __unicode__(self):
         return self.name

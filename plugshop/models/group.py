@@ -20,6 +20,8 @@ class GroupAbstract(MPTTModel):
 
     parent = TreeForeignKey('self', null=True, blank=True)
     name = models.CharField(blank=False, max_length=80)
+    slug = models.SlugField(_('Slug'), blank=False, unique=True)
+    sort = models.PositiveSmallIntegerField(_('Order'), default=1)
 
     def __unicode__(self):
         return self.name
