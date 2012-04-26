@@ -1,14 +1,12 @@
 from django.contrib import admin
 
 from testshop.myshop.models import *
-from plugshop.admin import BaseProductAdmin
+#from plugshop.admin import BaseProductAdmin, BaseGroupAdmin
+# from plugshop.models import Product as BaseProduct
+# from plugshop.models import Group as BaseGroup
 
-# class ProductImageInline(admin.TabularInline):
-#     model = ProductImage
-#     extra = 0
+# admin.site.unregister(BaseProduct)
+# admin.site.unregister(BaseGroup)
 
-# class ProductAdmin(BaseProductAdmin):
-#     pass
-
-# admin.site.register(Group)
-#admin.site.register(Product, ProductAdmin)
+#admin.site.register(Group)
+#admin.site.register(Product)

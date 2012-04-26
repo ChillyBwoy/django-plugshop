@@ -83,11 +83,13 @@ INSTALLED_APPS = (
     
     'south',
     'plugshop',
+    
     'testshop.myshop',
 )
 
-#PLUGSHOP_PRODUCT_MODEL  = 'testshop.myshop.models.Product'
-#PLUGSHOP_GROUP_MODEL    = 'testshop.myshop.models.ProductGroup'
+# PLUGSHOP_PRODUCT_MODEL = 'testshop.myshop.models.Product'
+# PLUGSHOP_GROUP_MODEL = 'testshop.myshop.models.Group'
+
 
 LOGGING = {
     'version': 1,

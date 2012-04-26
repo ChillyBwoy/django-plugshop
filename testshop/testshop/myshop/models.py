@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from sorl.thumbnail import ImageField
 
-#from plugshop.models.base import ProductAbstract
+from plugshop.models import *
 
 def get_upload_to(f, path):
     fname = f.encode('utf-8')
@@ -16,13 +16,14 @@ def get_upload_to(f, path):
     return os.path.abspath(path, '.'.join(path))
 
 
-# class ProductGroup(ProductGroupAbstract):
-#     logo = ImageField(_('Logo'), 
-#                         upload_to=lambda i,f: get_upload_to(f, 'groups'), 
-#                         blank=False)
+class Group(GroupAbstract):
+    logo = models.ImageField(_('Logo'), 
+                        upload_to=lambda i,f: get_upload_to(f, 'groups'), 
+                        blank=False)
 
-# class Product(ProductAbstract):
-#     pass
+class Product(ProductAbstract):
+    discount = models.IntegerField(_('Discount'), blank=True, null=True)
+
 
 # class ProductImage(models.Model):
 #     product = models.ForeignKey(Product)

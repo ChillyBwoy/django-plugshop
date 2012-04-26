@@ -27,7 +27,7 @@ models.ManyToManyField(load_class(settings.OPTION_MODEL),
                         related_name="product_options",
                         verbose_name=_('Product options')
                     ).contribute_to_class(ProductAbstract, 'options')
-                    
+
 models.ManyToManyField(load_class(settings.PRODUCT_MODEL),
                         through=load_class(settings.ORDER_PRODUCTS_MODEL),
                         related_name="order_products",
@@ -35,8 +35,12 @@ models.ManyToManyField(load_class(settings.PRODUCT_MODEL),
                     ).contribute_to_class(OrderAbstract, 'products')
 
 __all__ = [
+    'ProductAbstract',
     'Product',
+    
     'Group',
+    'GroupAbstract',
+    
     'Option', 
     'ProductGroups',
     'ProductOptions', 

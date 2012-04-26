@@ -24,5 +24,6 @@ SHIPPING_ADDRESS_MODEL = getattr(settings, 'PLUGSHOP_SHIPPING_ADDRESS_MODEL',
 
 ORDER_MODEL = getattr(settings, 'PLUGHOSP_ORDER_MODEL', 
                     'plugshop.models.order.Order')
+                    
 ORDER_PRODUCTS_MODEL = getattr(settings, 'PLUGHOSP_ORDER_PRODUCTS_MODEL', 
                     'plugshop.models.order_products.OrderProducts')
