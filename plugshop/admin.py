@@ -61,41 +61,24 @@ class BaseOptionAdmin(admin.ModelAdmin):
         'type',
     )
 admin.site.register(load_class(settings.OPTION_MODEL), BaseOptionAdmin)
-    
-# 
-# class OptionAdmin(admin.ModelAdmin):
-#     list_display = (
-#         'name',
-#     )
-# admin.site.register(Option, OptionAdmin)
-# 
-# 
-# class OrderProductInline(admin.TabularInline):
-#     model = OrderProduct
-#     extra = 0
-# 
-# class OrderAdmin(admin.ModelAdmin):
-#     inlines = (
-#         OrderProductInline,
-#     )
-#     search_fields = (
-#         'user__email', 
-#         'user__first_name', 
-#         'user__last_name',
-#     )
-#     list_filter = (
-#         'status',
-#     )
-#     radio_fields = (
-#         {'status': admin.VERTICAL}
-#     )
-# admin.site.register(Order, OrderAdmin)
+
+class BaseShippingTypeAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'price',
+        'is_default', 
+    )
+admin.site.register(load_class(settings.SHIPPING_TYPE_MODEL), 
+                                        BaseShippingTypeAdmin)
 
 
-# class ShippingTypeAdmin(admin.ModelAdmin):
-#     list_display = (
-#         'name', 
-#         'is_default', 
-#         'price',
-#     )
-# admin.site.register(ShippingType, ShippingTypeAdmin)
+
+class BaseOrderProductsInline(admin.TabularInline):
+    model = load_class(settings.ORDER_PRODUCTS_MODEL)
+    extra = 0
+
+class BaseOrderAdmin(admin.ModelAdmin):
+    inlines = (
+        BaseOrderProductsInline,
+    )
+admin.site.register(load_class(settings.ORDER_MODEL), BaseOrderAdmin)

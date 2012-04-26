@@ -11,6 +11,9 @@ from plugshop.models.group import *
 from plugshop.models.option import *
 from plugshop.models.product_options import *
 from plugshop.models.product_groups import *
+from plugshop.models.shipping import *
+from plugshop.models.order import *
+from plugshop.models.order_products import *
 
                     
 models.ManyToManyField(load_class(settings.GROUP_MODEL),
@@ -24,10 +27,21 @@ models.ManyToManyField(load_class(settings.OPTION_MODEL),
                         related_name="product_options",
                         verbose_name=_('Product options')
                     ).contribute_to_class(ProductAbstract, 'options')
+                    
+models.ManyToManyField(load_class(settings.PRODUCT_MODEL),
+                        through=load_class(settings.ORDER_PRODUCTS_MODEL),
+                        related_name="order_products",
+                        verbose_name=_('Order products')
+                    ).contribute_to_class(OrderAbstract, 'products')
+
 __all__ = [
     'Product',
     'Group',
     'Option', 
     'ProductGroups',
     'ProductOptions', 
+    'ShippingType',
+    'ShippingAddress',
+    'Order',
+    'OrderProducts',
 ]
