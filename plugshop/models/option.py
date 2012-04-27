@@ -24,7 +24,6 @@ OPTION_TYPE_CHOICES_DEFAULT = 'str'
 
 class OptionAbstract(models.Model):
     class Meta:
-        app_label = 'plugshop'
         abstract = True
         verbose_name = _("Option")
         verbose_name_plural = _("Options")
@@ -39,4 +38,5 @@ class OptionAbstract(models.Model):
         return self.name
 
 class Option(OptionAbstract):
-    pass
+    class Meta:
+        app_label = 'plugshop'

@@ -9,7 +9,6 @@ from plugshop.utils import load_class
 
 class ProductAbstract(models.Model):
     class Meta:
-        app_label = 'plugshop'
         abstract = True
         ordering = ['-created_at']
         verbose_name  = _('product')
@@ -24,15 +23,10 @@ class ProductAbstract(models.Model):
     created_at = models.DateTimeField(_('Created at'), blank=True, null=True, 
                                         default=datetime.datetime.now)
     sort = models.PositiveSmallIntegerField(_('Sort'), default=1)
-    # groups = models.ManyToManyField(load_class(settings.GROUP_MODEL), 
-    #                                 blank=True)
-    # options = models.ManyToManyField(load_class(settings.OPTION_MODEL),
-    #                         through=load_class(settings.PRODUCT_OPTIONS_MODEL),
-    #                         related_name="product_options",
-    #                         verbose_name=_('Product options'))
 
     def __unicode__(self):
         return self.name
 
 class Product(ProductAbstract):
-    pass
+    class Meta:
+        app_label = 'plugshop'

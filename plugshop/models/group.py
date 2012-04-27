@@ -10,7 +10,6 @@ from plugshop.utils import load_class
 
 class GroupAbstract(MPTTModel):
     class Meta:
-        app_label = 'plugshop'
         abstract = True
         verbose_name = _('Product group')
         verbose_name_plural = _('Product groups')
@@ -27,4 +26,5 @@ class GroupAbstract(MPTTModel):
         return self.name
 
 class Group(GroupAbstract):
-    pass
+    class Meta:
+        app_label = 'plugshop'

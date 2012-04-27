@@ -12,7 +12,6 @@ from plugshop.utils import load_class
 class ShippingTypeAbstract(models.Model):
     class Meta:
         abstract = True
-        app_label = 'plugshop'
         verbose_name = _('Shipping type')
         verbose_name_plural = _('Shipping type')
 
@@ -24,12 +23,12 @@ class ShippingTypeAbstract(models.Model):
         return self.name
 
 class ShippingType(ShippingTypeAbstract):
-    pass
+    class Meta:
+        app_label = 'plugshop'
     
 class ShippingAddressAbstract(models.Model):
     class Meta:
         abstract = True
-        app_label = 'plugshop'
         verbose_name = _('Shipping address')
         verbose_name_plural = _('Shipping addresses')
 
@@ -41,4 +40,5 @@ class ShippingAddressAbstract(models.Model):
         return "%s – %s" % (self.user, self.address)
 
 class ShippingAddress(ShippingAddressAbstract):
-    pass
+    class Meta:
+        app_label = 'plugshop'

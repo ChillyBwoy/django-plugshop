@@ -9,7 +9,6 @@ from plugshop.utils import load_class
 
 class ProductGroupsAbstract(models.Model):
     class Meta:
-        app_label = 'plugshop'
         abstract = True
         verbose_name = _("Product group")
         verbose_name_plural = _("Product groups")
@@ -18,4 +17,5 @@ class ProductGroupsAbstract(models.Model):
     group = models.ForeignKey(load_class(settings.GROUP_MODEL))
 
 class ProductGroups(ProductGroupsAbstract):
-    pass
+    class Meta:
+        app_label = 'plugshop'

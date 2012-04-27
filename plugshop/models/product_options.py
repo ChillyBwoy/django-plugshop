@@ -10,7 +10,6 @@ from plugshop.utils import load_class
 
 class ProductOptionsAbstract(models.Model):
     class Meta:
-        app_label = 'plugshop'
         abstract = True
         verbose_name = _("Product option")
         verbose_name_plural = _("Product options")
@@ -25,4 +24,5 @@ class ProductOptionsAbstract(models.Model):
                                     self.value)
 
 class ProductOptions(ProductOptionsAbstract):
-    pass
+    class Meta:
+        app_label = 'plugshop'

@@ -18,7 +18,6 @@ STATUS_CHOICES = (
 class OrderAbstract(models.Model):
     class Meta:
         abstract = True
-        app_label = 'plugshop'
         verbose_name = _('order')
         verbose_name_plural = _('Orders')
     
@@ -38,4 +37,5 @@ class OrderAbstract(models.Model):
         return str(self.pk)
 
 class Order(OrderAbstract):
-    pass
+    class Meta:
+        app_label = 'plugshop'
