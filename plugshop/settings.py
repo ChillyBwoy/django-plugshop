@@ -9,9 +9,6 @@ GROUP_MODEL = getattr(settings, 'PLUGSHOP_GROUP_MODEL',
                         
 OPTION_MODEL = getattr(settings, 'PLUGSHOP_OPTION_MODEL', 
                         'plugshop.models.option.Option')
-
-PRODUCT_GROUPS_MODEL = getattr(settings, 'PLUGSHOP_PRODUCT_GROUPS_MODEL', 
-                            'plugshop.models.product_groups.ProductGroups')
                         
 PRODUCT_OPTIONS_MODEL = getattr(settings, 'PLUGSHOP_PRODUCT_OPTIONS_MODEL', 
                             'plugshop.models.product_options.ProductOptions')

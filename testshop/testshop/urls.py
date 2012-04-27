@@ -4,5 +4,5 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^shop/', include('plugshop.urls')),
+    url(r'^shop/', include('plugshop.urls')),
 )

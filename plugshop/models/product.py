@@ -16,8 +16,11 @@ class ProductAbstract(models.Model):
 
     name = models.CharField(_('Name'), blank=False, max_length=200)
     slug = models.SlugField(_('Slug'), blank=False, unique=True)
-    description  = models.TextField(_('Description'), blank=True)
     price = models.PositiveIntegerField(_('Price'), blank=False)
+    group = models.ForeignKey(load_class(settings.GROUP_MODEL), 
+                                verbose_name=_('Group'),
+                                blank=True)
+    description  = models.TextField(_('Description'), blank=True)
     is_available = models.BooleanField(_('Is available'), default=True)
     is_active = models.BooleanField(_('Is active'), default=True)
     created_at = models.DateTimeField(_('Created at'), blank=True, null=True, 
@@ -30,3 +33,10 @@ class ProductAbstract(models.Model):
 class Product(ProductAbstract):
     class Meta:
         app_label = 'plugshop'
+        
+    @models.permalink
+    def get_absolute_url(self):
+        return ('PlugshopProduct', None, {
+                        'group': self.group.slug,
+                        'slug': self.slug
+                    })

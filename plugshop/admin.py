@@ -7,14 +7,12 @@ from django.utils.translation import ugettext as _
 from sorl.thumbnail import get_thumbnail
 from sorl.thumbnail.admin import AdminImageMixin
 
+from mptt.admin import MPTTModelAdmin
+
 from plugshop import settings
 from plugshop.utils import load_class
 from plugshop.models import *
 
-
-class BaseProductGroupsInline(admin.TabularInline):
-    model = load_class(settings.PRODUCT_GROUPS_MODEL)
-    extra = 0
 
 class BaseProductOptionsInline(admin.TabularInline):
     model = load_class(settings.PRODUCT_OPTIONS_MODEL)
@@ -22,7 +20,6 @@ class BaseProductOptionsInline(admin.TabularInline):
     
 class BaseProductAdmin(admin.ModelAdmin):
     inlines = (
-        BaseProductGroupsInline,
         BaseProductOptionsInline,
     )
     prepopulated_fields = {
@@ -44,14 +41,16 @@ class BaseProductAdmin(admin.ModelAdmin):
     )
 admin.site.register(load_class(settings.PRODUCT_MODEL), BaseProductAdmin)
 
-class BaseGroupAdmin(admin.ModelAdmin):
+class BaseGroupAdmin(MPTTModelAdmin):
+    mptt_level_indent = 20
     prepopulated_fields = {
-        'slug': ('name',)
+        'slug': ('name', )
     }
     list_display = (
         'name',
         'slug',
     )
+            
 admin.site.register(load_class(settings.GROUP_MODEL), BaseGroupAdmin)
 
 

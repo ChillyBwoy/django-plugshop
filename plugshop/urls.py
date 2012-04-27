@@ -5,7 +5,7 @@ from django.conf.urls.defaults import *
 from plugshop.views import *
 
 urlpatterns = patterns('plugshop.views',
-    url(r'^$', ProductListView.as_view(), name='Products'),
-    url(r'^(?P<slug>[\-\w]+)$', GroupView.as_view(), name='Group'),
-    url(r'^(?P<group>[\-\w]+)/(?P<slug>[\-\w]+)$', ProductView.as_view(), name='Product'),
+    url(r'^$', ProductListView.as_view(), name='PlugshopProductList'),
+    url(r'^(?P<path>[\-\/\w]+)$', GroupView.as_view(), name='PlugshopGroup'),
+    url(r'^(?P<path>[\-\/\w]+)$', ProductView.as_view(), name='PlugshopProduct'),
 )

@@ -16,14 +16,13 @@ def get_upload_to(f, path):
     return os.path.abspath(path, '.'.join(path))
 
 
-class Group(GroupAbstract):
-    logo = models.ImageField(_('Logo'), 
-                        upload_to=lambda i,f: get_upload_to(f, 'groups'), 
-                        blank=False)
-
-class Product(ProductAbstract):
-    discount = models.IntegerField(_('Discount'), blank=True, null=True)
-
+# class Group(GroupAbstract):
+#     logo = models.ImageField(_('Logo'), 
+#                         upload_to=lambda i,f: get_upload_to(f, 'groups'), 
+#                         blank=False)
+# 
+# class Product(ProductAbstract):
+#     discount = models.IntegerField(_('Discount'), blank=True, null=True)
 
 # class ProductImage(models.Model):
 #     product = models.ForeignKey(Product)

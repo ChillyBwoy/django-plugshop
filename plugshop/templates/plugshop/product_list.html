@@ -1,0 +1,28 @@
+{% extends 'plugshop/base.html' %}
+{% load mptt_tags %}
+
+{% block content %}
+    {% spaceless %}
+    <h1>
+        <a href="{% url PlugshopProductList %}">Shop</a>
+    </h1>
+    <h2>Groups</h2>
+    <ul>
+        {% recursetree groups %}
+            <li>
+                <a href="{{ node.get_absolute_url }}">{{node.name}}</a>
+                {% if not node.is_leaf_node %}<ul>{{ children }}</ul>{% endif %}
+            </li>
+        {% endrecursetree %}
+    </ul>
+    {% endspaceless %}
+
+    {% spaceless %}
+    <h2>Goods</h2>
+    <ul>
+        {% for p in products  %}
+            <li>{{p}}</li>
+        {% endfor %}
+    </ul>
+    {% endspaceless %}
+{% endblock content %}

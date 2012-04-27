@@ -13,6 +13,7 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     #('Your Name', 'your_email@example.com'),
 )
+INTERNAL_IPS = ('127.0.0.1',)
 
 MANAGERS = ADMINS
 
@@ -62,6 +63,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'testshop.urls'
@@ -81,14 +83,16 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     
+    'mptt',
     'south',
+    'debug_toolbar',
     'plugshop',
     
     'testshop.myshop',
 )
 
-PLUGSHOP_PRODUCT_MODEL = 'testshop.myshop.models.Product'
-PLUGSHOP_GROUP_MODEL = 'testshop.myshop.models.Group'
+# PLUGSHOP_PRODUCT_MODEL = 'testshop.myshop.models.Product'
+# PLUGSHOP_GROUP_MODEL = 'testshop.myshop.models.Group'
 
 LOGGING = {
     'version': 1,
