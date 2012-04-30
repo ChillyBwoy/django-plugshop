@@ -46,4 +46,4 @@ class Group(GroupAbstract):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('PlugshopGroup', None, {'path': self.get_path() })
+        return ('PlugshopGroup', None, {'group_path': self.get_path() })

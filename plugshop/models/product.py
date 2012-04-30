@@ -8,6 +8,7 @@ from plugshop import settings
 from plugshop.utils import load_class
 
 class ProductAbstract(models.Model):
+    
     class Meta:
         abstract = True
         ordering = ['-created_at']
@@ -29,14 +30,23 @@ class ProductAbstract(models.Model):
 
     def __unicode__(self):
         return self.name
+        
+    def get_path(self):
+        if self.group:
+            ancestors = self.group.get_ancestors()
+            path = "/".join([a.slug for a in ancestors] + 
+                                [self.group.slug])
+        else:
+            path = ""
+        return path
 
 class Product(ProductAbstract):
     class Meta:
         app_label = 'plugshop'
-        
+
     @models.permalink
     def get_absolute_url(self):
         return ('PlugshopProduct', None, {
-                        'group': self.group.slug,
-                        'slug': self.slug
-                    })
+            'group_path': self.get_path(),
+            'slug': self.slug,
+        })

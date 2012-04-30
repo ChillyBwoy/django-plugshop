@@ -27,9 +27,11 @@ class ProductListView(ListView):
         )
         return context
 
+
 class ProductView(DetailView):
     model = PRODUCT_CLASS
     context_object_name = 'product'
+
 
 class GroupView(DetailView):
     model = GROUP_CLASS
@@ -37,7 +39,7 @@ class GroupView(DetailView):
     template_name = 'plugshop/product_list.html'
 
     def get_object(self, *args, **kwargs):
-        path = self.kwargs.get('path', None)
+        path = self.kwargs.get('group_path', None)
         return GROUP_CLASS.objects.get_by_path(path)
 
     def get_context_data(self, **kwargs):

@@ -6,6 +6,6 @@ from plugshop.views import *
 
 urlpatterns = patterns('plugshop.views',
     url(r'^$', ProductListView.as_view(), name='PlugshopProductList'),
-    url(r'^(?P<path>[\-\/\w]+)$', GroupView.as_view(), name='PlugshopGroup'),
-    url(r'^(?P<path>[\-\/\w]+)$', ProductView.as_view(), name='PlugshopProduct'),
+    url(r'^(?P<group_path>[\-\/\w]+)$', GroupView.as_view(), name='PlugshopGroup'),
+    url(r'^(?P<group_path>[\-\/\w]+)/(?P<slug>[\-\/\w]+)$', ProductView.as_view(), name='PlugshopProduct'),
 )

@@ -21,7 +21,9 @@
     <h2>Goods</h2>
     <ul>
         {% for p in products  %}
-            <li>{{p}}</li>
+            <li>
+                <a href="{{p.get_absolute_url}}">{{p}}</a>
+            </li>
         {% endfor %}
     </ul>
     {% endspaceless %}
