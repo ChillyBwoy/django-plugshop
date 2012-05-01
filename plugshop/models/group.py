@@ -39,9 +39,7 @@ class GroupAbstract(MPTTModel):
         #ancestors = self.get_ancestors(include_self=True)
         #path = "/".join([a.slug for a in ancestors])
         #return path
-
-        nodes = GROUP_CACHE
-        ancestors = [n for n in nodes 
+        ancestors = [n for n in GROUP_CACHE 
                         if n.lft <= self.lft and 
                             n.rght >= self.rght and 
                                 n.tree_id == self.tree_id]

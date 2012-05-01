@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 
 from plugshop import settings
 from plugshop.utils import load_class
+from plugshop.models.group import GROUP_CACHE
 
 class ProductAbstract(models.Model):
     
@@ -31,13 +32,6 @@ class ProductAbstract(models.Model):
 
     def __unicode__(self):
         return self.name
-        
-    def get_path(self):
-        if self.group:
-            path = self.group.get_path()
-        else:
-            path = ""
-        return path
 
 class Product(ProductAbstract):
     class Meta:
@@ -45,7 +39,13 @@ class Product(ProductAbstract):
 
     @models.permalink
     def get_absolute_url(self):
+        try:
+            group = filter(lambda x: x.pk == self.group_id, GROUP_CACHE)[0]
+            group_path = group.get_path()
+        except IndexError:
+            group_path = ""
+
         return ('PlugshopProduct', None, {
-            'group_path': self.get_path(),
+            'group_path': group_path,
             'slug': self.slug,
         })
