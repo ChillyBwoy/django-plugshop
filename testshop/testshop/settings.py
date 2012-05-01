@@ -20,7 +20,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_ROOT, '../shop.db'),
+        'NAME': os.path.join(PROJECT_ROOT, '../shop.sqlite'),
     }
 }
 
@@ -116,4 +116,9 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+    'SHOW_TOOLBAR_CALLBACK': lambda r: DEBUG,
 }

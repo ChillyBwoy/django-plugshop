@@ -1,13 +1,14 @@
 # encoding: utf-8
 from django.db import models
-from django.db.models import get_model
 from django.utils.translation import ugettext as _
 
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
 
-from plugshop import settings as shop_settings
+from plugshop import settings
 from plugshop.utils import load_class
+
+GROUP_CACHE = []
 
 class GroupAbstractManager(TreeManager):
     def get_by_path(self, path):
@@ -35,9 +36,16 @@ class GroupAbstract(MPTTModel):
         return self.name
         
     def get_path(self):
-        ancestors = self.get_ancestors()
-        path = "/".join([a.slug for a in ancestors] + [self.slug])
-        return path
+        #ancestors = self.get_ancestors(include_self=True)
+        #path = "/".join([a.slug for a in ancestors])
+        #return path
+
+        nodes = GROUP_CACHE
+        ancestors = [n for n in nodes 
+                        if n.lft <= self.lft and 
+                            n.rght >= self.rght and 
+                                n.tree_id == self.tree_id]
+        return "/".join([a.slug for a in ancestors])
 
 
 class Group(GroupAbstract):
@@ -47,3 +55,5 @@ class Group(GroupAbstract):
     @models.permalink
     def get_absolute_url(self):
         return ('PlugshopGroup', None, {'group_path': self.get_path() })
+
+GROUP_CACHE = load_class(settings.GROUP_MODEL).objects.all()

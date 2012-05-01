@@ -10,7 +10,11 @@
     <ul>
         {% recursetree groups %}
             <li>
-                <a href="{{ node.get_absolute_url }}">{{node.name}}</a>
+                <a href="{{ node.get_absolute_url }}">
+                    {# {{node.pk}} | {{node.parent_id}} | {{node.lft}} | {{node.rght}} | {{node.tree_id}} #}
+                    {# <br> #}
+                    {{node.name}}
+                </a>
                 {% if not node.is_leaf_node %}<ul>{{ children }}</ul>{% endif %}
             </li>
         {% endrecursetree %}

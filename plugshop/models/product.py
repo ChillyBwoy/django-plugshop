@@ -20,7 +20,8 @@ class ProductAbstract(models.Model):
     price = models.PositiveIntegerField(_('Price'), blank=False)
     group = models.ForeignKey(load_class(settings.GROUP_MODEL), 
                                 verbose_name=_('Group'),
-                                blank=True)
+                                blank=True,
+                                null=True)
     description  = models.TextField(_('Description'), blank=True)
     is_available = models.BooleanField(_('Is available'), default=True)
     is_active = models.BooleanField(_('Is active'), default=True)
@@ -33,9 +34,7 @@ class ProductAbstract(models.Model):
         
     def get_path(self):
         if self.group:
-            ancestors = self.group.get_ancestors()
-            path = "/".join([a.slug for a in ancestors] + 
-                                [self.group.slug])
+            path = self.group.get_path()
         else:
             path = ""
         return path
