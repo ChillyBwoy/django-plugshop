@@ -2,11 +2,13 @@ import datetime
 
 from django.db import models
 from django.db.models import get_model
+from django.core.cache import cache
+
 from django.utils.translation import ugettext as _
 
 from plugshop import settings
 from plugshop.utils import load_class
-from plugshop.models.group import GROUP_CACHE
+from plugshop.models.group import get_groups
 
 class ProductAbstract(models.Model):
     
@@ -39,8 +41,9 @@ class Product(ProductAbstract):
 
     @models.permalink
     def get_absolute_url(self):
+        groups = get_groups()
         try:
-            group = filter(lambda x: x.pk == self.group_id, GROUP_CACHE)[0]
+            group = filter(lambda x: x.pk == self.group_id, groups)[0]
             group_path = group.get_path()
         except IndexError:
             group_path = ""

@@ -5,16 +5,15 @@
     {% spaceless %}
     <h1>
         <a href="{% url PlugshopProductList %}">Shop</a>
+        {% for g in group.get_ancestor_list %}&ndash;
+            <a href="{{g.get_absolute_url}}">{{g}}</a>
+        {% endfor %}
     </h1>
     <h2>Groups</h2>
     <ul>
         {% recursetree groups %}
             <li>
-                <a href="{{ node.get_absolute_url }}">
-                    {# {{node.pk}} | {{node.parent_id}} | {{node.lft}} | {{node.rght}} | {{node.tree_id}} #}
-                    {# <br> #}
-                    {{node.name}}
-                </a>
+                <a href="{{ node.get_absolute_url }}">{{node.name}}</a>
                 {% if not node.is_leaf_node %}<ul>{{ children }}</ul>{% endif %}
             </li>
         {% endrecursetree %}

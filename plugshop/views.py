@@ -31,10 +31,18 @@ class ProductListView(ListView):
 class ProductView(DetailView):
     model = PRODUCT_CLASS
     context_object_name = 'product'
-    
+
     def get_object(self, *args, **kwargs):
         slug = self.kwargs.get('slug', None)
         return get_object_or_404(PRODUCT_CLASS, slug=slug)
+        
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductView, self).get_context_data(**kwargs)
+        product = context.get('product')
+        context.update(
+            group=product.group
+        )
+        return context
 
 
 class GroupView(DetailView):
@@ -44,7 +52,10 @@ class GroupView(DetailView):
 
     def get_object(self, *args, **kwargs):
         path = self.kwargs.get('group_path', None)
-        return GROUP_CLASS.objects.get_by_path(path)
+        try:
+            return GROUP_CLASS.objects.get_by_path(path)
+        except GROUP_CLASS.DoesNotExist:
+            raise Http404
 
     def get_context_data(self, **kwargs):
         context = super(GroupView, self).get_context_data(**kwargs)
