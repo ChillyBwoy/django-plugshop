@@ -34,11 +34,9 @@ class GroupAbstract(MPTTModel):
 
     def __unicode__(self):
         return self.name
-        
+
     def get_path(self):
-        #ancestors = self.get_ancestors(include_self=True)
-        #path = "/".join([a.slug for a in ancestors])
-        #return path
+        #return "/".join([a.slug for a in self.get_ancestors(include_self=True)])
         ancestors = [n for n in GROUP_CACHE 
                         if n.lft <= self.lft and 
                             n.rght >= self.rght and 

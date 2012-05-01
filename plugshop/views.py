@@ -31,6 +31,10 @@ class ProductListView(ListView):
 class ProductView(DetailView):
     model = PRODUCT_CLASS
     context_object_name = 'product'
+    
+    def get_object(self, *args, **kwargs):
+        slug = self.kwargs.get('slug', None)
+        return get_object_or_404(PRODUCT_CLASS, slug=slug)
 
 
 class GroupView(DetailView):
