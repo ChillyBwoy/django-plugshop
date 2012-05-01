@@ -46,7 +46,7 @@ class Product(ProductAbstract):
             group = filter(lambda x: x.pk == self.group_id, groups)[0]
             group_path = group.get_path()
         except IndexError:
-            group_path = ""
+            group_path = "-"
 
         return ('PlugshopProduct', None, {
             'group_path': group_path,

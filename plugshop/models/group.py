@@ -43,14 +43,12 @@ class GroupAbstract(MPTTModel):
         
     def get_ancestor_list(self):
         groups = get_groups()
-        
         return [n for n in groups 
                     if n.lft <= self.lft and 
                         n.rght >= self.rght and 
                             n.tree_id == self.tree_id]
 
     def get_path(self):
-        #return "/".join([a.slug for a in self.get_ancestors(include_self=True)])
         ancestors = self.get_ancestor_list()
         return "/".join([a.slug for a in ancestors])
 
