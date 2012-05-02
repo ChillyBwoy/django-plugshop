@@ -40,7 +40,6 @@ class ProductView(DetailView):
         return get_object_or_404(PRODUCT_CLASS, slug=slug)
 
     def get_context_data(self, *args, **kwargs):
-        print kwargs
         context = super(ProductView, self).get_context_data(**kwargs)
         product = context.get('product')
         context.update(
@@ -78,7 +77,7 @@ class GroupView(DetailView):
 
 class CartView(TemplateResponseMixin, View):
     template_name = 'plugshop/cart.html'
-
+    
     def get_context_data(self, **kwargs):
         return {
             'cart': get_cart(self.request) or [],
@@ -95,10 +94,9 @@ class CartView(TemplateResponseMixin, View):
             product = form.cleaned_data.get('product')
             quantity = form.cleaned_data.get('quantity')
             cart = get_cart(request)
-            
-            if cart:
-                cart.append(product, product.price, quantity)
-                cart.save()
+
+            cart.append(product, int(product.price), quantity)
+            cart.save()
 
             if request.is_ajax():
                 return {

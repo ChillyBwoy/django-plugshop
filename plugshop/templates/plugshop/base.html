@@ -5,13 +5,27 @@
     <title></title>
 </head>
 <body>
-    {% block cart %}
-        <div>{{request.cart}}</div>
-    {% endblock cart %}
     
     {% block breadcrumbs %}
         <div>{% include "plugshop/group_path.html" with group=group %}</div>
-    {% endblock breadcrumbs %}
+    {% endblock breadcrumbs %}    
+    
+    {% block cart %}
+        <div>
+            <h2>Cart:</h2>
+            <table border="0" cellspacing="5" cellpadding="5">
+                {% for cart_item in request.cart %}
+                    <tr>
+                        <td>
+                            <a href="{{cart_item.product.get_absolute_url}}">{{cart_item.product}}</a>
+                        </td>
+                        <td>{{cart_item.quantity}}</td>
+                        <td>{{cart_item.price_total}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endblock cart %}
     
     {% block content %}{% endblock content %}
 </body>

@@ -6,6 +6,10 @@
     </div>
     <h1>{{product}}</h1>
     <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
-        <p><input type="submit" value="Buy &rarr;"></p>
+        <p>
+            <input type="hidden" name="product" value="{{product.pk}}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="submit" value="Buy &rarr;">
+        </p>
     </form>
 {% endblock content %}

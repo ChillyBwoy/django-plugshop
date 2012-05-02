@@ -15,9 +15,9 @@ class Cart(list):
         super(Cart, self).__init__()
         self.request = request
         self.name = name
-
-        for item, quantity in request.session.get(self.name, []):
-            self.append(item, quantity)
+        
+        for item, price, quantity in request.session.get(self.name, []):
+            self.append(item, price, quantity)
             
     def _get_product(self, product):
         try:
@@ -26,8 +26,8 @@ class Cart(list):
             return None
 
     def save(self):
-        self.request.session[self.name] = tuple((item.product, item.quantity,) 
-                                                            for item in self)
+        self.request.session[self.name] = tuple(
+                (item.product, item.price, item.quantity) for item in self)
     
     def append(self, product, price=0, quantity=1):
         item = self._get_product(product)
