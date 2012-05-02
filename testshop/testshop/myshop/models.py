@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.translation import ugettext as _
-from sorl.thumbnail import ImageField
 
 from plugshop.models import *
 

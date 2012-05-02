@@ -1,11 +1,11 @@
 {% extends 'plugshop/base.html' %}
 
 {% block content %}
-    <h1>
-        <a href="{% url PlugshopProductList %}">Shop</a>
-        {% for g in group.get_ancestor_list %}&ndash;
-            <a href="{{g.get_absolute_url}}">{{g}}</a>
-        {% endfor %}
-    </h1>
+    <div>
+        {% include "plugshop/group_path.html" with group=product.group %}
+    </div>
     <h1>{{product}}</h1>
+    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+        <p><input type="submit" value="Buy &rarr;"></p>
+    </form>
 {% endblock content %}

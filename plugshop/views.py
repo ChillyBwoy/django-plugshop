@@ -3,11 +3,15 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.shortcuts import get_object_or_404, redirect
 from django.http import Http404
 from django.utils.translation import ugettext as _
+from django.utils.decorators import method_decorator
 
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import View, TemplateView, ListView, DetailView
+from django.views.generic.base import TemplateResponseMixin
 
-from plugshop.utils import load_class
 from plugshop import settings
+from plugshop.utils import load_class
+from plugshop.forms import *
+from plugshop.cart import get_cart
 
 PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
 GROUP_CLASS = load_class(settings.GROUP_MODEL)
@@ -27,7 +31,6 @@ class ProductListView(ListView):
         )
         return context
 
-
 class ProductView(DetailView):
     model = PRODUCT_CLASS
     context_object_name = 'product'
@@ -35,8 +38,9 @@ class ProductView(DetailView):
     def get_object(self, *args, **kwargs):
         slug = self.kwargs.get('slug', None)
         return get_object_or_404(PRODUCT_CLASS, slug=slug)
-        
+
     def get_context_data(self, *args, **kwargs):
+        print kwargs
         context = super(ProductView, self).get_context_data(**kwargs)
         product = context.get('product')
         context.update(
@@ -70,6 +74,45 @@ class GroupView(DetailView):
             groups = groups
         )
         return context
+
+
+class CartView(TemplateResponseMixin, View):
+    template_name = 'plugshop/cart.html'
+
+    def get_context_data(self, **kwargs):
+        return {
+            'cart': get_cart(self.request) or [],
+        }
+        
+    def get(self, request, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
+
+    def post(self, request, **kwargs):
+        context = self.get_context_data(**kwargs)
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            product = form.cleaned_data.get('product')
+            quantity = form.cleaned_data.get('quantity')
+            cart = get_cart(request)
+            
+            if cart:
+                cart.append(product, product.price, quantity)
+                cart.save()
+
+            if request.is_ajax():
+                return {
+                    'cart': cart
+                }
+            else:
+                return redirect(product.get_absolute_url())
+        else:
+            if redirect.is_ajax():
+                return {
+                    'errors': form.errors
+                }
+            else:
+                return redirect(product.get_absolute_url())
 
 # @csrf_protect
 # @render_to('cartds/cart.html')

@@ -1,15 +1,10 @@
 {% extends 'plugshop/base.html' %}
 {% load mptt_tags %}
 
-{% block content %}
-    {% spaceless %}
-    <h1>
-        <a href="{% url PlugshopProductList %}">Shop</a>
-        {% for g in group.get_ancestor_list %}&ndash;
-            <a href="{{g.get_absolute_url}}">{{g}}</a>
-        {% endfor %}
-    </h1>
+
+{% block content %}    
     <h2>Groups</h2>
+    {% spaceless %}
     <ul>
         {% recursetree groups %}
             <li>
@@ -20,8 +15,8 @@
     </ul>
     {% endspaceless %}
 
-    {% spaceless %}
     <h2>Goods</h2>
+    {% spaceless %}
     <ul>
         {% for p in products  %}
             <li>

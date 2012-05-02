@@ -76,6 +76,17 @@ WSGI_APPLICATION = 'testshop.wsgi.application'
 TEMPLATE_DIRS = (
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -83,18 +94,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'django.contrib.admin',
     
     'mptt',
-    'south',
     'debug_toolbar',
     'plugshop',
     
     'testshop.myshop',
 )
-
-# PLUGSHOP_PRODUCT_MODEL = 'testshop.myshop.models.Product'
-# PLUGSHOP_GROUP_MODEL = 'testshop.myshop.models.Group'
 
 LOGGING = {
     'version': 1,
@@ -124,3 +132,5 @@ DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
     'SHOW_TOOLBAR_CALLBACK': lambda r: DEBUG,
 }
+# PLUGSHOP_PRODUCT_MODEL = 'testshop.myshop.models.Product'
+# PLUGSHOP_GROUP_MODEL = 'testshop.myshop.models.Group'

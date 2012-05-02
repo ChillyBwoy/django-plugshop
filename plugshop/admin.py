@@ -4,9 +4,6 @@ import plugshop.utils as utils
 from django.contrib import admin
 from django.utils.translation import ugettext as _
 
-from sorl.thumbnail import get_thumbnail
-from sorl.thumbnail.admin import AdminImageMixin
-
 from mptt.admin import MPTTModelAdmin
 
 from plugshop import settings
@@ -50,9 +47,7 @@ class BaseGroupAdmin(MPTTModelAdmin):
         'name',
         'slug',
     )
-            
 admin.site.register(load_class(settings.GROUP_MODEL), BaseGroupAdmin)
-
 
 class BaseOptionAdmin(admin.ModelAdmin):
     list_display = (
@@ -60,6 +55,7 @@ class BaseOptionAdmin(admin.ModelAdmin):
         'type',
     )
 admin.site.register(load_class(settings.OPTION_MODEL), BaseOptionAdmin)
+
 
 class BaseShippingTypeAdmin(admin.ModelAdmin):
     list_display = (
@@ -69,7 +65,6 @@ class BaseShippingTypeAdmin(admin.ModelAdmin):
     )
 admin.site.register(load_class(settings.SHIPPING_TYPE_MODEL), 
                                         BaseShippingTypeAdmin)
-
 
 
 class BaseOrderProductsInline(admin.TabularInline):

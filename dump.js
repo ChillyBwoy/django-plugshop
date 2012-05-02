@@ -152,6 +152,14 @@
         }
     }, 
     {
+        "pk": "3f1a5eef45a8e4b08f6c0947a5207fad", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2012-05-15T15:45:20.945Z", 
+            "session_data": "NGZiY2ExOTA0YzAzNjkxZmYwZDc2NGIzZTQ4M2E3MjE4OTRmNzc3ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZFUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRVDV9h\ndXRoX3VzZXJfaWRLAVUNcGx1Z3Nob3AuY2FydCl1Lg==\n"
+        }
+    }, 
+    {
         "pk": 1, 
         "model": "sites.site", 
         "fields": {
@@ -161,18 +169,9 @@
     }, 
     {
         "pk": 1, 
-        "model": "south.migrationhistory", 
-        "fields": {
-            "applied": "2012-05-01T09:33:18.877Z", 
-            "app_name": "plugshop", 
-            "migration": "0001_initial"
-        }
-    }, 
-    {
-        "pk": 1, 
         "model": "plugshop.group", 
         "fields": {
-            "rght": 8, 
+            "rght": 22, 
             "name": "\u041e\u0434\u0435\u0436\u0434\u0430", 
             "parent": null, 
             "level": 0, 
@@ -182,23 +181,10 @@
         }
     }, 
     {
-        "pk": 2, 
-        "model": "plugshop.group", 
-        "fields": {
-            "rght": 6, 
-            "name": "\u041f\u043e\u0441\u0443\u0434\u0430", 
-            "parent": null, 
-            "level": 0, 
-            "lft": 1, 
-            "tree_id": 2, 
-            "slug": "posuda"
-        }
-    }, 
-    {
         "pk": 3, 
         "model": "plugshop.group", 
         "fields": {
-            "rght": 3, 
+            "rght": 5, 
             "name": "\u0411\u0440\u044e\u043a\u0438", 
             "parent": 1, 
             "level": 1, 
@@ -208,16 +194,107 @@
         }
     }, 
     {
+        "pk": 13, 
+        "model": "plugshop.group", 
+        "fields": {
+            "rght": 4, 
+            "name": "\u0414\u0436\u0438\u043d\u0441\u044b", 
+            "parent": 3, 
+            "level": 2, 
+            "lft": 3, 
+            "tree_id": 1, 
+            "slug": "dzhinsy"
+        }
+    }, 
+    {
         "pk": 4, 
         "model": "plugshop.group", 
         "fields": {
-            "rght": 5, 
+            "rght": 9, 
             "name": "\u0424\u0443\u0442\u0431\u043e\u043b\u043a\u0438", 
             "parent": 1, 
             "level": 1, 
-            "lft": 4, 
+            "lft": 6, 
             "tree_id": 1, 
             "slug": "futbolki"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "plugshop.group", 
+        "fields": {
+            "rght": 8, 
+            "name": "\u041c\u0430\u0439\u043a\u0438-\u0430\u043b\u043a\u0430\u0448\u043a\u0438", 
+            "parent": 4, 
+            "level": 2, 
+            "lft": 7, 
+            "tree_id": 1, 
+            "slug": "majki-alkashki"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "plugshop.group", 
+        "fields": {
+            "rght": 13, 
+            "name": "\u041f\u043b\u0430\u0442\u043a\u0438", 
+            "parent": 1, 
+            "level": 1, 
+            "lft": 10, 
+            "tree_id": 1, 
+            "slug": "platki"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "plugshop.group", 
+        "fields": {
+            "rght": 19, 
+            "name": "\u0428\u0430\u043f\u043a\u0438", 
+            "parent": 1, 
+            "level": 1, 
+            "lft": 14, 
+            "tree_id": 1, 
+            "slug": "shapki"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "plugshop.group", 
+        "fields": {
+            "rght": 16, 
+            "name": "\u0411\u0435\u0439\u0441\u0431\u043e\u043b\u043a\u0438", 
+            "parent": 8, 
+            "level": 2, 
+            "lft": 15, 
+            "tree_id": 1, 
+            "slug": "bejsbolki"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "plugshop.group", 
+        "fields": {
+            "rght": 18, 
+            "name": "\u041a\u0435\u043f\u044b", 
+            "parent": 8, 
+            "level": 2, 
+            "lft": 17, 
+            "tree_id": 1, 
+            "slug": "kepy"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "plugshop.group", 
+        "fields": {
+            "rght": 8, 
+            "name": "\u041f\u043e\u0441\u0443\u0434\u0430", 
+            "parent": null, 
+            "level": 0, 
+            "lft": 1, 
+            "tree_id": 2, 
+            "slug": "posuda"
         }
     }, 
     {
@@ -247,16 +324,16 @@
         }
     }, 
     {
-        "pk": 7, 
+        "pk": 9, 
         "model": "plugshop.group", 
         "fields": {
             "rght": 7, 
-            "name": "\u041f\u043b\u0430\u0442\u043a\u0438", 
-            "parent": 1, 
+            "name": "\u041f\u0440\u0438\u0431\u043e\u0440\u044b", 
+            "parent": 2, 
             "level": 1, 
             "lft": 6, 
-            "tree_id": 1, 
-            "slug": "platki"
+            "tree_id": 2, 
+            "slug": "pribory"
         }
     }, 
     {
@@ -362,6 +439,21 @@
             "is_available": true, 
             "slug": "kruzhka-iz-probki", 
             "name": "\u041a\u0440\u0443\u0436\u043a\u0430 \u0438\u0437 \u043f\u0440\u043e\u0431\u043a\u0438"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "plugshop.product", 
+        "fields": {
+            "sort": 1, 
+            "created_at": "2012-05-01T10:15:33Z", 
+            "group": null, 
+            "description": "", 
+            "price": 300, 
+            "is_active": true, 
+            "is_available": true, 
+            "slug": "znachok", 
+            "name": "\u0417\u043d\u0430\u0447\u043e\u043a"
         }
     }, 
     {
@@ -806,12 +898,428 @@
             "is_active": true, 
             "is_superuser": true, 
             "is_staff": true, 
-            "last_login": "2012-05-01T09:34:04.441Z", 
+            "last_login": "2012-05-01T12:25:19.192Z", 
             "groups": [], 
             "user_permissions": [], 
             "password": "pbkdf2_sha256$10000$D24MmdXvPNjZ$O+exTZr07M9lt+SMib4GZY4ixdEno4/NpU1M+gOWx8I=", 
             "email": "ec@kittyhug.ru", 
             "date_joined": "2012-05-01T09:33:10.793Z"
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T14:40:22.202Z", 
+            "object_repr": "poiuytrfde", 
+            "object_id": "19", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T14:40:22.191Z", 
+            "object_repr": "rtyuiop[poiuytre", 
+            "object_id": "18", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T14:40:22.180Z", 
+            "object_repr": "dasda", 
+            "object_id": "17", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T14:40:22.169Z", 
+            "object_repr": "asdasdasds", 
+            "object_id": "16", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T14:40:22.155Z", 
+            "object_repr": "asdasdasdasdasdd", 
+            "object_id": "15", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T14:40:22.144Z", 
+            "object_repr": "asdsadasdasdasdasd", 
+            "object_id": "14", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T14:40:07.911Z", 
+            "object_repr": "poiuytrfde", 
+            "object_id": "19", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T14:39:58.230Z", 
+            "object_repr": "rtyuiop[poiuytre", 
+            "object_id": "18", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T13:58:56.710Z", 
+            "object_repr": "dasda", 
+            "object_id": "17", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T13:58:36.965Z", 
+            "object_repr": "asdasdasds", 
+            "object_id": "16", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T13:57:20.492Z", 
+            "object_repr": "asdasdasdasdasdd", 
+            "object_id": "15", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T13:56:03.802Z", 
+            "object_repr": "asdsadasdasdasdasd", 
+            "object_id": "14", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T13:18:32.135Z", 
+            "object_repr": "\u0425\u0438\u0434\u0436\u0430\u0431", 
+            "object_id": "14", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T13:18:27.099Z", 
+            "object_repr": "\u0433\u043d\u0435\u043a\u0443\u0432\u044b", 
+            "object_id": "18", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T13:18:27.088Z", 
+            "object_repr": "32423423\u0444\u0432\u0444\u0432\u044b", 
+            "object_id": "17", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T13:18:27.077Z", 
+            "object_repr": "\u0444\u044b\u0432\u0444\u044b\u0432\u0444\u044b\u0432", 
+            "object_id": "16", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T13:18:27.064Z", 
+            "object_repr": "\u0448\u043d\u044f\u0433\u0430", 
+            "object_id": "15", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T13:06:29.893Z", 
+            "object_repr": "\u0433\u043d\u0435\u043a\u0443\u0432\u044b", 
+            "object_id": "18", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T13:06:19.595Z", 
+            "object_repr": "32423423\u0444\u0432\u0444\u0432\u044b", 
+            "object_id": "17", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T13:05:39.045Z", 
+            "object_repr": "\u0444\u044b\u0432\u0444\u044b\u0432\u0444\u044b\u0432", 
+            "object_id": "16", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T13:05:24.953Z", 
+            "object_repr": "\u0448\u043d\u044f\u0433\u0430", 
+            "object_id": "15", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-05-01T12:53:51.584Z", 
+            "object_repr": "\u041f\u0430\u0440\u0430\u043d\u0436\u0430", 
+            "object_id": "15", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T12:53:34.847Z", 
+            "object_repr": "\u041f\u0430\u0440\u0430\u043d\u0436\u0430", 
+            "object_id": "15", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T12:52:26.362Z", 
+            "object_repr": "\u0425\u0438\u0434\u0436\u0430\u0431", 
+            "object_id": "14", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T12:51:00.450Z", 
+            "object_repr": "\u0414\u0436\u0438\u043d\u0441\u044b", 
+            "object_id": "13", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T12:48:49.867Z", 
+            "object_repr": "\u041c\u0430\u0439\u043a\u0438-\u0430\u043b\u043a\u0430\u0448\u043a\u0438", 
+            "object_id": "12", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T12:42:57.917Z", 
+            "object_repr": "\u041a\u0435\u043f\u044b", 
+            "object_id": "11", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T12:42:48.532Z", 
+            "object_repr": "\u0411\u0435\u0439\u0441\u0431\u043e\u043b\u043a\u0438", 
+            "object_id": "10", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2012-05-01T12:42:33.648Z", 
+            "object_repr": "\u0428\u0430\u043f\u043a\u0438", 
+            "object_id": "8", 
+            "change_message": "\u0418\u0437\u043c\u0435\u043d\u0435\u043d name \u0438 slug.", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T10:30:48.953Z", 
+            "object_repr": "\u041f\u0440\u0438\u0431\u043e\u0440\u044b", 
+            "object_id": "9", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T10:29:30.648Z", 
+            "object_repr": "\u0411\u0435\u0439\u0441\u0431\u043e\u043b\u043a\u0438", 
+            "object_id": "8", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-05-01T10:15:42.757Z", 
+            "object_repr": "\u0417\u043d\u0430\u0447\u043e\u043a", 
+            "object_id": "8", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 10
         }
     }, 
     {

@@ -5,7 +5,14 @@
     <title></title>
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
+    {% block cart %}
+        <div>{{request.cart}}</div>
+    {% endblock cart %}
+    
+    {% block breadcrumbs %}
+        <div>{% include "plugshop/group_path.html" with group=group %}</div>
+    {% endblock breadcrumbs %}
+    
+    {% block content %}{% endblock content %}
 </body>
 </html>

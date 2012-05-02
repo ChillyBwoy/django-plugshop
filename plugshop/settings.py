@@ -1,6 +1,9 @@
 #encoding: utf-8
 from django.conf import settings
 
+REQUEST_NAMESPACE = getattr(settings, 'PLUGSHOP_REQUEST_NAMESPACE', 'cart')
+SESSION_NAMESPACE = getattr(settings, 'PLUGSHOP_SESSION_NAMESPACE', 'cart')
+
 PRODUCT_MODEL = getattr(settings, 'PLUGSHOP_PRODUCT_MODEL', 
                         'plugshop.models.product.Product')
 

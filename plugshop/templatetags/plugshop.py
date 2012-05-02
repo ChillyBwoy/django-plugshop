@@ -4,6 +4,7 @@ import markdown
 from django import template
 from django.forms.widgets import Select
 from django.utils.translation import ugettext as _
+from plugshop import settings
 
 register = template.Library()
 
@@ -13,7 +14,6 @@ def currency(value):
 
     v = str(value)[::-1]
     return " ".join([v[i:i+3][::-1] for i in xrange(0, len(v), 3) ][::-1])
-
 
 @register.simple_tag
 def option(opt_type, value, name=None):
