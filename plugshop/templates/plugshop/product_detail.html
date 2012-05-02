@@ -1,9 +1,6 @@
 {% extends 'plugshop/base.html' %}
 
 {% block content %}
-    <div>
-        {% include "plugshop/group_path.html" with group=product.group %}
-    </div>
     <h1>{{product}}</h1>
     <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
         <p>
