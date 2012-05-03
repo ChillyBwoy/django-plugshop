@@ -96,15 +96,26 @@ class CartView(TemplateResponseMixin, View):
         else:
             return self.render_to_response(context)
 
-    def post(self, request, **kwargs):
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            product = form.cleaned_data.get('product')
-            quantity = form.cleaned_data.get('quantity')
-            cart = get_cart(request)
 
-            cart.append(product, int(product.price), quantity)
-            cart.save()
+    def post(self, request, **kwargs):
+        action = request.POST.get('_method', None)
+
+        if action == 'create':
+            form = ProductForm(request.POST)
+            if form.is_valid():
+                product = form.cleaned_data.get('product')
+                quantity = form.cleaned_data.get('quantity', 1)
+                cart = get_cart(request)
+
+                cart.append(product, int(product.price), quantity)
+                cart.save()
+                
+        elif action == 'update':
+            pass
+        elif action == 'destroy':
+            pass
+        else:
+            raise Http404
 
         return redirect('PlugshopCart')
 

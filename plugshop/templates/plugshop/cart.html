@@ -9,6 +9,22 @@
                 </td>
                 <td>{{cart_item.quantity}}</td>
                 <td>{{cart_item.price_total}}</td>
+                <td>
+                    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+                        <p>
+                            <input type="hidden" name="product" value="{{cart_item.product.pk}}">
+                            <input type="hidden" name="_method" value="create">
+                            <input type="submit" value="-">
+                        </p>
+                    </form>
+                    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+                        <p>
+                            <input type="hidden" name="product" value="{{cart_item.product.pk}}">
+                            <input type="hidden" name="_method" value="destroy">
+                            <input type="submit" value="+">
+                        </p>
+                    </form>
+                </td>
             </tr>
         {% endfor %}
     </table>
