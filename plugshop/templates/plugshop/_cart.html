@@ -1,0 +1,32 @@
+<div>
+    <h2>Cart:</h2>
+    {% if request.cart|length %}
+    <table border="0" cellspacing="5" cellpadding="5">
+        {% for cart_item in request.cart %}
+            <tr>
+                <td>
+                    <a href="{{cart_item.product.get_absolute_url}}">{{cart_item.product}}</a>
+                </td>
+                <td>{{cart_item.quantity}}</td>
+                <td>{{cart_item.price_total}}</td>
+                <td>
+                    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+                        <p>
+                            <input type="hidden" name="product" value="{{cart_item.product.pk}}">
+                            <input type="hidden" name="_method" value="create">
+                            <input type="submit" value="-">
+                        </p>
+                    </form>
+                    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+                        <p>
+                            <input type="hidden" name="product" value="{{cart_item.product.pk}}">
+                            <input type="hidden" name="_method" value="destroy">
+                            <input type="submit" value="+">
+                        </p>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
