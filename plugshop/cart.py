@@ -1,5 +1,8 @@
 import time
+from django.utils import simplejson as json
+
 from plugshop import settings
+from plugshop.utils import serialize_model
 
 class CartItem(object):
     def __init__(self, product, price=0, quantity=1):
@@ -55,10 +58,20 @@ class Cart(list):
 
     def price_total(self):
         return sum([p.price_total() for p in self])
+        
+    def to_json(self):
+        return {
+            'products': self.get_products(),
+            'price_total': self.price_total()
+        }
 
     def get_products(self):
-        return [{'product': p.product.pk, 'quantity': p.quantity} 
-                    for p in self]
+        return [{
+                    'product': serialize_model(item.product),
+                    'price': item.price,
+                    'quantity': item.quantity
+            } for item in self]
+                
 
 
 def get_cart(request):

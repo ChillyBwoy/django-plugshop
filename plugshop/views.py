@@ -1,15 +1,18 @@
 # encoding: utf-8
+
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.shortcuts import get_object_or_404, redirect
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
 
 from django.views.generic import View, TemplateView, ListView, DetailView
 from django.views.generic.base import TemplateResponseMixin
+from django.utils import simplejson as json
+from django.core import serializers
 
 from plugshop import settings
-from plugshop.utils import load_class
+from plugshop.utils import load_class, serialize_model
 from plugshop.forms import *
 from plugshop.cart import get_cart
 
@@ -77,18 +80,23 @@ class GroupView(DetailView):
 
 class CartView(TemplateResponseMixin, View):
     template_name = 'plugshop/cart.html'
-    
+        
     def get_context_data(self, **kwargs):
         return {
             'cart': get_cart(self.request) or [],
         }
-        
+
     def get(self, request, **kwargs):
         context = self.get_context_data(**kwargs)
-        return self.render_to_response(context)
+        if request.is_ajax():
+            context.update(
+                cart=request.cart.to_json()
+            )
+            return HttpResponse(json.dumps(context), content_type='application/json', **kwargs)
+        else:
+            return self.render_to_response(context)
 
     def post(self, request, **kwargs):
-        context = self.get_context_data(**kwargs)
         form = ProductForm(request.POST)
         if form.is_valid():
             product = form.cleaned_data.get('product')
@@ -98,19 +106,8 @@ class CartView(TemplateResponseMixin, View):
             cart.append(product, int(product.price), quantity)
             cart.save()
 
-            if request.is_ajax():
-                return {
-                    'cart': cart
-                }
-            else:
-                return redirect(product.get_absolute_url())
-        else:
-            if redirect.is_ajax():
-                return {
-                    'errors': form.errors
-                }
-            else:
-                return redirect(product.get_absolute_url())
+        return redirect('PlugshopCart')
+
 
 # @csrf_protect
 # @render_to('cartds/cart.html')

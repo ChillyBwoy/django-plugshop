@@ -10,6 +10,12 @@ def load_class(path):
 
     cl = getattr(module, class_name)
     return cl
+    
+def serialize_model(instance):
+    data = {}
+    for field in instance._meta.fields:
+        data[field.name] = field.value_to_string(instance)
+    return data
 
 # CLASS_PATH_ERROR = '''django-shop is unable to interpret settings value for %s. %s should ' \
 #                    'be in ther form of a tuple: (\'path.to.models.Class\',

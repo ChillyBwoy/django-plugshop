@@ -2,11 +2,60 @@
 
 {% block content %}
     <h1>{{product}}</h1>
-    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+    <form action="{% url PlugshopCart %}" method="post" id="product_form">{% csrf_token %}
         <p>
             <input type="hidden" name="product" value="{{product.pk}}">
             <input type="hidden" name="quantity" value="1">
             <input type="submit" value="Buy &rarr;">
         </p>
     </form>
+    
+    <script type="text/javascript">
+        (function() {
+            var serialize = function(form) {
+                var data = {};
+
+                for (var i = 0; i < form.elements.length; i++) {
+                    var el   = form.elements[i],
+                        type = el.type.toLowerCase(),
+                        name = el.name;
+
+                    if(type.match('^hidden|text|radio|checkbox$')) {
+                        data[name] = el.value;
+                    }
+                };
+                return data;
+            }
+            
+            var request = function(url, data, success) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4) {
+                        if (xmlhttp.status == 200) {
+                            success.call(this)
+                        }
+                    }
+                }
+                
+                var requestData = []
+                for(d in data) {
+                    if (data.hasOwnProperty(d)) {
+                        requestData.push(d + '=' + data[d]) 
+                    }
+                }
+                var requestStr = encodeURI(requestData.join('&'));
+
+                xmlhttp.open('POST', url, true);
+                xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                xmlhttp.send(requestStr);
+            }
+            
+            var form = document.getElementById('product_form');
+            form.addEventListener('submit', function(evt) {
+                request('/shop/cart/', serialize(form), function() {});
+                evt.preventDefault();
+            });
+        }());
+    </script>
 {% endblock content %}

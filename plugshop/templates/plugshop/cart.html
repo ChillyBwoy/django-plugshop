@@ -1,1 +1,16 @@
-cart: {{cart}}
+<div>
+    <h2>Cart:</h2>
+    {% if request.cart|length %}
+    <table border="0" cellspacing="5" cellpadding="5">
+        {% for cart_item in request.cart %}
+            <tr>
+                <td>
+                    <a href="{{cart_item.product.get_absolute_url}}">{{cart_item.product}}</a>
+                </td>
+                <td>{{cart_item.quantity}}</td>
+                <td>{{cart_item.price_total}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
