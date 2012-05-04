@@ -13,15 +13,24 @@
                     <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
                         <p>
                             <input type="hidden" name="product" value="{{cart_item.product.pk}}">
-                            <input type="hidden" name="_method" value="create">
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="_action" value="add">
+                            <input type="submit" value="+">
+                        </p>
+                    </form>
+                    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+                        <p>
+                            <input type="hidden" name="product" value="{{cart_item.product.pk}}">
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="_action" value="remove">
                             <input type="submit" value="-">
                         </p>
                     </form>
                     <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
                         <p>
                             <input type="hidden" name="product" value="{{cart_item.product.pk}}">
-                            <input type="hidden" name="_method" value="destroy">
-                            <input type="submit" value="+">
+                            <input type="hidden" name="_action" value="remove_product">
+                            <input type="submit" value="x">
                         </p>
                     </form>
                 </td>

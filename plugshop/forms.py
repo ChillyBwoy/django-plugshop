@@ -8,6 +8,4 @@ PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
 
 class ProductForm(forms.Form):
     product = forms.ModelChoiceField(queryset=PRODUCT_CLASS.objects)
-    quantity = forms.IntegerField(required=True, error_messages={
-                                'required': _('Quantity not specified')
-                            })
+    quantity = forms.IntegerField(required=False)
