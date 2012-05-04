@@ -38,4 +38,10 @@
         {% endfor %}
     </table>
     {% endif %}
+    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+        <p>
+            <input type="hidden" name="_action" value="remove_all">
+            <input type="submit" value="empty">
+        </p>
+    </form>
 </div>
