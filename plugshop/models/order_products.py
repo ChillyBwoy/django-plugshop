@@ -13,16 +13,13 @@ class OrderProductsAbstract(models.Model):
         verbose_name_plural = _('Order product')
 
     order = models.ForeignKey(load_class(settings.ORDER_MODEL), 
-                                verbose_name=_('Order')
-                            )
+                                verbose_name=_('Order'))
     product = models.ForeignKey(load_class(settings.PRODUCT_MODEL),
-                                verbose_name=_('Product')
-                            )
+                                verbose_name=_('Product'))
     quantity = models.PositiveIntegerField(_('Quantity'), 
                                             blank=False, 
                                             null=False, 
-                                            default=1
-                                        )
+                                            default=1)
 
 class OrderProducts(OrderProductsAbstract):
     class Meta:

@@ -52,11 +52,11 @@
                 xmlhttp.send(requestStr);
             }
             
-            var form = document.getElementById('product_form');
-            form.addEventListener('submit', function(evt) {
-                request('/shop/cart/', serialize(form), function() {});
-                evt.preventDefault();
-            });
+            // var form = document.getElementById('product_form');
+            // form.addEventListener('submit', function(evt) {
+            //     request('/shop/cart/', serialize(form), function() {});
+            //     evt.preventDefault();
+            // });
         }());
     </script>
 {% endblock content %}

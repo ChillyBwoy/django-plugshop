@@ -121,9 +121,8 @@ class CartView(TemplateResponseMixin, View):
 
                 else:
                     raise Http404
-                    
+
         cart.save()
-            
         return redirect('PlugshopCart')
 
 
@@ -153,118 +152,9 @@ class CartView(TemplateResponseMixin, View):
 #         'delivery': delivery,
 #         'template': 'cartds/ajax.html'
 #     }
-# 
-# @render_to('cartds/goods.html')
-# def goods(request):
-#     cart = request.cart
-#     return {
-#         'cart': request.cart
-#     }
-# 
-# @ajax_request
-# def count(request):
-#     cart = request.cart
-#     count = len(cart)
-#     return {
-#         'count': count,
-#         'label': choose_plural(count, (u'товар', u'товара', u'товаров'))
-#     }
-# 
-# @csrf_protect
-# @ajax_request
-# def update(request):
-#     cart = request.cart
-#     
-#     if len(cart) == 0: return redirect('shop_list')
-#     
-#     if request.method == 'POST':
-#         try:
-#             product = Product.objects.get(pk=request.POST.get('product', None))
-# 
-#             try:
-#                 quantity = int(request.POST.get('quantity'))
-#             except Exception:
-#                 quantity = 1
-# 
-#             cart.remove(product, quantity)
-#             cart.save()
-#             context = {
-#                 'cart': {
-#                     'products': cart.products(),
-#                     'price_total': cart.price_total(),
-#                     'count': len(cart)
-#                 }
-#             }
-#         except Product.DoesNotExist, e:
-#             context = { 
-#                 'errors': {
-#                     'product': str(e)
-#                 } 
-#             }
-#         return context if request.is_ajax() else redirect('cart_order')
-#     else:
-#         raise Http404
-# 
-# @csrf_protect
-# @ajax_request
-# def add(request):
-#     if request.method == 'POST':
-#         form = ProductForm(request.POST or None)
-#         cart = request.cart
-# 
-#         if form.is_valid():
-#             product = form.cleaned_data['product']
-#             cart.append(product)
-#             cart.save()
-#             if request.is_ajax():
-#                 return {
-#                     'cart': {
-#                         'products': cart.products(),
-#                         'price_total': cart.price_total(),
-#                         'count': len(cart)
-#                     }
-#                 }
-#             else:
-#                 return redirect('cart_order')
-#         else:
-#             return { 'errors': form.errors } if request.is_ajax() else redirect('cart_order')
-#     else:
-#         raise Http404
-# 
-# 
-# @csrf_protect
-# @ajax_request
-# def remove(request):
-#     cart = request.cart
-# 
-#     if request.method == 'POST':
-#         try:
-#             product = Product.objects.get(pk=request.POST.get('product', None))
-#             cart.remove(product)
-#             cart.save()
-#             context = {
-#                 'cart': {
-#                     'products': cart.products(),
-#                     'price_total': cart.price_total(),
-#                     'count': len(cart)
-#                 }
-#             }
-#         except Product.DoesNotExist, e:
-#             context = { 
-#                 'errors': {
-#                     'product': str(e)
-#                 } 
-#             }
-#         if request.is_ajax():
-#             return context
-#         else:
-#             return redirect('cart_order')
-#     else:
-#         raise Http404
-# 
-# 
-# 
-# 
+
+
+
 # @csrf_protect
 # @render_to('cartds/cart.html')
 # def order(request):
