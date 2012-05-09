@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-09 14:08+0400\n"
+"POT-Creation-Date: 2012-05-09 17:20+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,21 +19,37 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
-#: models/__init__.py:20 models/product_options.py:15
-msgid "Product options"
+#: forms.py:15 forms.py:35
+msgid "Name required"
 msgstr ""
+
+#: forms.py:16
+msgid "Invalid email"
+msgstr ""
+
+#: forms.py:17
+msgid "Invalid phone"
+msgstr ""
+
+#: forms.py:44
+msgid "Address required"
+msgstr ""
+
+#: models/__init__.py:20
+msgid "Product option list"
+msgstr "Список опций товара"
 
 #: models/__init__.py:26
 msgid "Order products"
-msgstr ""
+msgstr "Список товаров в заказе"
 
 #: models/group.py:31
 msgid "Product group"
-msgstr ""
+msgstr "Группа товара"
 
 #: models/group.py:32
-msgid "Product groups"
-msgstr ""
+msgid "Product group list"
+msgstr "Список опций продукта"
 
 #: models/group.py:39 models/product.py:22
 msgid "Slug"
@@ -77,11 +93,11 @@ msgstr ""
 
 #: models/option.py:28
 msgid "Option"
-msgstr ""
+msgstr "Опция"
 
 #: models/option.py:29
 msgid "Options"
-msgstr ""
+msgstr "Опции"
 
 #: models/option.py:31 models/product.py:21 models/shipping.py:18
 msgid "Name"
@@ -117,19 +133,23 @@ msgstr "Заказы"
 
 #: models/order.py:26 models/shipping.py:15 models/shipping.py:16
 msgid "Shipping type"
-msgstr ""
+msgstr "Тип доставки"
 
 #: models/order.py:32
 msgid "Order status"
 msgstr "Статус заказа"
 
-#: models/order.py:35
+#: models/order.py:36
 msgid "Creation date"
 msgstr "Дата создания"
 
+#: models/order.py:39
+msgid "Delivery date"
+msgstr "Дата доставки"
+
 #: models/order_products.py:12 models/order_products.py:13
 msgid "Order product"
-msgstr ""
+msgstr "Товар в заказе"
 
 #: models/order_products.py:16
 msgid "Order"
@@ -181,6 +201,10 @@ msgstr "Сортировка"
 
 #: models/product_options.py:14
 msgid "Product option"
+msgstr "Опция продукта"
+
+#: models/product_options.py:15
+msgid "Product options"
 msgstr ""
 
 #: models/product_options.py:19
@@ -193,11 +217,11 @@ msgstr "По-умолчанию"
 
 #: models/shipping.py:32
 msgid "Shipping address"
-msgstr ""
+msgstr "Адрес доставки"
 
 #: models/shipping.py:33
-msgid "Shipping addresses"
-msgstr ""
+msgid "Shipping address list"
+msgstr "Список адресов доставки"
 
 #: models/shipping.py:36
 msgid "Address"

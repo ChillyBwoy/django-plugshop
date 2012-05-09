@@ -154,7 +154,6 @@ class CartView(TemplateResponseMixin, View):
 #     }
 
 
-
 # @csrf_protect
 # @render_to('cartds/cart.html')
 # def order(request):

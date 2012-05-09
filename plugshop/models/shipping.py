@@ -30,7 +30,7 @@ class ShippingAddressAbstract(models.Model):
     class Meta:
         abstract = True
         verbose_name = _('Shipping address')
-        verbose_name_plural = _('Shipping addresses')
+        verbose_name_plural = _('Shipping address list')
 
     user = models.ForeignKey(User)
     address = models.TextField(_('Address'), blank=False)

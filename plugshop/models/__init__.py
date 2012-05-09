@@ -17,7 +17,7 @@ from plugshop.models.order_products import *
 models.ManyToManyField(load_class(settings.OPTION_MODEL),  
                         through=load_class(settings.PRODUCT_OPTIONS_MODEL),
                         related_name="product_options",
-                        verbose_name=_('Product options')
+                        verbose_name=_('Product option list')
                     ).contribute_to_class(ProductAbstract, 'options')
 
 models.ManyToManyField(load_class(settings.PRODUCT_MODEL),

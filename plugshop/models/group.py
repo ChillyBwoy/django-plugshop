@@ -29,7 +29,7 @@ class GroupAbstract(MPTTModel):
     class Meta:
         abstract = True
         verbose_name = _('Product group')
-        verbose_name_plural = _('Product groups')
+        verbose_name_plural = _('Product group list')
 
     class MPTTMeta:
         ordering = ['pk', 'lft']

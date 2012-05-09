@@ -32,10 +32,12 @@ class OrderAbstract(models.Model):
     status = models.CharField(_('Order status'), blank=False, max_length=80, 
                                 choices=STATUS_CHOICES, 
                                 default='created')
+                                
     created_at = models.DateTimeField(_('Creation date'), blank=False, 
                                         default=datetime.datetime.now)
-    # completed_at = models.DateTimeField(_('Delivery date'), blank=True, 
-    #                                     null=True)
+
+    delivered_at = models.DateTimeField(_('Delivery date'), blank=True, 
+                                        null=True)
 
     def get_user(self):
         return self.address.user
