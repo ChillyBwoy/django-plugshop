@@ -32,11 +32,13 @@ __all__ = [
     
     'Group',
     'GroupAbstract',
-    
+
     'Option', 
     'ProductOptions', 
+    
     'ShippingType',
-    'ShippingAddress',
+    'Shipping',
+    
     'Order',
     'OrderProducts',
 ]

@@ -10,8 +10,7 @@ SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_MODEL)
 class ProductForm(forms.Form):
     product = forms.ModelChoiceField(queryset=PRODUCT_CLASS.objects)
     quantity = forms.IntegerField(required=False)
-    
-    
+
 class OrderForm(forms.Form):
     name = forms.CharField(required=True, error_messages={'required': _('Name required')}, initial="")
     email = forms.EmailField(required=True, error_messages={'required': _('Invalid email')}, initial="")

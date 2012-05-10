@@ -70,9 +70,14 @@ admin.site.register(load_class(settings.SHIPPING_TYPE_MODEL),
 class BaseOrderProductsInline(admin.TabularInline):
     model = load_class(settings.ORDER_PRODUCTS_MODEL)
     extra = 0
+    
+class BaseOrderShippingInline(admin.StackedInline):
+    model = load_class(settings.SHIPPING_MODEL)
+    can_delete = False
 
 class BaseOrderAdmin(admin.ModelAdmin):
     inlines = (
+        BaseOrderShippingInline,
         BaseOrderProductsInline,
     )
 admin.site.register(load_class(settings.ORDER_MODEL), BaseOrderAdmin)

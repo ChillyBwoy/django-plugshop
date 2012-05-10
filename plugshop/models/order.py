@@ -1,8 +1,12 @@
 import datetime
 from django.db import models
+from django.db.models.signals import post_save, pre_save
+
+from django.dispatch import receiver
+
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from mptt.models import MPTTModel, TreeForeignKey
-
 
 from plugshop import settings
 from plugshop.utils import load_class
@@ -19,19 +23,14 @@ class OrderAbstract(models.Model):
         abstract = True
         verbose_name = _('order')
         verbose_name_plural = _('Orders')
-
-    shipping_type = models.ForeignKey(load_class(settings.SHIPPING_TYPE_MODEL), 
-                                        blank=True, 
-                                        null=True, 
-                                        verbose_name=_('Shipping type'))
-
-    address = models.ForeignKey(load_class(settings.SHIPPING_ADDRESS_MODEL), 
-                                    blank=True,
-                                    null=True)
+        
+    user = models.ForeignKey(User)
 
     status = models.CharField(_('Order status'), blank=False, max_length=80, 
                                 choices=STATUS_CHOICES, 
                                 default='created')
+
+    comment = models.TextField(_('Comment'), blank=True, null=True)
                                 
     created_at = models.DateTimeField(_('Creation date'), blank=False, 
                                         default=datetime.datetime.now)
@@ -48,3 +47,11 @@ class OrderAbstract(models.Model):
 class Order(OrderAbstract):
     class Meta:
         app_label = 'plugshop'
+
+# @receiver(post_save, sender=load_class(settings.ORDER_MODEL))
+# def create_shipping(sender, instance, created, **kwargs):
+#     if created:
+#         SHIPPING_CLASS = load_class(settings.SHIPPING_MODEL)
+#         SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_CLASS)
+# 
+#         s, s_created = SHIPPING_CLASS.objects.get_or_create(order=instance)
