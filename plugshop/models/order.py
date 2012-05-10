@@ -25,10 +25,10 @@ class OrderAbstract(models.Model):
         verbose_name_plural = _('Orders')
         
     user = models.ForeignKey(User)
-
-    status = models.CharField(_('Order status'), blank=False, max_length=80, 
-                                choices=STATUS_CHOICES, 
-                                default='created')
+    
+    status = models.IntegerField(_('Order status'), blank=False, 
+                                choices=settings.STATUS_CHOICES, 
+                                default=settings.STATUS_CHOICES_START)
 
     comment = models.TextField(_('Comment'), blank=True, null=True)
                                 

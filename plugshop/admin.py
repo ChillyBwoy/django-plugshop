@@ -80,4 +80,15 @@ class BaseOrderAdmin(admin.ModelAdmin):
         BaseOrderShippingInline,
         BaseOrderProductsInline,
     )
+    list_display = (
+        'id',
+        'user',
+        'status',
+    )
+    list_editable = (
+        'status',
+    )
+    list_filter = (
+        'status', 
+    )
 admin.site.register(load_class(settings.ORDER_MODEL), BaseOrderAdmin)

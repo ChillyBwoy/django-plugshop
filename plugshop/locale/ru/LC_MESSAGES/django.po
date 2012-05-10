@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-09 17:20+0400\n"
+"POT-Creation-Date: 2012-05-10 17:23+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,9 +31,21 @@ msgstr ""
 msgid "Invalid phone"
 msgstr ""
 
-#: forms.py:44
-msgid "Address required"
-msgstr ""
+#: settings.py:35 models/order.py:15
+msgid "Created"
+msgstr "Создан"
+
+#: settings.py:36 models/order.py:16
+msgid "Confirmed"
+msgstr "Подтверждён"
+
+#: settings.py:37 models/order.py:17
+msgid "Denied"
+msgstr "Отклонён"
+
+#: settings.py:38 models/order.py:18
+msgid "Delivered"
+msgstr "Доставлен"
 
 #: models/__init__.py:20
 msgid "Product option list"
@@ -107,43 +119,27 @@ msgstr "Наименование"
 msgid "Type"
 msgstr "Тип"
 
-#: models/order.py:11
-msgid "Created"
-msgstr "Создан"
-
-#: models/order.py:12
-msgid "Confirmed"
-msgstr "Подтверждён"
-
-#: models/order.py:13
-msgid "Denied"
-msgstr "Отклонён"
-
-#: models/order.py:14
-msgid "Delivered"
-msgstr "Доставлен"
-
-#: models/order.py:20
+#: models/order.py:24
 msgid "order"
 msgstr "заказ"
 
-#: models/order.py:21
+#: models/order.py:25
 msgid "Orders"
 msgstr "Заказы"
 
-#: models/order.py:26 models/shipping.py:15 models/shipping.py:16
-msgid "Shipping type"
-msgstr "Тип доставки"
-
-#: models/order.py:32
+#: models/order.py:31
 msgid "Order status"
 msgstr "Статус заказа"
 
-#: models/order.py:36
+#: models/order.py:35
+msgid "Comment"
+msgstr ""
+
+#: models/order.py:37
 msgid "Creation date"
 msgstr "Дата создания"
 
-#: models/order.py:39
+#: models/order.py:40
 msgid "Delivery date"
 msgstr "Дата доставки"
 
@@ -151,7 +147,7 @@ msgstr "Дата доставки"
 msgid "Order product"
 msgstr "Товар в заказе"
 
-#: models/order_products.py:16
+#: models/order_products.py:16 models/shipping.py:37
 msgid "Order"
 msgstr "Заказ"
 
@@ -211,6 +207,10 @@ msgstr ""
 msgid "Value"
 msgstr "Значение"
 
+#: models/shipping.py:15 models/shipping.py:16 models/shipping.py:40
+msgid "Shipping type"
+msgstr "Тип доставки"
+
 #: models/shipping.py:20
 msgid "Default"
 msgstr "По-умолчанию"
@@ -223,6 +223,6 @@ msgstr "Адрес доставки"
 msgid "Shipping address list"
 msgstr "Список адресов доставки"
 
-#: models/shipping.py:36
+#: models/shipping.py:41
 msgid "Address"
 msgstr "Адрес"

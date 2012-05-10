@@ -1,6 +1,8 @@
 # encoding: utf-8
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
 
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -37,8 +39,13 @@ class ShippingAbstract(models.Model):
                             blank=True, null=True,
                             verbose_name=_('Shipping type'))
     address = models.TextField(_('Address'), blank=True, null=True)
-    
 
 class Shipping(ShippingAbstract):
     class Meta:
         app_label = 'plugshop'
+
+
+@receiver(post_save, sender=load_class(settings.SHIPPING_MODEL))
+def remove_null_shipping(sender, instance, created, **kwargs):
+    if instance.type is None:
+        instance.delete()
