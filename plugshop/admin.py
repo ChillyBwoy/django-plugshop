@@ -39,7 +39,9 @@ class BaseProductAdmin(admin.ModelAdmin):
 admin.site.register(load_class(settings.PRODUCT_MODEL), BaseProductAdmin)
 
 class BaseGroupAdmin(MPTTModelAdmin):
+#class BaseGroupAdmin(admin.ModelAdmin):
     mptt_level_indent = 20
+    #change_list_template = 'admin/group/change_list.html'
     prepopulated_fields = {
         'slug': ('name', )
     }
@@ -84,6 +86,8 @@ class BaseOrderAdmin(admin.ModelAdmin):
         'id',
         'user',
         'status',
+        'created_at',
+        'delivered_at',
     )
     list_editable = (
         'status',

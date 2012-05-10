@@ -11,47 +11,35 @@ from mptt.models import MPTTModel, TreeForeignKey
 from plugshop import settings
 from plugshop.utils import load_class
 
-STATUS_CHOICES = (
-    ('created', _('Created')),
-    ('aproved', _('Confirmed')),
-    ('denied', _('Denied')),
-    ('delivered', _('Delivered')),
-)
-
 class OrderAbstract(models.Model):
+
     class Meta:
         abstract = True
         verbose_name = _('order')
         verbose_name_plural = _('Orders')
-        
+
     user = models.ForeignKey(User)
-    
     status = models.IntegerField(_('Order status'), blank=False, 
                                 choices=settings.STATUS_CHOICES, 
                                 default=settings.STATUS_CHOICES_START)
-
-    comment = models.TextField(_('Comment'), blank=True, null=True)
-                                
     created_at = models.DateTimeField(_('Creation date'), blank=False, 
                                         default=datetime.datetime.now)
-
     delivered_at = models.DateTimeField(_('Delivery date'), blank=True, 
                                         null=True)
-
-    def get_user(self):
-        return self.address.user
+    comment = models.TextField(_('Comment'), blank=True, null=True)
     
     def __unicode__(self):
         return str(self.pk)
 
 class Order(OrderAbstract):
     class Meta:
+        verbose_name = _('order')
+        verbose_name_plural = _('Orders')
         app_label = 'plugshop'
-
-# @receiver(post_save, sender=load_class(settings.ORDER_MODEL))
-# def create_shipping(sender, instance, created, **kwargs):
-#     if created:
-#         SHIPPING_CLASS = load_class(settings.SHIPPING_MODEL)
-#         SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_CLASS)
-# 
-#         s, s_created = SHIPPING_CLASS.objects.get_or_create(order=instance)
+        
+@receiver(pre_save, sender=load_class(settings.ORDER_MODEL))
+def set_delivered(sender, instance, **kwargs):
+    if instance.status == settings.STATUS_CHOICES_FINISH:
+        instance.delivered_at = datetime.datetime.now()
+    else:
+        instance.delivered_at = None

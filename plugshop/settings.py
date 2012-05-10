@@ -39,6 +39,6 @@ STATUS_CHOICES = getattr(settings, 'PLUGHOSP_STATUS_CHOICES', (
                         ))
 
 STATUS_CHOICES_START = getattr(settings, 'PLUGHOSP_STATUS_CHOICES_START', 
-                                STATUS_CHOICES[0])
+                                STATUS_CHOICES[0][0])
 STATUS_CHOICES_FINISH = getattr(settings, 'PLUGHOSP_STATUS_CHOICES_FINISH',
-                                STATUS_CHOICES[-1])
+                                STATUS_CHOICES[-1][0])

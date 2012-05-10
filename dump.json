@@ -138,7 +138,7 @@
     "pk": "fb9720154d892f58bc2416eb0d71c409",
     "model": "sessions.session",
     "fields": {
-      "expire_date": "2012-05-24T13:12:42.046Z",
+      "expire_date": "2012-05-24T15:24:42.306Z",
       "session_data": "MjM1ZTI0MDM3MzZiM2NkYTM2YThjMDA1NjVjYjE2NzgwZGQ1Njg2NjqAAn1xAShVBGNhcnQpVQ1f\nYXV0aF91c2VyX2lkSwFVEl9hdXRoX3VzZXJfYmFja2VuZFUpZGphbmdvLmNvbnRyaWIuYXV0aC5i\nYWNrZW5kcy5Nb2RlbEJhY2tlbmR1Lg==\n"
     }
   },

@@ -24,13 +24,15 @@ class ShippingTypeAbstract(models.Model):
 
 class ShippingType(ShippingTypeAbstract):
     class Meta:
+        verbose_name = _('Shipping type')
+        verbose_name_plural = _('Shipping type')
         app_label = 'plugshop'
 
 class ShippingAbstract(models.Model):
     class Meta:
         abstract = True
-        verbose_name = _('Shipping address')
-        verbose_name_plural = _('Shipping address list')
+        verbose_name = _('Shipping')
+        verbose_name_plural = _('Shipping list')
     
     order = models.OneToOneField(load_class(settings.ORDER_MODEL),
                             primary_key=True,
@@ -42,8 +44,9 @@ class ShippingAbstract(models.Model):
 
 class Shipping(ShippingAbstract):
     class Meta:
+        verbose_name = _('Shipping')
+        verbose_name_plural = _('Shipping list')
         app_label = 'plugshop'
-
 
 @receiver(post_save, sender=load_class(settings.SHIPPING_MODEL))
 def remove_null_shipping(sender, instance, created, **kwargs):
