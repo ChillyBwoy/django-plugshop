@@ -17,7 +17,7 @@ from plugshop.forms import *
 from plugshop.cart import get_cart
 
 PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
-GROUP_CLASS = load_class(settings.GROUP_MODEL)
+CATEGORY_CLASS = load_class(settings.CATEGORY_MODEL)
 
 class ProductListView(ListView):
     context_object_name = 'products'
@@ -28,9 +28,9 @@ class ProductListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
-        groups = GROUP_CLASS.objects.all()
+        categories = CATEGORY_CLASS.objects.all()
         context.update(
-            groups = groups
+            categories = categories
         )
         return context
 
@@ -46,34 +46,34 @@ class ProductView(DetailView):
         context = super(ProductView, self).get_context_data(**kwargs)
         product = context.get('product')
         context.update(
-            group=product.group
+            category=product.category
         )
         return context
 
 
-class GroupView(DetailView):
-    model = GROUP_CLASS
-    context_object_name = 'group'
+class CategoryView(DetailView):
+    model = CATEGORY_CLASS
+    context_object_name = 'category'
     template_name = 'plugshop/product_list.html'
 
     def get_object(self, *args, **kwargs):
-        path = self.kwargs.get('group_path', None)
+        path = self.kwargs.get('category_path', None)
         try:
-            return GROUP_CLASS.objects.get_by_path(path)
-        except GROUP_CLASS.DoesNotExist:
+            return CATEGORY_CLASS.objects.get_by_path(path)
+        except CATEGORY_CLASS.DoesNotExist:
             raise Http404
 
     def get_context_data(self, **kwargs):
-        context = super(GroupView, self).get_context_data(**kwargs)
-        group = context.get('group')
+        context = super(CategoryView, self).get_context_data(**kwargs)
+        category = context.get('category')
         
-        group_list = [group] + list(group.get_children())
-        products = PRODUCT_CLASS.objects.filter(group__in=group_list)
+        category_list = [category] + list(category.get_children())
+        products = PRODUCT_CLASS.objects.filter(category__in=category_list)
 
-        groups = GROUP_CLASS.objects.all()
+        categories = CATEGORY_CLASS.objects.all()
         context.update(
             products = products,
-            groups = groups
+            categories = categories
         )
         return context
 
@@ -123,7 +123,7 @@ class CartView(TemplateResponseMixin, View):
                     raise Http404
 
         cart.save()
-        return redirect('PlugshopCart')
+        return redirect('plugshop-cart')
 
 
 # @csrf_protect

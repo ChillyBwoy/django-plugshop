@@ -11,13 +11,13 @@ from plugshop.utils import load_class
 class ProductOptionsAbstract(models.Model):
     class Meta:
         abstract = True
-        verbose_name = _("Product option")
-        verbose_name_plural = _("Product options")
+        verbose_name = _("product option")
+        verbose_name_plural = _("product options")
 
     product = models.ForeignKey(load_class(settings.PRODUCT_MODEL))
     option = models.ForeignKey(load_class(settings.OPTION_MODEL))
-    value = models.CharField(_('Value'), blank=False, max_length=200)
-    sort = models.PositiveSmallIntegerField(_('Sort'), default=1)
+    value = models.CharField(_('value'), blank=False, max_length=200)
+    sort = models.PositiveSmallIntegerField(_('sort'), default=1)
 
     def __unicode__(self):
         return "(%s) %s = '%s'" % (self.option.type, self.option.name,

@@ -15,9 +15,9 @@ def get_upload_to(f, path):
     return os.path.abspath(path, '.'.join(path))
 
 
-# class Group(GroupAbstract):
+# class Category(CategoryAbstract):
 #     logo = models.ImageField(_('Logo'), 
-#                         upload_to=lambda i,f: get_upload_to(f, 'groups'), 
+#                         upload_to=lambda i,f: get_upload_to(f, 'categories'), 
 #                         blank=False)
 # 
 # class Product(ProductAbstract):

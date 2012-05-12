@@ -9,14 +9,14 @@ from plugshop.utils import load_class
 class OrderProductsAbstract(models.Model):
     class Meta:
         abstract = True
-        verbose_name = _('Order product')
-        verbose_name_plural = _('Order product')
+        verbose_name = _('order product')
+        verbose_name_plural = _('order product')
 
     order = models.ForeignKey(load_class(settings.ORDER_MODEL), 
-                                verbose_name=_('Order'))
+                                verbose_name=_('order'))
     product = models.ForeignKey(load_class(settings.PRODUCT_MODEL),
-                                verbose_name=_('Product'))
-    quantity = models.PositiveIntegerField(_('Quantity'), 
+                                verbose_name=_('product'))
+    quantity = models.PositiveIntegerField(_('quantity'), 
                                             blank=False, 
                                             null=False, 
                                             default=1)

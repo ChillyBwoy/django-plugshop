@@ -1,0 +1,12 @@
+{% spaceless %}
+<ul>
+    <li>
+        <a href="{% url plugshop-product-list %}">{{root|default:"Shop"}}</a>
+    </li>
+    {% for c in category.get_ancestor_list %}
+        <li>
+            <a href="{{c.get_absolute_url}}">{{c.name}}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endspaceless %}

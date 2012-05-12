@@ -25,12 +25,12 @@ OPTION_TYPE_CHOICES_DEFAULT = 'str'
 class OptionAbstract(models.Model):
     class Meta:
         abstract = True
-        verbose_name = _("Option")
-        verbose_name_plural = _("Options")
+        verbose_name = _("option")
+        verbose_name_plural = _("options")
 
-    name = models.CharField(_('Name'), blank=False, max_length=200, 
+    name = models.CharField(_('name'), blank=False, max_length=200, 
                             unique=True)
-    type = models.CharField(_('Type'), max_length=10, blank=False, 
+    type = models.CharField(_('type'), max_length=10, blank=False, 
                             choices=OPTION_TYPE_CHOICES, 
                             default=OPTION_TYPE_CHOICES_DEFAULT)
 

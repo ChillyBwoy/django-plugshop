@@ -1,158 +1,7 @@
 [
   {
-    "pk": 4,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "contenttype",
-      "name": "content type",
-      "app_label": "contenttypes"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "group",
-      "name": "group",
-      "app_label": "auth"
-    }
-  },
-  {
-    "pk": 8,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "group",
-      "name": "group",
-      "app_label": "plugshop"
-    }
-  },
-  {
-    "pk": 7,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "logentry",
-      "name": "log entry",
-      "app_label": "admin"
-    }
-  },
-  {
-    "pk": 10,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "option",
-      "name": "option",
-      "app_label": "plugshop"
-    }
-  },
-  {
-    "pk": 13,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "order",
-      "name": "order",
-      "app_label": "plugshop"
-    }
-  },
-  {
-    "pk": 15,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "orderproducts",
-      "name": "order products",
-      "app_label": "plugshop"
-    }
-  },
-  {
     "pk": 1,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "permission",
-      "name": "permission",
-      "app_label": "auth"
-    }
-  },
-  {
-    "pk": 9,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "product",
-      "name": "product",
-      "app_label": "plugshop"
-    }
-  },
-  {
-    "pk": 11,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "productoptions",
-      "name": "product options",
-      "app_label": "plugshop"
-    }
-  },
-  {
-    "pk": 5,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "session",
-      "name": "session",
-      "app_label": "sessions"
-    }
-  },
-  {
-    "pk": 14,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "shipping",
-      "name": "shipping",
-      "app_label": "plugshop"
-    }
-  },
-  {
-    "pk": 12,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "shippingtype",
-      "name": "shipping type",
-      "app_label": "plugshop"
-    }
-  },
-  {
-    "pk": 6,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "site",
-      "name": "site",
-      "app_label": "sites"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "user",
-      "name": "user",
-      "app_label": "auth"
-    }
-  },
-  {
-    "pk": "fb9720154d892f58bc2416eb0d71c409",
-    "model": "sessions.session",
-    "fields": {
-      "expire_date": "2012-05-24T15:24:42.306Z",
-      "session_data": "MjM1ZTI0MDM3MzZiM2NkYTM2YThjMDA1NjVjYjE2NzgwZGQ1Njg2NjqAAn1xAShVBGNhcnQpVQ1f\nYXV0aF91c2VyX2lkSwFVEl9hdXRoX3VzZXJfYmFja2VuZFUpZGphbmdvLmNvbnRyaWIuYXV0aC5i\nYWNrZW5kcy5Nb2RlbEJhY2tlbmR1Lg==\n"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "sites.site",
-    "fields": {
-      "domain": "example.com",
-      "name": "example.com"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "plugshop.group",
+    "model": "plugshop.category",
     "fields": {
       "rght": 6,
       "name": "\u041e\u0434\u0435\u0436\u0434\u0430",
@@ -165,7 +14,7 @@
   },
   {
     "pk": 2,
-    "model": "plugshop.group",
+    "model": "plugshop.category",
     "fields": {
       "rght": 3,
       "name": "\u0424\u0443\u0442\u0431\u043e\u043b\u043a\u0438",
@@ -178,7 +27,7 @@
   },
   {
     "pk": 3,
-    "model": "plugshop.group",
+    "model": "plugshop.category",
     "fields": {
       "rght": 5,
       "name": "\u0411\u0440\u044e\u043a\u0438",
@@ -191,7 +40,7 @@
   },
   {
     "pk": 4,
-    "model": "plugshop.group",
+    "model": "plugshop.category",
     "fields": {
       "rght": 6,
       "name": "\u0413\u043e\u043b\u043e\u0432\u043d\u044b\u0435 \u0443\u0431\u043e\u0440\u044b",
@@ -204,7 +53,7 @@
   },
   {
     "pk": 5,
-    "model": "plugshop.group",
+    "model": "plugshop.category",
     "fields": {
       "rght": 3,
       "name": "\u0411\u0435\u0439\u0441\u0431\u043e\u043b\u043a\u0438",
@@ -217,7 +66,7 @@
   },
   {
     "pk": 6,
-    "model": "plugshop.group",
+    "model": "plugshop.category",
     "fields": {
       "rght": 5,
       "name": "\u0428\u043b\u044f\u043f\u044b",
@@ -234,7 +83,7 @@
     "fields": {
       "sort": 1,
       "created_at": "2012-05-03T13:53:20Z",
-      "group": 2,
+      "category": 2,
       "description": "",
       "price": 1000,
       "is_active": true,
@@ -249,7 +98,7 @@
     "fields": {
       "sort": 1,
       "created_at": "2012-05-03T13:53:32Z",
-      "group": 2,
+      "category": 2,
       "description": "",
       "price": 1000,
       "is_active": true,
@@ -264,7 +113,7 @@
     "fields": {
       "sort": 1,
       "created_at": "2012-05-03T13:53:48Z",
-      "group": 3,
+      "category": 3,
       "description": "",
       "price": 3000,
       "is_active": true,
@@ -279,7 +128,7 @@
     "fields": {
       "sort": 1,
       "created_at": "2012-05-03T13:53:55Z",
-      "group": 4,
+      "category": 4,
       "description": "",
       "price": 500,
       "is_active": true,
@@ -294,7 +143,7 @@
     "fields": {
       "sort": 1,
       "created_at": "2012-05-03T13:54:12Z",
-      "group": 5,
+      "category": 5,
       "description": "",
       "price": 300,
       "is_active": true,
@@ -309,453 +158,13 @@
     "fields": {
       "sort": 1,
       "created_at": "2012-05-03T13:54:35Z",
-      "group": 5,
+      "category": 5,
       "description": "",
       "price": 400,
       "is_active": true,
       "is_available": true,
       "slug": "zelyonaya-bejsbolka",
       "name": "\u0417\u0435\u043b\u0451\u043d\u0430\u044f \u0431\u0435\u0439\u0441\u0431\u043e\u043b\u043a\u0430"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "plugshop.shippingtype",
-    "fields": {
-      "is_default": false,
-      "price": 0,
-      "name": "\u0421\u0430\u043c\u043e\u0432\u044b\u0432\u043e\u0437"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "plugshop.shipping",
-    "fields": {
-      "type": 1,
-      "address": ""
-    }
-  },
-  {
-    "pk": 19,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_logentry",
-      "name": "Can add log entry",
-      "content_type": 7
-    }
-  },
-  {
-    "pk": 20,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_logentry",
-      "name": "Can change log entry",
-      "content_type": 7
-    }
-  },
-  {
-    "pk": 21,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_logentry",
-      "name": "Can delete log entry",
-      "content_type": 7
-    }
-  },
-  {
-    "pk": 1,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_group",
-      "name": "Can add group",
-      "content_type": 2
-    }
-  },
-  {
-    "pk": 4,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_group",
-      "name": "Can change group",
-      "content_type": 2
-    }
-  },
-  {
-    "pk": 7,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_group",
-      "name": "Can delete group",
-      "content_type": 2
-    }
-  },
-  {
-    "pk": 2,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_permission",
-      "name": "Can add permission",
-      "content_type": 1
-    }
-  },
-  {
-    "pk": 5,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_permission",
-      "name": "Can change permission",
-      "content_type": 1
-    }
-  },
-  {
-    "pk": 8,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_permission",
-      "name": "Can delete permission",
-      "content_type": 1
-    }
-  },
-  {
-    "pk": 3,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_user",
-      "name": "Can add user",
-      "content_type": 3
-    }
-  },
-  {
-    "pk": 6,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_user",
-      "name": "Can change user",
-      "content_type": 3
-    }
-  },
-  {
-    "pk": 9,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_user",
-      "name": "Can delete user",
-      "content_type": 3
-    }
-  },
-  {
-    "pk": 10,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_contenttype",
-      "name": "Can add content type",
-      "content_type": 4
-    }
-  },
-  {
-    "pk": 11,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_contenttype",
-      "name": "Can change content type",
-      "content_type": 4
-    }
-  },
-  {
-    "pk": 12,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_contenttype",
-      "name": "Can delete content type",
-      "content_type": 4
-    }
-  },
-  {
-    "pk": 22,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_group",
-      "name": "Can add group",
-      "content_type": 8
-    }
-  },
-  {
-    "pk": 30,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_group",
-      "name": "Can change group",
-      "content_type": 8
-    }
-  },
-  {
-    "pk": 38,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_group",
-      "name": "Can delete group",
-      "content_type": 8
-    }
-  },
-  {
-    "pk": 23,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_option",
-      "name": "Can add option",
-      "content_type": 10
-    }
-  },
-  {
-    "pk": 31,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_option",
-      "name": "Can change option",
-      "content_type": 10
-    }
-  },
-  {
-    "pk": 39,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_option",
-      "name": "Can delete option",
-      "content_type": 10
-    }
-  },
-  {
-    "pk": 28,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_shippingaddress",
-      "name": "Can add shipping address",
-      "content_type": 13
-    }
-  },
-  {
-    "pk": 36,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_shippingaddress",
-      "name": "Can change shipping address",
-      "content_type": 13
-    }
-  },
-  {
-    "pk": 44,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_shippingaddress",
-      "name": "Can delete shipping address",
-      "content_type": 13
-    }
-  },
-  {
-    "pk": 25,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_orderproducts",
-      "name": "Can add order products",
-      "content_type": 15
-    }
-  },
-  {
-    "pk": 33,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_orderproducts",
-      "name": "Can change order products",
-      "content_type": 15
-    }
-  },
-  {
-    "pk": 41,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_orderproducts",
-      "name": "Can delete order products",
-      "content_type": 15
-    }
-  },
-  {
-    "pk": 26,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_product",
-      "name": "Can add product",
-      "content_type": 9
-    }
-  },
-  {
-    "pk": 34,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_product",
-      "name": "Can change product",
-      "content_type": 9
-    }
-  },
-  {
-    "pk": 42,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_product",
-      "name": "Can delete product",
-      "content_type": 9
-    }
-  },
-  {
-    "pk": 27,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_productoptions",
-      "name": "Can add product options",
-      "content_type": 11
-    }
-  },
-  {
-    "pk": 35,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_productoptions",
-      "name": "Can change product options",
-      "content_type": 11
-    }
-  },
-  {
-    "pk": 43,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_productoptions",
-      "name": "Can delete product options",
-      "content_type": 11
-    }
-  },
-  {
-    "pk": 24,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_order",
-      "name": "Can add order",
-      "content_type": 14
-    }
-  },
-  {
-    "pk": 32,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_order",
-      "name": "Can change order",
-      "content_type": 14
-    }
-  },
-  {
-    "pk": 40,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_order",
-      "name": "Can delete order",
-      "content_type": 14
-    }
-  },
-  {
-    "pk": 29,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_shippingtype",
-      "name": "Can add shipping type",
-      "content_type": 12
-    }
-  },
-  {
-    "pk": 37,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_shippingtype",
-      "name": "Can change shipping type",
-      "content_type": 12
-    }
-  },
-  {
-    "pk": 45,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_shippingtype",
-      "name": "Can delete shipping type",
-      "content_type": 12
-    }
-  },
-  {
-    "pk": 13,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_session",
-      "name": "Can add session",
-      "content_type": 5
-    }
-  },
-  {
-    "pk": 14,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_session",
-      "name": "Can change session",
-      "content_type": 5
-    }
-  },
-  {
-    "pk": 15,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_session",
-      "name": "Can delete session",
-      "content_type": 5
-    }
-  },
-  {
-    "pk": 16,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_site",
-      "name": "Can add site",
-      "content_type": 6
-    }
-  },
-  {
-    "pk": 17,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_site",
-      "name": "Can change site",
-      "content_type": 6
-    }
-  },
-  {
-    "pk": 18,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_site",
-      "name": "Can delete site",
-      "content_type": 6
-    }
-  },
-  {
-    "pk": 1,
-    "model": "auth.user",
-    "fields": {
-      "username": "admin",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": true,
-      "is_staff": true,
-      "last_login": "2012-05-10T12:41:26.345Z",
-      "groups": [],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$xQx11rU7S5dG$GkK1AOhy4Rr8183wmdlqcKO4e5rZ/ou91bi2VqrpkzE=",
-      "email": "ec@kittyhug.ru",
-      "date_joined": "2012-05-03T13:13:25.083Z"
     }
   }
 ]

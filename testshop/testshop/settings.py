@@ -133,4 +133,4 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda r: DEBUG,
 }
 # PLUGSHOP_PRODUCT_MODEL = 'testshop.myshop.models.Product'
-# PLUGSHOP_GROUP_MODEL = 'testshop.myshop.models.Group'
+# PLUGSHOP_CATEGORY_MODEL = 'testshop.myshop.models.Category'

@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>{{product}}</h1>
-    <form action="{% url PlugshopCart %}" method="post" id="product_form">{% csrf_token %}
+    <form action="{% url plugshop-cart %}" method="post" id="product_form">{% csrf_token %}
         {% plugshop_action product "add" %}
         <p>
             <input type="submit" value="Buy &rarr;">

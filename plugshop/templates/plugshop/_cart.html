@@ -12,21 +12,21 @@
                 <td>{{cart_item.price_total}}</td>
                 <td>
 
-                    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+                    <form action="{% url plugshop-cart %}" method="post">{% csrf_token %}
                         {% plugshop_action cart_item.product "add" 1 %}
                         <p>
                             <input type="submit" value="+">
                         </p>
                     </form>
 
-                    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+                    <form action="{% url plugshop-cart %}" method="post">{% csrf_token %}
                         {% plugshop_action cart_item.product "remove" 1 %}
                         <p>
                             <input type="submit" value="-">
                         </p>
                     </form>
 
-                    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+                    <form action="{% url plugshop-cart %}" method="post">{% csrf_token %}
                         {% plugshop_action cart_item.product "remove_product" %}
                         <p>
                             <input type="submit" value="x">
@@ -41,7 +41,7 @@
         Total: {{cart.price_total}}
     </div>
     {% endif %}
-    <form action="{% url PlugshopCart %}" method="post">{% csrf_token %}
+    <form action="{% url plugshop-cart %}" method="post">{% csrf_token %}
         <p>
             <input type="hidden" name="_action" value="remove_all">
             <input type="submit" value="empty">

@@ -8,8 +8,8 @@ SESSION_NAMESPACE = getattr(settings, 'PLUGSHOP_SESSION_NAMESPACE', 'cart')
 PRODUCT_MODEL = getattr(settings, 'PLUGSHOP_PRODUCT_MODEL', 
                         'plugshop.models.product.Product')
 
-GROUP_MODEL = getattr(settings, 'PLUGSHOP_GROUP_MODEL', 
-                        'plugshop.models.group.Group')
+CATEGORY_MODEL = getattr(settings, 'PLUGSHOP_CATEGORY_MODEL', 
+                        'plugshop.models.category.Category')
                         
 OPTION_MODEL = getattr(settings, 'PLUGSHOP_OPTION_MODEL', 
                         'plugshop.models.option.Option')

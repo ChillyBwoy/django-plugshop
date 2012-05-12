@@ -38,10 +38,10 @@ class BaseProductAdmin(admin.ModelAdmin):
     )
 admin.site.register(load_class(settings.PRODUCT_MODEL), BaseProductAdmin)
 
-class BaseGroupAdmin(MPTTModelAdmin):
-#class BaseGroupAdmin(admin.ModelAdmin):
+class BaseCategoryAdmin(MPTTModelAdmin):
+#class BaseCategoryAdmin(admin.ModelAdmin):
     mptt_level_indent = 20
-    #change_list_template = 'admin/group/change_list.html'
+    #change_list_template = 'admin/category/change_list.html'
     prepopulated_fields = {
         'slug': ('name', )
     }
@@ -49,7 +49,7 @@ class BaseGroupAdmin(MPTTModelAdmin):
         'name',
         'slug',
     )
-admin.site.register(load_class(settings.GROUP_MODEL), BaseGroupAdmin)
+admin.site.register(load_class(settings.CATEGORY_MODEL), BaseCategoryAdmin)
 
 class BaseOptionAdmin(admin.ModelAdmin):
     list_display = (
