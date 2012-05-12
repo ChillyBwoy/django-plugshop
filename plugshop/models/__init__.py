@@ -16,14 +16,14 @@ from plugshop.models.order_products import *
 
 models.ManyToManyField(load_class(settings.OPTION_MODEL),  
                         through=load_class(settings.PRODUCT_OPTIONS_MODEL),
-                        related_name="product_options",
-                        verbose_name=_('product option list')
+                        related_name="options",
+                        verbose_name=_('option list')
                     ).contribute_to_class(ProductAbstract, 'options')
 
 models.ManyToManyField(load_class(settings.PRODUCT_MODEL),
                         through=load_class(settings.ORDER_PRODUCTS_MODEL),
-                        related_name="order_products",
-                        verbose_name=_('order products')
+                        related_name="products",
+                        verbose_name=_('products')
                     ).contribute_to_class(OrderAbstract, 'products')
 
 __all__ = [

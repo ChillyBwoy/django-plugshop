@@ -3,7 +3,7 @@ from plugshop import settings
 from plugshop.cart import Cart
 
 class CartMiddleware(object):
-    
+
     def process_request(self, request):
         setattr(request, 
                 settings.REQUEST_NAMESPACE, 
