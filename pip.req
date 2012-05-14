@@ -1,5 +1,0 @@
-Django==1.4
-django-debug-toolbar==0.9.4
-django-mptt==0.5.2
-simplejson==2.5.0
-wsgiref==0.1.2
