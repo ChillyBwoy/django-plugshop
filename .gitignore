@@ -1,11 +1,12 @@
 .DS_Store
 *.pyc
 *.sqlite
-*egg-info*
-dist
 build
+dist
+*egg-info*
+
 clear.sh
 dump.sh
 data.json
-testshop
 pip.req
+testshop

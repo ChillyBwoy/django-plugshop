@@ -1,9 +1,6 @@
 import os
 from setuptools import setup, find_packages
 
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
-
 setup(
     author = "Eugene Cheltsov",
     author_email = "chill.icp@gmail.com",
@@ -20,13 +17,12 @@ setup(
     download_url='',
     include_package_data = True,
     keywords = "plugshop",
-    long_description = read('README.md'),
+    long_description = open(os.path.join(os.path.dirname(__file__), 'README.md')).read(),
     license = "BSD",
     name = "django-plugshop",
-    packages = ['plugshop'],
-    packages = find_packages(exclude=('testshop',),
+    packages = find_packages(exclude=['testshop']),
     platforms = ['OS Independent'],
     url = "https://github.com/ChillyBwoy/django-plugshop",
-    version = "0.0.1dev",
-    zip_safe = True,
+    version = "0.0.5dev",
+    zip_safe = False
 )

@@ -1,0 +1,3 @@
+include README.md
+recursive-include plugshop/locale *
+recursive-include plugshop/templates *
