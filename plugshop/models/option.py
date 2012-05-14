@@ -40,3 +40,5 @@ class OptionAbstract(models.Model):
 class Option(OptionAbstract):
     class Meta:
         app_label = 'plugshop'
+        verbose_name = _("option")
+        verbose_name_plural = _("options")

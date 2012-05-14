@@ -26,3 +26,5 @@ class ProductOptionsAbstract(models.Model):
 class ProductOptions(ProductOptionsAbstract):
     class Meta:
         app_label = 'plugshop'
+        verbose_name = _("product option")
+        verbose_name_plural = _("product options")

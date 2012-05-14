@@ -27,12 +27,7 @@ class ProductAbstract(models.Model):
 
     def __unicode__(self):
         return self.name
-
-class Product(ProductAbstract):
-    class Meta:
-        app_label = 'plugshop'
-        verbose_name  = _('product')
-        verbose_name_plural = _('products')
+        
 
     @models.permalink
     def get_absolute_url(self):
@@ -47,3 +42,9 @@ class Product(ProductAbstract):
             'category_path': category_path,
             'slug': self.slug,
         })
+
+class Product(ProductAbstract):
+    class Meta:
+        app_label = 'plugshop'
+        verbose_name  = _('product')
+        verbose_name_plural = _('products')

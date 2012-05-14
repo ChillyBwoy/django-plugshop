@@ -24,3 +24,5 @@ class OrderProductsAbstract(models.Model):
 class OrderProducts(OrderProductsAbstract):
     class Meta:
         app_label = 'plugshop'
+        verbose_name = _('order product')
+        verbose_name_plural = _('order product')
