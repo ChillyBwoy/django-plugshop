@@ -4,9 +4,7 @@ from django.db.models.signals import post_save, pre_save
 
 from django.dispatch import receiver
 
-from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
-from mptt.models import MPTTModel, TreeForeignKey
 
 from plugshop import settings
 from plugshop.utils import load_class
@@ -18,7 +16,6 @@ class OrderAbstract(models.Model):
         verbose_name = _('order')
         verbose_name_plural = _('orders')
 
-    user = models.ForeignKey(User)
     status = models.IntegerField(_('order status'), blank=False, 
                                 choices=settings.STATUS_CHOICES, 
                                 default=settings.STATUS_CHOICES_START)

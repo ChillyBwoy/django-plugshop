@@ -1,5 +1,6 @@
 from django.utils.translation import ugettext as _
 from django.db import models
+from django.contrib.auth.models import User
 
 from plugshop import settings
 from plugshop.utils import load_class
@@ -28,14 +29,13 @@ def import_default(name, settings, where=[]):
     model = getattr(settings, name)
     default_model = getattr(settings, default_name)
 
-    cls = load_class(model)
-
     if model == default_model:
+        cls = load_class(model)
         #setattr(cls._meta, 'app_label', 'plugshop')
         where.append(default_model.split('.')[-1])
 
-for m in ['PRODUCT_MODEL', 
-            'CATEGORY_MODEL',
+for m in ['CATEGORY_MODEL',
+            'PRODUCT_MODEL', 
             'OPTION_MODEL',
             'PRODUCT_OPTIONS_MODEL',
             'SHIPPING_TYPE_MODEL',
@@ -43,8 +43,6 @@ for m in ['PRODUCT_MODEL',
             'ORDER_MODEL',
             'ORDER_PRODUCTS_MODEL']:
     import_default(m, settings, __all__)
-
-print __all__
 
 models.ManyToManyField(load_class(settings.OPTION_MODEL),  
                         through=load_class(settings.PRODUCT_OPTIONS_MODEL),
@@ -67,3 +65,31 @@ models.ManyToManyField(load_class(settings.PRODUCT_MODEL),
                         verbose_name=_('products')
                     ).contribute_to_class(load_class(settings.ORDER_MODEL), 
                                                         'products')
+
+models.ForeignKey(User, verbose_name=_('user')).contribute_to_class(
+                            load_class(settings.ORDER_MODEL), 'user')
+                            
+models.ForeignKey(load_class(settings.ORDER_MODEL),
+                        verbose_name=_('order')).contribute_to_class(
+                            load_class(settings.ORDER_PRODUCTS_MODEL), 'order')
+                            
+models.ForeignKey(load_class(settings.PRODUCT_MODEL),
+                        verbose_name=_('product')).contribute_to_class(
+                            load_class(settings.ORDER_PRODUCTS_MODEL), 
+                                        'product')
+
+models.ForeignKey(load_class(settings.PRODUCT_MODEL),
+                        verbose_name=_('product')).contribute_to_class(
+                            load_class(settings.PRODUCT_OPTIONS_MODEL), 
+                                        'product')
+                                        
+models.ForeignKey(load_class(settings.OPTION_MODEL),
+                        verbose_name=_('option')).contribute_to_class(
+                            load_class(settings.PRODUCT_OPTIONS_MODEL), 
+                                        'option')
+
+models.ForeignKey(load_class(settings.SHIPPING_TYPE_MODEL),
+                        verbose_name=_('shipping type'), 
+                        blank=True, 
+                        null=True).contribute_to_class(
+                            load_class(settings.SHIPPING_MODEL), 'type')

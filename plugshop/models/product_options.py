@@ -14,8 +14,6 @@ class ProductOptionsAbstract(models.Model):
         verbose_name = _("product option")
         verbose_name_plural = _("product options")
 
-    product = models.ForeignKey(load_class(settings.PRODUCT_MODEL))
-    option = models.ForeignKey(load_class(settings.OPTION_MODEL))
     value = models.CharField(_('value'), blank=False, max_length=200)
     sort = models.PositiveSmallIntegerField(_('sort'), default=1)
 

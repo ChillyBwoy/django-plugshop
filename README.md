@@ -13,10 +13,16 @@ Installation
 * Add the following middleware to your project's settings.py file:
 
         `plugshop.middleware.CartMiddleware`
+        
+* Add URL-patterns:
 
-* Override default models:
+        urlpatterns = patterns('',  
+            url(r'^shop/', include('plugshop.urls')),  
+        )
 
-        PLUGSHOP_PRODUCT_MODEL = 'testshop.myshop.models.Product'
+* Override default models. Example:
+
+        PLUGSHOP_PRODUCT_MODEL = 'testshop.myshop.models.Product'  
         PLUGSHOP_CATEGORY_MODEL = 'testshop.myshop.models.Category'
     
 * Run `python manage.py syncdb`

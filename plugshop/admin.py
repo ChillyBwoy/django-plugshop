@@ -25,15 +25,12 @@ class BaseProductAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'slug',
-        'is_available',
         'is_active',
     )
     list_editable = (
         'is_active',
-        'is_available',
     )
     list_filter = (
-        'is_available',
         'is_active',
     )
 admin.site.register(load_class(settings.PRODUCT_MODEL), BaseProductAdmin)

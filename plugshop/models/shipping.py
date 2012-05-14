@@ -37,9 +37,6 @@ class ShippingAbstract(models.Model):
     order = models.OneToOneField(load_class(settings.ORDER_MODEL),
                             primary_key=True,
                             verbose_name=_('order'))
-    type = models.ForeignKey(load_class(settings.SHIPPING_TYPE_MODEL), 
-                            blank=True, null=True,
-                            verbose_name=_('shipping type'))
     address = models.TextField(_('address'), blank=True, null=True)
 
 class Shipping(ShippingAbstract):
