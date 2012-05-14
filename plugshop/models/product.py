@@ -11,7 +11,6 @@ from plugshop.utils import load_class
 from plugshop.models.category import get_categories
 
 class ProductAbstract(models.Model):
-    
     class Meta:
         abstract = True
         ordering = ['-created_at']
@@ -21,10 +20,6 @@ class ProductAbstract(models.Model):
     name = models.CharField(_('name'), blank=False, max_length=200)
     slug = models.SlugField(_('slug'), blank=False, unique=True)
     price = models.PositiveIntegerField(_('price'), blank=False)
-    category = models.ForeignKey(load_class(settings.CATEGORY_MODEL), 
-                                verbose_name=_('category'),
-                                blank=True,
-                                null=True)
     description  = models.TextField(_('description'), blank=True)
     is_available = models.BooleanField(_('is available'), default=True)
     is_active = models.BooleanField(_('is active'), default=True)

@@ -5,30 +5,35 @@ from django.conf import settings
 REQUEST_NAMESPACE = getattr(settings, 'PLUGSHOP_REQUEST_NAMESPACE', 'cart')
 SESSION_NAMESPACE = getattr(settings, 'PLUGSHOP_SESSION_NAMESPACE', 'cart')
 
+PRODUCT_MODEL_DEFAULT = 'plugshop.models.product.Product'
 PRODUCT_MODEL = getattr(settings, 'PLUGSHOP_PRODUCT_MODEL', 
-                        'plugshop.models.product.Product')
+                            PRODUCT_MODEL_DEFAULT)
 
+CATEGORY_MODEL_DEFAULT = 'plugshop.models.category.Category'
 CATEGORY_MODEL = getattr(settings, 'PLUGSHOP_CATEGORY_MODEL', 
-                        'plugshop.models.category.Category')
-                        
-OPTION_MODEL = getattr(settings, 'PLUGSHOP_OPTION_MODEL', 
-                        'plugshop.models.option.Option')
-                        
+                            CATEGORY_MODEL_DEFAULT)
+        
+OPTION_MODEL_DEFAULT = 'plugshop.models.option.Option'
+OPTION_MODEL = getattr(settings, 'PLUGSHOP_OPTION_MODEL', OPTION_MODEL_DEFAULT)
+
+PRODUCT_OPTIONS_MODEL_DEFAULT = 'plugshop.models.product_options.ProductOptions'
 PRODUCT_OPTIONS_MODEL = getattr(settings, 'PLUGSHOP_PRODUCT_OPTIONS_MODEL', 
-                            'plugshop.models.product_options.ProductOptions')
+                                    PRODUCT_OPTIONS_MODEL_DEFAULT)
 
+SHIPPING_TYPE_MODEL_DEFAULT = 'plugshop.models.shipping.ShippingType'
 SHIPPING_TYPE_MODEL = getattr(settings, 'PLUGSHOP_SHIPPING_TYPE_MODEL', 
-                            'plugshop.models.shipping.ShippingType')
+                                SHIPPING_TYPE_MODEL_DEFAULT)
                                 
+SHIPPING_MODEL_DEFAULT =  'plugshop.models.shipping.Shipping'
 SHIPPING_MODEL = getattr(settings, 'PLUGSHOP_SHIPPING_MODEL', 
-                            'plugshop.models.shipping.Shipping')
+                            SHIPPING_MODEL_DEFAULT)
 
-ORDER_MODEL = getattr(settings, 'PLUGHOSP_ORDER_MODEL', 
-                    'plugshop.models.order.Order')
-                    
+ORDER_MODEL_DEFAULT = 'plugshop.models.order.Order'
+ORDER_MODEL = getattr(settings, 'PLUGHOSP_ORDER_MODEL', ORDER_MODEL_DEFAULT)
+                
+ORDER_PRODUCTS_MODEL_DEFAULT = 'plugshop.models.order_products.OrderProducts'
 ORDER_PRODUCTS_MODEL = getattr(settings, 'PLUGHOSP_ORDER_PRODUCTS_MODEL', 
-                    'plugshop.models.order_products.OrderProducts')
-
+                                    ORDER_PRODUCTS_MODEL_DEFAULT)
 
 
 STATUS_CHOICES = getattr(settings, 'PLUGHOSP_STATUS_CHOICES', (
