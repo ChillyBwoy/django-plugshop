@@ -1,6 +1,6 @@
 import os
 from setuptools import setup, find_packages
-import plushop 
+import plugshop 
 
 setup(
     author = "Eugene Cheltsov",
