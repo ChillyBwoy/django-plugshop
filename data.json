@@ -1,187 +1,355 @@
 [
   {
-    "pk": 1, 
-    "model": "sites.site", 
+    "pk": 1,
+    "model": "sites.site",
     "fields": {
-      "domain": "example.com", 
+      "domain": "example.com",
       "name": "example.com"
     }
-  }, 
+  },
   {
-    "pk": 1, 
-    "model": "plugshop.category", 
+    "pk": 1,
+    "model": "plugshop.category",
     "fields": {
-      "rght": 6, 
-      "name": "\u041e\u0434\u0435\u0436\u0434\u0430", 
-      "parent": null, 
-      "level": 0, 
-      "lft": 1, 
-      "tree_id": 1, 
-      "slug": "odezhda"
+      "rght": 8,
+      "name": "Books",
+      "parent": null,
+      "level": 0,
+      "lft": 1,
+      "tree_id": 1,
+      "slug": "books"
     }
-  }, 
+  },
   {
-    "pk": 2, 
-    "model": "plugshop.category", 
+    "pk": 5,
+    "model": "plugshop.category",
     "fields": {
-      "rght": 3, 
-      "name": "\u0424\u0443\u0442\u0431\u043e\u043b\u043a\u0438", 
-      "parent": 1, 
-      "level": 1, 
-      "lft": 2, 
-      "tree_id": 1, 
-      "slug": "futbolki"
+      "rght": 3,
+      "name": "Textbooks",
+      "parent": 1,
+      "level": 1,
+      "lft": 2,
+      "tree_id": 1,
+      "slug": "textbooks"
     }
-  }, 
+  },
   {
-    "pk": 3, 
-    "model": "plugshop.category", 
+    "pk": 6,
+    "model": "plugshop.category",
     "fields": {
-      "rght": 5, 
-      "name": "\u0411\u0440\u044e\u043a\u0438", 
-      "parent": 1, 
-      "level": 1, 
-      "lft": 4, 
-      "tree_id": 1, 
-      "slug": "bryuki"
+      "rght": 5,
+      "name": "Audiobooks",
+      "parent": 1,
+      "level": 1,
+      "lft": 4,
+      "tree_id": 1,
+      "slug": "audiobooks"
     }
-  }, 
+  },
   {
-    "pk": 4, 
-    "model": "plugshop.category", 
+    "pk": 7,
+    "model": "plugshop.category",
     "fields": {
-      "rght": 6, 
-      "name": "\u0413\u043e\u043b\u043e\u0432\u043d\u044b\u0435 \u0443\u0431\u043e\u0440\u044b", 
-      "parent": null, 
-      "level": 0, 
-      "lft": 1, 
-      "tree_id": 2, 
-      "slug": "golovnye-ubory"
+      "rght": 7,
+      "name": "Magazines",
+      "parent": 1,
+      "level": 1,
+      "lft": 6,
+      "tree_id": 1,
+      "slug": "magazines"
     }
-  }, 
+  },
   {
-    "pk": 5, 
-    "model": "plugshop.category", 
+    "pk": 2,
+    "model": "plugshop.category",
     "fields": {
-      "rght": 3, 
-      "name": "\u0411\u0435\u0439\u0441\u0431\u043e\u043b\u043a\u0438", 
-      "parent": 4, 
-      "level": 1, 
-      "lft": 2, 
-      "tree_id": 2, 
-      "slug": "bejsbolki"
+      "rght": 8,
+      "name": "Electronics",
+      "parent": null,
+      "level": 0,
+      "lft": 1,
+      "tree_id": 2,
+      "slug": "electronics"
     }
-  }, 
+  },
   {
-    "pk": 6, 
-    "model": "plugshop.category", 
+    "pk": 8,
+    "model": "plugshop.category",
     "fields": {
-      "rght": 5, 
-      "name": "\u0428\u043b\u044f\u043f\u044b", 
-      "parent": 4, 
-      "level": 1, 
-      "lft": 4, 
-      "tree_id": 2, 
-      "slug": "shlyapy"
+      "rght": 3,
+      "name": "Video Games",
+      "parent": 2,
+      "level": 1,
+      "lft": 2,
+      "tree_id": 2,
+      "slug": "video-games"
     }
-  }, 
+  },
   {
-    "pk": 1, 
-    "model": "plugshop.product", 
+    "pk": 9,
+    "model": "plugshop.category",
     "fields": {
-      "category": 2, 
-      "created_at": "2012-05-03T13:53:20Z", 
-      "description": "", 
-      "price": 1000, 
-      "is_active": true, 
-      "sort": 1, 
-      "is_available": true, 
-      "slug": "krasnaya-futbolka", 
-      "name": "\u041a\u0440\u0430\u0441\u043d\u0430\u044f \u0444\u0443\u0442\u0431\u043e\u043b\u043a\u0430"
+      "rght": 5,
+      "name": "Car Electronics",
+      "parent": 2,
+      "level": 1,
+      "lft": 4,
+      "tree_id": 2,
+      "slug": "car-electronics"
     }
-  }, 
+  },
   {
-    "pk": 2, 
-    "model": "plugshop.product", 
+    "pk": 10,
+    "model": "plugshop.category",
     "fields": {
-      "category": 2, 
-      "created_at": "2012-05-03T13:53:32Z", 
-      "description": "", 
-      "price": 1000, 
-      "is_active": true, 
-      "sort": 1, 
-      "is_available": true, 
-      "slug": "zelyonaya-futbolka", 
-      "name": "\u0417\u0435\u043b\u0451\u043d\u0430\u044f \u0444\u0443\u0442\u0431\u043e\u043b\u043a\u0430"
+      "rght": 7,
+      "name": "Musical Instruments",
+      "parent": 2,
+      "level": 1,
+      "lft": 6,
+      "tree_id": 2,
+      "slug": "musical-instruments"
     }
-  }, 
+  },
   {
-    "pk": 3, 
-    "model": "plugshop.product", 
+    "pk": 4,
+    "model": "plugshop.category",
     "fields": {
-      "category": 3, 
-      "created_at": "2012-05-03T13:53:48Z", 
-      "description": "", 
-      "price": 3000, 
-      "is_active": true, 
-      "sort": 1, 
-      "is_available": true, 
-      "slug": "dzhinsy", 
-      "name": "\u0414\u0436\u0438\u043d\u0441\u044b"
+      "rght": 8,
+      "name": "Sports",
+      "parent": null,
+      "level": 0,
+      "lft": 1,
+      "tree_id": 4,
+      "slug": "sports"
     }
-  }, 
+  },
   {
-    "pk": 4, 
-    "model": "plugshop.product", 
+    "pk": 11,
+    "model": "plugshop.category",
     "fields": {
-      "category": 4, 
-      "created_at": "2012-05-03T13:53:55Z", 
-      "description": "", 
-      "price": 500, 
-      "is_active": true, 
-      "sort": 1, 
-      "is_available": true, 
-      "slug": "shapka-pidorka", 
-      "name": "\u0428\u0430\u043f\u043a\u0430-\u043f\u0438\u0434\u043e\u0440\u043a\u0430"
+      "rght": 3,
+      "name": "Fitness",
+      "parent": 4,
+      "level": 1,
+      "lft": 2,
+      "tree_id": 4,
+      "slug": "fitness"
     }
-  }, 
+  },
   {
-    "pk": 5, 
-    "model": "plugshop.product", 
+    "pk": 12,
+    "model": "plugshop.category",
     "fields": {
-      "category": 5, 
-      "created_at": "2012-05-03T13:54:12Z", 
-      "description": "", 
-      "price": 300, 
-      "is_active": true, 
-      "sort": 1, 
-      "is_available": true, 
-      "slug": "krasnaya-bejsbolka", 
-      "name": "\u041a\u0440\u0430\u0441\u043d\u0430\u044f \u0431\u0435\u0439\u0441\u0431\u043e\u043b\u043a\u0430 "
+      "rght": 5,
+      "name": "Bikes",
+      "parent": 4,
+      "level": 1,
+      "lft": 4,
+      "tree_id": 4,
+      "slug": "bikes"
     }
-  }, 
+  },
   {
-    "pk": 6, 
-    "model": "plugshop.product", 
+    "pk": 13,
+    "model": "plugshop.category",
     "fields": {
-      "category": 5, 
-      "created_at": "2012-05-03T13:54:35Z", 
-      "description": "", 
-      "price": 400, 
-      "is_active": true, 
-      "sort": 1, 
-      "is_available": true, 
-      "slug": "zelyonaya-bejsbolka", 
-      "name": "\u0417\u0435\u043b\u0451\u043d\u0430\u044f \u0431\u0435\u0439\u0441\u0431\u043e\u043b\u043a\u0430"
+      "rght": 7,
+      "name": "Snowboards",
+      "parent": 4,
+      "level": 1,
+      "lft": 6,
+      "tree_id": 4,
+      "slug": "snowboards"
     }
-  }, 
+  },
   {
-    "pk": 1, 
-    "model": "plugshop.shippingtype", 
+    "pk": 1,
+    "model": "plugshop.product",
     "fields": {
-      "is_default": false, 
-      "price": 0, 
-      "name": "\u0421\u0430\u043c\u043e\u0432\u044b\u0432\u043e\u0437"
+      "category": 5,
+      "created_at": "2012-05-14T10:09:34Z",
+      "description": "",
+      "price": 15,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "brief-history-time",
+      "name": "A Brief History of Time"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 5,
+      "created_at": "2012-05-14T10:12:07Z",
+      "description": "",
+      "price": 20,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "programming-python",
+      "name": "Programming Python"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 5,
+      "created_at": "2012-05-14T10:17:54Z",
+      "description": "",
+      "price": 35,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "dive-python",
+      "name": "Dive Into Python"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 6,
+      "created_at": "2012-05-14T10:19:20Z",
+      "description": "",
+      "price": 25,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "1984-new-classic-edition",
+      "name": "1984: New Classic Edition"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 6,
+      "created_at": "2012-05-14T10:20:23Z",
+      "description": "",
+      "price": 18,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "alices-adventures-wonderland",
+      "name": "Alice's Adventures in Wonderland"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 7,
+      "created_at": "2012-05-14T10:20:50Z",
+      "description": "",
+      "price": 20,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "wired",
+      "name": "Wired"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 8,
+      "created_at": "2012-05-14T10:22:03Z",
+      "description": "",
+      "price": 40,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "battlefield-3",
+      "name": "Battlefield 3"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 8,
+      "created_at": "2012-05-14T10:23:20Z",
+      "description": "",
+      "price": 360,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "rocksmith-guitar-bundle",
+      "name": "Rocksmith Guitar Bundle "
+    }
+  },
+  {
+    "pk": 9,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 8,
+      "created_at": "2012-05-14T10:23:35Z",
+      "description": "",
+      "price": 50,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "max-payne-3",
+      "name": "Max Payne 3"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 9,
+      "created_at": "2012-05-14T10:23:54Z",
+      "description": "",
+      "price": 130,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "garmin-nuvi-1450lmt",
+      "name": "Garmin n\u00fcvi 1450LMT"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 11,
+      "created_at": "2012-05-14T10:24:29Z",
+      "description": "",
+      "price": 170,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "nike-sportwatch-gps-powered-tomtom",
+      "name": "Nike+ SportWatch GPS Powered by TomTom"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "plugshop.product",
+    "fields": {
+      "category": 10,
+      "created_at": "2012-05-14T10:24:54Z",
+      "description": "",
+      "price": 300,
+      "is_active": true,
+      "sort": 1,
+      "is_available": true,
+      "slug": "casio-ctk-2100-61-key-portable-keyboard",
+      "name": "Casio CTK-2100 61-Key Portable Keyboard"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "plugshop.shippingtype",
+    "fields": {
+      "is_default": true,
+      "price": 0,
+      "name": "Self-delivery"
     }
   }
 ]

@@ -25,7 +25,7 @@ DATABASES = {
 }
 
 TIME_ZONE = 'Europe/Moscow'
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'en-en'
 
 SITE_ID = 1
 USE_I18N = True
