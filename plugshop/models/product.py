@@ -2,7 +2,6 @@ import datetime
 
 from django.db import models
 from django.db.models import get_model
-from django.core.cache import cache
 
 from django.utils.translation import ugettext as _
 
@@ -21,7 +20,6 @@ class ProductAbstract(models.Model):
     slug = models.SlugField(_('slug'), blank=False, unique=True)
     price = models.PositiveIntegerField(_('price'), blank=False)
     description  = models.TextField(_('description'), blank=True)
-    is_available = models.BooleanField(_('is available'), default=True)
     is_active = models.BooleanField(_('is active'), default=True)
     created_at = models.DateTimeField(_('created at'), blank=True, null=True, 
                                         default=datetime.datetime.now)
