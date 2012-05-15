@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from plugshop.utils import is_default_model
 
 class ProductOptionsAbstract(models.Model):
     class Meta:
@@ -14,8 +15,9 @@ class ProductOptionsAbstract(models.Model):
         return "(%s) %s = '%s'" % (self.option.type, self.option.name,
                                     self.value)
 
-class ProductOptions(ProductOptionsAbstract):
-    class Meta:
-        app_label = 'plugshop'
-        verbose_name = _("product option")
-        verbose_name_plural = _("product options")
+if is_default_model('PRODUCT_OPTIONS'):
+    class ProductOptions(ProductOptionsAbstract):
+        class Meta:
+            app_label = 'plugshop'
+            verbose_name = _("product option")
+            verbose_name_plural = _("product options")

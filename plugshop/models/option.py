@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from plugshop.utils import is_default_model
 
 OPTION_TYPE_CHOICES = (
     ('str', _('string')),
@@ -31,8 +32,9 @@ class OptionAbstract(models.Model):
     def __unicode__(self):
         return self.name
 
-class Option(OptionAbstract):
-    class Meta:
-        app_label = 'plugshop'
-        verbose_name = _("option")
-        verbose_name_plural = _("options")
+if is_default_model('OPTION'):
+    class Option(OptionAbstract):
+        class Meta:
+            app_label = 'plugshop'
+            verbose_name = _("option")
+            verbose_name_plural = _("options")

@@ -3,7 +3,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from plugshop import settings
-from plugshop.utils import load_class
+from plugshop.utils import load_class, get_categories
+
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
 
 # from plugshop.models.product import *
 # from plugshop.models.category import *
@@ -13,15 +16,6 @@ from plugshop.utils import load_class
 # from plugshop.models.shipping_type import *
 # from plugshop.models.order import *
 # from plugshop.models.order_products import *
-
-# from plugshop.models.product import ProductAbstract
-# from plugshop.models.category import CategoryAbstract
-# from plugshop.models.option import OptionAbstract
-# from plugshop.models.product_options import ProductOptionsAbstract
-# from plugshop.models.shipping import ShippingAbstract
-# from plugshop.models.shipping_type import ShippingTypeAbstract
-# from plugshop.models.order import OrderAbstract
-# from plugshop.models.order_products import OrderProductsAbstract
 
 # __all__ = [
 #     'ProductAbstract',
@@ -53,7 +47,6 @@ from plugshop.utils import load_class
 #             'ORDER_MODEL',
 #             'ORDER_PRODUCTS_MODEL']:
 #     import_default(m, settings, __all__)
-
 
 PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
 OPTION_CLASS = load_class(settings.OPTION_MODEL)
@@ -110,7 +103,21 @@ models.ForeignKey(SHIPPING_TYPE_CLASS,
                     null=True
                 ).contribute_to_class(SHIPPING_CLASS, 'type')
 
-# models.OneToOneField(load_class(settings.ORDER_MODEL),
-#                         verbose_name=_('order'), 
-#                         primary_key=True).contribute_to_class(
-#                             load_class(settings.SHIPPING_MODEL), 'order')
+# models.OneToOneField(ORDER_CLASS,
+#                     verbose_name=_('order'), 
+#                     primary_key=True
+#                 ).contribute_to_class(SHIPPING_CLASS, 'order')
+
+@receiver(post_save, sender=SHIPPING_CLASS)
+def remove_null_shipping(sender, instance, created, **kwargs):
+    if instance.type is None:
+        instance.delete()
+
+@receiver(pre_save, sender=ORDER_CLASS)
+def set_delivered(sender, instance, **kwargs):
+    if instance.status == settings.STATUS_CHOICES_FINISH:
+        instance.delivered_at = datetime.datetime.now()
+    else:
+        instance.delivered_at = None
+
+post_save.connect(get_categories, sender=CATEGORY_CLASS)

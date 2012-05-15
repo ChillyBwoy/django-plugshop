@@ -2,15 +2,12 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.cache import cache
-
-from django.db.models.signals import post_save
 
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
 
 from plugshop import settings
-from plugshop.utils import load_class
+from plugshop.utils import load_class, get_categories, is_default_model
 
 class CategoryAbstractManager(TreeManager):
     def get_by_path(self, path):
@@ -51,22 +48,15 @@ class CategoryAbstract(MPTTModel):
         ancestors = self.get_ancestor_list()
         return "/".join([a.slug for a in ancestors])
 
-class Category(CategoryAbstract):
-    class Meta:
-        verbose_name = _('category')
-        verbose_name_plural = _('categories')
-        app_label = 'plugshop'
-
     @models.permalink
     def get_absolute_url(self):
         return ('plugshop-category', None, {'category_path': self.get_path() })
 
 
-CATEGORY_CLASS = load_class(settings.CATEGORY_MODEL)
-def get_categories(*args, **kwargs):
-    categories = cache.get('plugshop_categories')
-    if categories is None:
-        categories = CATEGORY_CLASS.objects.all()
-        cache.set('plugshop_categories', categories)
-    return categories
-post_save.connect(get_categories, sender=CATEGORY_CLASS)
+
+if is_default_model('CATEGORY'):
+    class Category(CategoryAbstract):
+        class Meta:
+            verbose_name = _('category')
+            verbose_name_plural = _('categories')
+            app_label = 'plugshop'

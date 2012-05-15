@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 
 from plugshop import settings
-from plugshop.utils import load_class
+from plugshop.utils import load_class, is_default_model
 
 class OrderAbstract(models.Model):
 
@@ -26,15 +26,10 @@ class OrderAbstract(models.Model):
     def __unicode__(self):
         return str(self.pk)
 
-class Order(OrderAbstract):
-    class Meta:
-        verbose_name = _('order')
-        verbose_name_plural = _('orders')
-        app_label = 'plugshop'
-        
-@receiver(pre_save, sender=load_class(settings.ORDER_MODEL))
-def set_delivered(sender, instance, **kwargs):
-    if instance.status == settings.STATUS_CHOICES_FINISH:
-        instance.delivered_at = datetime.datetime.now()
-    else:
-        instance.delivered_at = None
+
+if is_default_model('ORDER'):
+    class Order(OrderAbstract):
+        class Meta:
+            verbose_name = _('order')
+            verbose_name_plural = _('orders')
+            app_label = 'plugshop'

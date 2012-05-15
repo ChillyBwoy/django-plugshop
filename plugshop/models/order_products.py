@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from plugshop.utils import is_default_model
 
 class OrderProductsAbstract(models.Model):
     class Meta:
@@ -12,8 +13,9 @@ class OrderProductsAbstract(models.Model):
                                             null=False, 
                                             default=1)
 
-class OrderProducts(OrderProductsAbstract):
-    class Meta:
-        app_label = 'plugshop'
-        verbose_name = _('order product')
-        verbose_name_plural = _('order product')
+if is_default_model('ORDER_PRODUCTS'):
+    class OrderProducts(OrderProductsAbstract):
+        class Meta:
+            app_label = 'plugshop'
+            verbose_name = _('order product')
+            verbose_name_plural = _('order product')

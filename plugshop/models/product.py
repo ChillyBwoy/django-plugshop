@@ -1,7 +1,7 @@
 import datetime
 from django.db import models
 from django.utils.translation import ugettext as _
-from plugshop.models.category import get_categories
+from plugshop.utils import is_default_model, get_categories
 
 class ProductAbstract(models.Model):
     class Meta:
@@ -36,8 +36,9 @@ class ProductAbstract(models.Model):
             'slug': self.slug,
         })
 
-class Product(ProductAbstract):
-    class Meta:
-        app_label = 'plugshop'
-        verbose_name  = _('product')
-        verbose_name_plural = _('products')
+if is_default_model('PRODUCT'):
+    class Product(ProductAbstract):
+        class Meta:
+            app_label = 'plugshop'
+            verbose_name  = _('product')
+            verbose_name_plural = _('products')
