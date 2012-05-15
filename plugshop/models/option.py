@@ -1,11 +1,5 @@
-import datetime
-
 from django.db import models
-from django.db.models import get_model
 from django.utils.translation import ugettext as _
-
-from plugshop import settings
-from plugshop.utils import load_class
 
 OPTION_TYPE_CHOICES = (
     ('str', _('string')),

@@ -1,12 +1,6 @@
 import datetime
-
 from django.db import models
-from django.db.models import get_model
-
 from django.utils.translation import ugettext as _
-
-from plugshop import settings
-from plugshop.utils import load_class
 from plugshop.models.category import get_categories
 
 class ProductAbstract(models.Model):

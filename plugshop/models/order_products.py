@@ -1,10 +1,5 @@
-import datetime
-
 from django.db import models
 from django.utils.translation import ugettext as _
-
-from plugshop import settings
-from plugshop.utils import load_class
 
 class OrderProductsAbstract(models.Model):
     class Meta:
