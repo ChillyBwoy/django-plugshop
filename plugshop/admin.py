@@ -9,16 +9,9 @@ from mptt.admin import MPTTModelAdmin
 from plugshop import settings
 from plugshop.utils import load_class
 from plugshop.models import *
-
-
-class BaseProductOptionsInline(admin.TabularInline):
-    model = load_class(settings.PRODUCT_OPTIONS_MODEL)
-    extra = 0
     
 class BaseProductAdmin(admin.ModelAdmin):
-    inlines = (
-        BaseProductOptionsInline,
-    )
+    inlines = ()
     prepopulated_fields = {
         'slug': ('name',) 
     }
@@ -47,13 +40,6 @@ class BaseCategoryAdmin(MPTTModelAdmin):
         'slug',
     )
 admin.site.register(load_class(settings.CATEGORY_MODEL), BaseCategoryAdmin)
-
-class BaseOptionAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'type',
-    )
-admin.site.register(load_class(settings.OPTION_MODEL), BaseOptionAdmin)
 
 
 class BaseShippingTypeAdmin(admin.ModelAdmin):

@@ -12,13 +12,6 @@ PRODUCT_MODEL = getattr(settings, 'PLUGSHOP_PRODUCT_MODEL',
 CATEGORY_MODEL_DEFAULT = 'plugshop.models.category.Category'
 CATEGORY_MODEL = getattr(settings, 'PLUGSHOP_CATEGORY_MODEL', 
                             CATEGORY_MODEL_DEFAULT)
-        
-OPTION_MODEL_DEFAULT = 'plugshop.models.option.Option'
-OPTION_MODEL = getattr(settings, 'PLUGSHOP_OPTION_MODEL', OPTION_MODEL_DEFAULT)
-
-PRODUCT_OPTIONS_MODEL_DEFAULT = 'plugshop.models.product_options.ProductOptions'
-PRODUCT_OPTIONS_MODEL = getattr(settings, 'PLUGSHOP_PRODUCT_OPTIONS_MODEL', 
-                                    PRODUCT_OPTIONS_MODEL_DEFAULT)
 
 SHIPPING_MODEL_DEFAULT =  'plugshop.models.shipping.Shipping'
 SHIPPING_MODEL = getattr(settings, 'PLUGSHOP_SHIPPING_MODEL', 
@@ -27,7 +20,6 @@ SHIPPING_MODEL = getattr(settings, 'PLUGSHOP_SHIPPING_MODEL',
 SHIPPING_TYPE_MODEL_DEFAULT = 'plugshop.models.shipping_type.ShippingType'
 SHIPPING_TYPE_MODEL = getattr(settings, 'PLUGSHOP_SHIPPING_TYPE_MODEL', 
                                 SHIPPING_TYPE_MODEL_DEFAULT)
-
 
 ORDER_MODEL_DEFAULT = 'plugshop.models.order.Order'
 ORDER_MODEL = getattr(settings, 'PLUGHOSP_ORDER_MODEL', ORDER_MODEL_DEFAULT)
