@@ -25,6 +25,7 @@ if is_default_model('PRODUCT'):
     admin.site.register(load_class(settings.PRODUCT_MODEL), BaseProductAdmin)
 
 class BaseCategoryAdmin(MPTTModelAdmin):
+    change_list_template = 'admin/category/change_list.html'
     mptt_level_indent = 20
     prepopulated_fields = {
         'slug': ('name', )
