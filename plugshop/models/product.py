@@ -1,4 +1,3 @@
-import datetime
 from django.db import models
 from django.utils.translation import ugettext as _
 from plugshop.utils import is_default_model, get_categories
@@ -6,18 +5,12 @@ from plugshop.utils import is_default_model, get_categories
 class ProductAbstract(models.Model):
     class Meta:
         abstract = True
-        ordering = ['-created_at']
         verbose_name  = _('product')
         verbose_name_plural = _('products')
 
     name = models.CharField(_('name'), blank=False, max_length=200)
     slug = models.SlugField(_('slug'), blank=False, unique=True)
     price = models.PositiveIntegerField(_('price'), blank=False)
-    description  = models.TextField(_('description'), blank=True)
-    is_active = models.BooleanField(_('is active'), default=True)
-    created_at = models.DateTimeField(_('created at'), blank=True, null=True, 
-                                        default=datetime.datetime.now)
-    sort = models.PositiveSmallIntegerField(_('sort'), default=1)
 
     def __unicode__(self):
         return self.name

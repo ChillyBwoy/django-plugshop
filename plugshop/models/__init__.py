@@ -1,3 +1,4 @@
+import datetime
 from django.utils.translation import ugettext as _
 from django.db import models
 from django.contrib.auth.models import User
@@ -10,8 +11,6 @@ from django.dispatch import receiver
 
 from plugshop.models.product import *
 from plugshop.models.category import *
-from plugshop.models.option import *
-from plugshop.models.product_options import *
 from plugshop.models.shipping import *
 from plugshop.models.shipping_type import *
 from plugshop.models.order import *
@@ -65,5 +64,9 @@ def set_delivered(sender, instance, **kwargs):
         instance.delivered_at = datetime.datetime.now()
     else:
         instance.delivered_at = None
+        
+@receiver(pre_save, sender=ORDER_CLASS)
+def set_updated(sender, instance, **kwargs):
+    instance.updated_at = datetime.datetime.now()
 
 post_save.connect(get_categories, sender=CATEGORY_CLASS)

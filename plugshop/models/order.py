@@ -19,9 +19,9 @@ class OrderAbstract(models.Model):
                                 default=settings.STATUS_CHOICES_START)
     created_at = models.DateTimeField(_('creation date'), blank=False, 
                                         default=datetime.datetime.now)
+    updated_at = models.DateTimeField(_('update'), blank=True, null=True)
     delivered_at = models.DateTimeField(_('delivery date'), blank=True, 
                                         null=True)
-    comment = models.TextField(_('comment'), blank=True, null=True)
     
     def __unicode__(self):
         return str(self.pk)

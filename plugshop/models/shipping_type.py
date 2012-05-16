@@ -11,7 +11,6 @@ class ShippingTypeAbstract(models.Model):
 
     name = models.CharField(_('name'), blank=False, max_length=100)
     price = models.PositiveIntegerField(_('price'), blank=False)
-    is_default = models.BooleanField(_('default'), default=False)
 
     def __unicode__(self):
         return self.name

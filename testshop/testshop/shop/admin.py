@@ -2,12 +2,11 @@ from django.contrib import admin
 
 from testshop.shop.models import *
 
-#from plugshop.admin import BaseProductAdmin, BaseCategoryAdmin
-# from plugshop.models import Product as BaseProduct
-# from plugshop.models import Category as BaseCategory
+from plugshop.admin import BaseProductAdmin, BaseCategoryAdmin
 
-# admin.site.unregister(BaseProduct)
-# admin.site.unregister(BaseCategory)
+class CategoryAdmin(BaseCategoryAdmin):
+    pass
 
-#admin.site.register(Category)
-#admin.site.register(Product)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Product)
+admin.site.register(ShippingType)
