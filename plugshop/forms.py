@@ -14,10 +14,8 @@ class ProductForm(forms.Form):
 class OrderForm(forms.Form):
     name = forms.CharField(required=True, error_messages={'required': _('Name required')}, initial="")
     email = forms.EmailField(required=True, error_messages={'required': _('Invalid email')}, initial="")
-    phone = forms.CharField(required=True, error_messages={'required': _('Invalid phone')}, initial="")
     shipping_type = forms.ModelChoiceField(queryset=SHIPPING_TYPE_CLASS.objects)
     address = forms.CharField(widget=forms.widgets.Textarea(), required=False, initial="")
-    comment = forms.CharField(widget=forms.widgets.Textarea(), required=False, initial="")
 
     first_name = ""
     last_name  = ""

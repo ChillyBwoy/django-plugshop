@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-16 02:18+0400\n"
+"POT-Creation-Date: 2012-05-16 17:40+0400\n"
 "PO-Revision-Date: 2012-05-12 22:38+0300\n"
 "Last-Translator: Eugene Cheltsov <chill.icp@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,16 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
-#: forms.py:15 forms.py:35
+#: forms.py:15 forms.py:33
 msgid "Name required"
 msgstr ""
 
 #: forms.py:16
 msgid "Invalid email"
-msgstr ""
-
-#: forms.py:17
-msgid "Invalid phone"
 msgstr ""
 
 #: settings.py:33
@@ -46,29 +42,29 @@ msgstr "Отклонён"
 msgid "Delivered"
 msgstr "Доставлен"
 
-#: models/__init__.py:28 models/category.py:27 models/category.py:60
+#: models/__init__.py:27 models/category.py:27 models/category.py:60
 msgid "category"
 msgstr "категория"
 
-#: models/__init__.py:36 models/product.py:11 models/product.py:44
+#: models/__init__.py:35 models/product.py:9 models/product.py:37
 msgid "products"
 msgstr "товары"
 
-#: models/__init__.py:39
+#: models/__init__.py:38
 msgid "user"
 msgstr "пользователь"
 
-#: models/__init__.py:42 models/__init__.py:55 models/order.py:14
+#: models/__init__.py:41 models/__init__.py:54 models/order.py:14
 #: models/order.py:33
 msgid "order"
 msgstr "заказ"
 
-#: models/__init__.py:46 models/product.py:10 models/product.py:43
+#: models/__init__.py:45 models/product.py:8 models/product.py:36
 msgid "product"
 msgstr "товар"
 
-#: models/__init__.py:50 models/shipping_type.py:9 models/shipping_type.py:10
-#: models/shipping_type.py:22 models/shipping_type.py:23
+#: models/__init__.py:49 models/shipping_type.py:9 models/shipping_type.py:10
+#: models/shipping_type.py:21 models/shipping_type.py:22
 msgid "shipping type"
 msgstr "тип доставки"
 
@@ -76,7 +72,11 @@ msgstr "тип доставки"
 msgid "categories"
 msgstr "категории"
 
-#: models/category.py:35 models/product.py:14
+#: models/category.py:34 models/product.py:11 models/shipping_type.py:12
+msgid "name"
+msgstr "наименование"
+
+#: models/category.py:35 models/product.py:12
 msgid "slug"
 msgstr "метка"
 
@@ -93,12 +93,12 @@ msgid "creation date"
 msgstr "дата создания"
 
 #: models/order.py:22
+msgid "update"
+msgstr ""
+
+#: models/order.py:23
 msgid "delivery date"
 msgstr "дата доставки"
-
-#: models/order.py:24
-msgid "comment"
-msgstr "комментарий"
 
 #: models/order_products.py:8 models/order_products.py:9
 #: models/order_products.py:20 models/order_products.py:21
@@ -109,29 +109,9 @@ msgstr "товар в заказе"
 msgid "quantity"
 msgstr "количество"
 
-#: models/product.py:13 models/shipping_type.py:12
-msgid "name"
-msgstr "наименование"
-
-#: models/product.py:15 models/shipping_type.py:13
+#: models/product.py:13 models/shipping_type.py:13
 msgid "price"
 msgstr "цена"
-
-#: models/product.py:16
-msgid "description"
-msgstr "описание"
-
-#: models/product.py:17
-msgid "is active"
-msgstr "активен"
-
-#: models/product.py:18
-msgid "created at"
-msgstr "время создания"
-
-#: models/product.py:20
-msgid "sort"
-msgstr "сортировка"
 
 #: models/shipping.py:11 models/shipping.py:19
 msgid "shipping"
@@ -144,7 +124,3 @@ msgstr "данные для доставки"
 #: models/shipping.py:14
 msgid "address"
 msgstr "адрес"
-
-#: models/shipping_type.py:14
-msgid "default"
-msgstr "по-умолчанию"

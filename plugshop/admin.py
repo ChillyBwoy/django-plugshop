@@ -19,6 +19,10 @@ class BaseProductAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'slug',
+        'category',
+    )
+    list_filter = (
+        'category',
     )
 
 if is_default_model('PRODUCT'):

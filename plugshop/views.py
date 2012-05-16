@@ -22,9 +22,7 @@ CATEGORY_CLASS = load_class(settings.CATEGORY_MODEL)
 class ProductListView(ListView):
     context_object_name = 'products'
     template_name = 'plugshop/product_list.html'
-
-    def get_queryset(self):
-        return PRODUCT_CLASS.objects.all()
+    model = PRODUCT_CLASS
 
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
@@ -106,7 +104,7 @@ class CartView(TemplateResponseMixin, View):
             cart.empty()
         else:
             form = ProductForm(request.POST)
-            
+
             if form.is_valid():
                 product = form.cleaned_data.get('product')
                 quantity = form.cleaned_data.get('quantity', 1)

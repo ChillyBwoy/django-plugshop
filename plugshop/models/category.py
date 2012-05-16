@@ -31,7 +31,7 @@ class CategoryAbstract(MPTTModel):
         ordering = ['pk', 'lft']
 
     parent = TreeForeignKey('self', null=True, blank=True)
-    name = models.CharField(blank=False, max_length=80)
+    name = models.CharField(_('name'), blank=False, max_length=80)
     slug = models.SlugField(_('slug'), blank=False, unique=True)
 
     def __unicode__(self):
