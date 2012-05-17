@@ -22,6 +22,9 @@ class Cart(list):
         for item, price, quantity in request.session.get(self.name, []):
             self.append(item, price, quantity)
             
+    def __len__(self):
+        return sum(c.quantity for c in self)
+
     def _get_product(self, product):
         try:
             return filter(lambda x: x.product.pk == product.pk, self)[0]

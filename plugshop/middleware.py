@@ -10,7 +10,7 @@ class CartMiddleware(object):
                 Cart(request, settings.SESSION_NAMESPACE))
 
     def process_response(self, request, response):
-       if hasattr(request, settings.REQUEST_NAMESPACE):
-           cart = getattr(request, settings.REQUEST_NAMESPACE)
-           cart.save()
-       return response
+        if hasattr(request, settings.REQUEST_NAMESPACE):
+            cart = getattr(request, settings.REQUEST_NAMESPACE)
+            cart.save()
+        return response

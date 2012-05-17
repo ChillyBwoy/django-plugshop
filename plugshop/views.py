@@ -18,6 +18,7 @@ from plugshop.cart import get_cart
 
 PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
 CATEGORY_CLASS = load_class(settings.CATEGORY_MODEL)
+SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_MODEL)
 
 class ProductListView(ListView):
     context_object_name = 'products'
@@ -83,13 +84,18 @@ class CartView(TemplateResponseMixin, View):
     def get_context_data(self, **kwargs):
         return {
             'cart': get_cart(self.request) or [],
+            'shipping_type': SHIPPING_TYPE_CLASS.objects.all(),
         }
 
     def get(self, request, **kwargs):
+        cart = request.cart
+        if len(cart) == 0:
+            return redirect('plugshop-product-list')
+        
         context = self.get_context_data(**kwargs)
         if request.is_ajax():
             context.update(
-                cart=request.cart.to_json()
+                cart=cart.to_json()
             )
             return HttpResponse(json.dumps(context), content_type='application/json', **kwargs)
         else:
