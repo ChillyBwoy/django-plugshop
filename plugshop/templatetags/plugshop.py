@@ -4,6 +4,28 @@ from django.utils.translation import ugettext as _
 
 register = template.Library()
 
+class HasProduct(template.Node):
+    def __init__(self, parser, token):
+        try:
+            tag_name, product = token.split_contents()
+        except ValueError:
+            raise template.TemplateSyntaxError, "%r tag requires exactly one argument" % token.contents.split()[0]
+
+        nodelist = parser.parse(('endplusghop_has_product',))
+        parser.delete_first_token()
+        
+        self.product = parser.compile_filter(product)
+        self.nodelist = nodelist
+
+    def render(self, context, *args, **kwargs):
+        product = self.product.resolve(context, True)
+        return self.nodelist.render(context)
+
+
+@register.tag
+def plusghop_has_product(parser, token, *args, **kwargs):
+    return HasProduct(parser, token)
+
 @register.filter
 def plugshop_currency(value):
     if value is None: return ""

@@ -1,15 +1,14 @@
 # encoding: utf-8
-
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.shortcuts import get_object_or_404, redirect
 from django.http import Http404, HttpResponse
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
-
+from django.core import serializers
 from django.views.generic import View, TemplateView, ListView, DetailView
 from django.views.generic.base import TemplateResponseMixin
 from django.utils import simplejson as json
-from django.core import serializers
+from plugshop.utils import serialize_queryset
 
 from plugshop import settings
 from plugshop.utils import load_class, serialize_model
@@ -80,26 +79,33 @@ class CategoryView(DetailView):
 
 class CartView(TemplateResponseMixin, View):
     template_name = 'plugshop/cart.html'
-        
+
     def get_context_data(self, **kwargs):
         return {
             'cart': get_cart(self.request) or [],
-            'shipping_type': SHIPPING_TYPE_CLASS.objects.all(),
         }
 
+    def extend_context(self, context):
+        return context
+        
+    def extend_context_ajax(self, context):
+        return context
+    
     def get(self, request, **kwargs):
         cart = request.cart
-        if len(cart) == 0:
-            return redirect('plugshop-product-list')
-        
         context = self.get_context_data(**kwargs)
+
         if request.is_ajax():
             context.update(
-                cart=cart.to_json()
+                cart=cart.serialize(),
             )
-            return HttpResponse(json.dumps(context), content_type='application/json', **kwargs)
+            return HttpResponse(json.dumps(context), content_type='application/json', 
+                                **kwargs)
         else:
-            return self.render_to_response(context)
+            if len(cart) == 0:
+                return redirect('plugshop-product-list')
+            else:
+                return self.render_to_response(context)
 
 
     def post(self, request, **kwargs):
