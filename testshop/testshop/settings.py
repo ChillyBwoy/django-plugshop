@@ -133,7 +133,9 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda r: DEBUG,
 }
 
-PLUGSHOP_PRODUCT_MODEL = 'testshop.shop.models.Product'
-PLUGSHOP_CATEGORY_MODEL = 'testshop.shop.models.Category'
-PLUGSHOP_SHIPPING_TYPE_MODEL = 'testshop.shop.models.ShippingType'
-PLUGSHOP_SHIPPING_MODEL = 'testshop.shop.models.Shipping'
+PLUGSHOP_MODELS = {
+    'PRODUCT': 'testshop.shop.models.Product',
+    'CATEGORY': 'testshop.shop.models.Category',
+    'SHIPPING_TYPE': 'testshop.shop.models.ShippingType',
+    'SHIPPING': 'testshop.shop.models.Shipping',
+}

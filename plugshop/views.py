@@ -11,6 +11,11 @@ from django.views.generic.base import TemplateResponseMixin
 from django.utils import simplejson as json
 from django.contrib.auth.models import User
 
+from django.utils.html import strip_tags
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives, mail_managers, \
+mail_admins
+
 from plugshop.utils import serialize_queryset
 from plugshop import settings
 from plugshop.utils import load_class, serialize_model
@@ -178,8 +183,8 @@ class OrderView(FormView):
 
         if created:
             user.username = form.cleaned_data.get('email')
-            user.first_name = form.cleaned_data.get('first_name')
-            user.last_name = form.cleaned_data.get('last_name')
+            user.first_name = form.cleaned_data.get('first_name', '')
+            user.last_name = form.cleaned_data.get('last_name', '')
             user.is_active = False
             user.save()
 
@@ -199,6 +204,18 @@ class OrderView(FormView):
                 quantity=c.quantity,
                 order=order
             )
+
+
+        message_html = render_to_string('plugshop/email/order_admin.html', {
+            'cart': cart,
+            'order': order,
+        })
+        message_text = render_to_string('plugshop/email/order_admin.txt', {
+            'cart': cart,
+            'order': order,
+        })
+        mail_managers(_('New Order'), message_text, html_message=message_html)
+        mail_admins(_('New Order'), message_text, html_message=message_html)
 
         cart.empty()
         return super(OrderView, self).form_valid(form)

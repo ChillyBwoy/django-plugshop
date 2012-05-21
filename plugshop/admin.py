@@ -12,14 +12,16 @@ from plugshop.models import *
 from plugshop.utils import is_default_model
 
 class BaseProductAdmin(admin.ModelAdmin):
+    #change_list_template = 'admin/product/change_list.html'
     inlines = ()
+    search_fields = ('name',)
     prepopulated_fields = {
         'slug': ('name',) 
     }
     list_display = (
         'name',
         'slug',
-        'category',
+        #'category',
     )
     list_filter = (
         'category',
@@ -46,11 +48,11 @@ class BaseShippingTypeAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'price',
+        'require_address',
     )
 if is_default_model('SHIPPING_TYPE'):
     admin.site.register(load_class(settings.SHIPPING_TYPE_MODEL), 
                                             BaseShippingTypeAdmin)
-
 
 class BaseOrderProductsInline(admin.TabularInline):
     model = load_class(settings.ORDER_PRODUCTS_MODEL)
@@ -61,10 +63,12 @@ class BaseOrderShippingInline(admin.StackedInline):
     can_delete = False
 
 class BaseOrderAdmin(admin.ModelAdmin):
+    date_hierarchy = 'created_at'
     inlines = (
         BaseOrderShippingInline,
         BaseOrderProductsInline,
     )
+    search_fields = ('number', 'user',)
     list_display = (
         'number',
         'user',
@@ -78,6 +82,7 @@ class BaseOrderAdmin(admin.ModelAdmin):
     )
     list_filter = (
         'status', 
+        'created_at',
     )
 if is_default_model('ORDER'):
     admin.site.register(load_class(settings.ORDER_MODEL), BaseOrderAdmin)

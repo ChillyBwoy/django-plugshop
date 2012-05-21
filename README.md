@@ -29,9 +29,11 @@ Installation
         )
 
 * Override default models. Example:
-
-        PLUGSHOP_PRODUCT_MODEL = 'testshop.myshop.models.Product'  
-        PLUGSHOP_CATEGORY_MODEL = 'testshop.myshop.models.Category'
+        
+        PLUGSHOP_MODELS = {
+            'PRODUCT': 'testshop.myshop.models.Product',
+            'CATEGORY': 'testshop.myshop.models.Category',
+        }
     
 * Run `python manage.py syncdb`
 
@@ -41,21 +43,34 @@ Configuration
 
 Models:
 
-* `PLUGSHOP_PRODUCT_MODEL`
-* `PLUGSHOP_CATEGORY_MODEL`
-* `PLUGSHOP_SHIPPING_MODEL`
-* `PLUGSHOP_SHIPPING_TYPE_MODEL`
-* `PLUGSHOP_ORDER_MODEL`
-* `PLUGSHOP_ORDER_PRODUCTS_MODEL`
+        PLUGSHOP_MODELS = {
+            'PRODUCT': 'plugshop.models.product.Product',
+            'CATEGORY': 'plugshop.models.category.Category',
+            'SHIPPING': 'plugshop.models.shipping.Shipping',
+            'SHIPPING_TYPE': 'plugshop.models.shipping_type.ShippingType',
+            'ORDER': 'plugshop.models.order.Order',
+            'ORDER_PRODUCTS': 'plugshop.models.order_products.OrderProducts',
+        }
 
-Possible values of the status of the order are stored in `PLUGSHOP_STATUS_CHOICES` tuple. Default values are:
+Config:
     
-    PLUGSHOP_STATUS_CHOICES = (
-        (1, _('Created')),
-        (2, _('Confirmed')),
-        (3, _('Denied')),
-        (4, _('Delivered')),
-    )
+    
+        PLUGSHOP_CONFIG = {
+            'REQUEST_NAMESPACE': 'cart',
+            'SESSION_NAMESPACE': 'cart',
+        }
+
+Other options:
+
+        PLUGSHOP_OPTIONS = {
+            # Possible values of the status of the order. Default values:
+            'STATUS_CHOICES': (
+                (1, _('Created')),
+                (2, _('Confirmed')),
+                (3, _('Denied')),
+                (4, _('Delivered')),
+            ),
+        }
     
 Cart
 ====
@@ -67,7 +82,11 @@ Cart
 Or
     
         #settings.py
-        PLUGSHOP_REQUEST_NAMESPACE = 'my_cart_namespace'
+        PLUGSHOP_CONFIG = {
+            ...
+            'REQUEST_NAMESPACE': 'my_cart_namespace',
+            ...
+        }
         
         #views.py
         def my_view(request):

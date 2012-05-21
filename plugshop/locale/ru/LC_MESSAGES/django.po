@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-16 17:40+0400\n"
+"POT-Creation-Date: 2012-05-21 23:45+0400\n"
 "PO-Revision-Date: 2012-05-12 22:38+0300\n"
 "Last-Translator: Eugene Cheltsov <chill.icp@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,45 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
-#: forms.py:15 forms.py:33
-msgid "Name required"
+#: forms.py:11
+msgid "Name is required"
 msgstr ""
 
-#: forms.py:16
-msgid "Invalid email"
+#: forms.py:12
+msgid "Invalid email address"
 msgstr ""
 
-#: settings.py:33
+#: forms.py:13
+#, python-format
+msgid "Email address '%s' already exits, must be unique"
+msgstr ""
+
+#: forms.py:14
+msgid "Address is required"
+msgstr "Не указан адрес"
+
+#: forms.py:20
+#, fuzzy
+msgid "New user"
+msgstr "Новый пользователь"
+
+#: forms.py:21
+msgid "Registered user"
+msgstr "Зарегистрированный пользователь"
+
+#: settings.py:32
 msgid "Created"
 msgstr "Создан"
 
-#: settings.py:34
+#: settings.py:33
 msgid "Confirmed"
 msgstr "Подтверждён"
 
-#: settings.py:35
+#: settings.py:34
 msgid "Denied"
 msgstr "Отклонён"
 
-#: settings.py:36
+#: settings.py:35
 msgid "Delivered"
 msgstr "Доставлен"
 
@@ -54,17 +72,17 @@ msgstr "товары"
 msgid "user"
 msgstr "пользователь"
 
-#: models/__init__.py:41 models/__init__.py:54 models/order.py:14
-#: models/order.py:33
+#: models/__init__.py:41 models/__init__.py:50 models/order.py:14
+#: models/order.py:35
 msgid "order"
 msgstr "заказ"
 
-#: models/__init__.py:45 models/product.py:8 models/product.py:36
+#: models/__init__.py:44 models/product.py:8 models/product.py:36
 msgid "product"
 msgstr "товар"
 
-#: models/__init__.py:49 models/shipping_type.py:9 models/shipping_type.py:10
-#: models/shipping_type.py:21 models/shipping_type.py:22
+#: models/__init__.py:47 models/shipping_type.py:9 models/shipping_type.py:10
+#: models/shipping_type.py:23 models/shipping_type.py:24
 msgid "shipping type"
 msgstr "тип доставки"
 
@@ -80,23 +98,27 @@ msgstr "наименование"
 msgid "slug"
 msgstr "метка"
 
-#: models/order.py:15 models/order.py:34
+#: models/order.py:15 models/order.py:36
 msgid "orders"
 msgstr "заказы"
 
 #: models/order.py:17
+msgid "order number"
+msgstr "номер заказа"
+
+#: models/order.py:19
 msgid "order status"
 msgstr "статус заказа"
 
-#: models/order.py:20
+#: models/order.py:22
 msgid "creation date"
 msgstr "дата создания"
 
-#: models/order.py:22
-msgid "update"
-msgstr ""
+#: models/order.py:24
+msgid "updated at"
+msgstr "дата обновления"
 
-#: models/order.py:23
+#: models/order.py:25
 msgid "delivery date"
 msgstr "дата доставки"
 
@@ -124,3 +146,7 @@ msgstr "данные для доставки"
 #: models/shipping.py:14
 msgid "address"
 msgstr "адрес"
+
+#: models/shipping_type.py:14
+msgid "require address"
+msgstr "необходимо ввести адрес"
