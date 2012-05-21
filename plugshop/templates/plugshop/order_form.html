@@ -1,0 +1,13 @@
+{% extends 'plugshop/base.html' %}
+{% load plugshop %}
+
+{% block content %}
+<form action="" method="post">{% csrf_token %}
+    <table border="0" cellspacing="5" cellpadding="5">
+        {{form}}
+    </table>
+    <p>
+        <input type="submit" value="Continue &rarr;">
+    </p>
+</form>
+{% endblock content %}

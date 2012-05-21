@@ -19,9 +19,17 @@ class OrderAbstract(models.Model):
                                 default=settings.STATUS_CHOICES_START)
     created_at = models.DateTimeField(_('creation date'), blank=False, 
                                         default=datetime.datetime.now)
-    updated_at = models.DateTimeField(_('update'), blank=True, null=True)
+    updated_at = models.DateTimeField(_('updated at'), blank=True, null=True)
     delivered_at = models.DateTimeField(_('delivery date'), blank=True, 
                                         null=True)
+                                        
+    def save(self, *args, **kwargs):
+        self.updated_at = datetime.datetime.now()
+        if self.status == settings.STATUS_CHOICES_FINISH:
+            self.delivered_at = datetime.datetime.now()
+
+        return super(load_class(settings.ORDER_MODEL), 
+                                self).save(*args, **kwargs)
     
     def __unicode__(self):
         return str(self.pk)

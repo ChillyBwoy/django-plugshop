@@ -5,7 +5,8 @@ from django.http import Http404, HttpResponse
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
 from django.core import serializers
-from django.views.generic import View, TemplateView, ListView, DetailView
+from django.views.generic import View, TemplateView, ListView, DetailView,\
+CreateView, FormView
 from django.views.generic.base import TemplateResponseMixin
 from django.utils import simplejson as json
 from plugshop.utils import serialize_queryset
@@ -18,6 +19,8 @@ from plugshop.cart import get_cart
 PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
 CATEGORY_CLASS = load_class(settings.CATEGORY_MODEL)
 SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_MODEL)
+ORDER_CLASS = load_class(settings.ORDER_MODEL)
+ORDER_PRODUCTS_CLASS = load_class(settings.ORDER_PRODUCTS_MODEL)
 
 class ProductListView(ListView):
     context_object_name = 'products'
@@ -136,6 +139,33 @@ class CartView(TemplateResponseMixin, View):
         cart.save()
         return redirect('plugshop-cart')
 
+
+
+class OrderView(FormView):
+    template_name = 'plugshop/order_form.html'
+    form_class = OrderForm
+    success_url = '/'
+
+    def get_initial(self, *args, **kwargs):
+        cart = get_cart(self.request)
+        initial = {
+            'products': [c.product for c in cart]
+        }
+        return initial
+
+    def get_form_kwargs(self):
+        cart = get_cart(self.request)
+        form_kwargs = super(OrderView, self).get_form_kwargs()
+        return form_kwargs
+    
+    def form_valid(self, form):
+        cart = get_cart(self.request)
+        cart.empty()
+
+        return super(OrderView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form))
 
 # @csrf_protect
 # @render_to('cartds/cart.html')

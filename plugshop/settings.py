@@ -28,7 +28,6 @@ ORDER_PRODUCTS_MODEL_DEFAULT = 'plugshop.models.order_products.OrderProducts'
 ORDER_PRODUCTS_MODEL = getattr(settings, 'PLUGHOSP_ORDER_PRODUCTS_MODEL', 
                                     ORDER_PRODUCTS_MODEL_DEFAULT)
 
-
 STATUS_CHOICES = getattr(settings, 'PLUGHOSP_STATUS_CHOICES', (
                             (1, _('Created')),
                             (2, _('Confirmed')),

@@ -40,15 +40,11 @@ ORDER_CLASS.add_to_class('user', models.ForeignKey(User,
 ORDER_PRODUCTS_CLASS.add_to_class('order', models.ForeignKey(ORDER_CLASS,
                                         verbose_name=_('order')))
 
-
 ORDER_PRODUCTS_CLASS.add_to_class('product', models.ForeignKey(PRODUCT_CLASS, 
                                         verbose_name=_('product')))
 
-
 SHIPPING_CLASS.add_to_class('type', models.ForeignKey(SHIPPING_TYPE_CLASS,
-                                        verbose_name=_('shipping type'), 
-                                        blank=True, 
-                                        null=True))
+                                        verbose_name=_('shipping type')))
 
 SHIPPING_CLASS.add_to_class('order', models.OneToOneField(ORDER_CLASS,
                                         verbose_name=_('order')))

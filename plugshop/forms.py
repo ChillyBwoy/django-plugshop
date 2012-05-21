@@ -7,18 +7,38 @@ from plugshop.utils import load_class
 PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
 SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_MODEL)
 
+
+NAME_ERROR = _('Name is required')
+EMAIL_ERROR = _('Invalid email address')
+ADDRESS_ERROR = _('Address is required')
+
 class ProductForm(forms.Form):
     product = forms.ModelChoiceField(queryset=PRODUCT_CLASS.objects)
     quantity = forms.IntegerField(required=False)
 
-class OrderForm(forms.Form):
-    name = forms.CharField(required=True, error_messages={'required': _('Name required')}, initial="")
-    email = forms.EmailField(required=True, error_messages={'required': _('Invalid email')}, initial="")
-    shipping_type = forms.ModelChoiceField(queryset=SHIPPING_TYPE_CLASS.objects)
-    address = forms.CharField(widget=forms.widgets.Textarea(), required=False, initial="")
 
-    first_name = ""
-    last_name  = ""
+class OrderForm(forms.Form):
+    name = forms.CharField(required=True, 
+                                error_messages={
+                                    'required': NAME_ERROR
+                                }, 
+                                initial="Vasya")
+    first_name = forms.CharField(required=False) 
+    last_name  = forms.CharField(required=False)
+    email = forms.EmailField(required=True, 
+                                error_messages={
+                                    'required': EMAIL_ERROR
+                                }, 
+                                initial="")
+    shipping_type = forms.ModelChoiceField(
+                                empty_label=None,
+                                queryset=SHIPPING_TYPE_CLASS.objects)
+    address = forms.CharField(widget=forms.widgets.Textarea(), 
+                                required=False, 
+                                initial="")
+    products = forms.ModelMultipleChoiceField(
+                                queryset=PRODUCT_CLASS.objects,
+                                required=True)
 
     def clean_name(self):
         name = self.cleaned_data.get('name').strip()
@@ -30,7 +50,7 @@ class OrderForm(forms.Form):
             else:
                 self.cleaned_data['first_name'] = name
         else:
-            raise forms.ValidationError(_('Name required'))
+            raise forms.ValidationError(NAME_ERROR)
         return name
 
     def clean_address(self):
@@ -38,7 +58,9 @@ class OrderForm(forms.Form):
         shipping_type = cleaned_data.get('shipping_type')
         address = cleaned_data.get('address', '').strip()
 
-        # if shipping_type.require_address:
-        #     if len(address) == 0: raise forms.ValidationError(_('Address required'))
+        if shipping_type:
+            if shipping_type.address_required:
+                if len(address) == 0: 
+                    raise forms.ValidationError(ADDRESS_ERROR)
 
         return address
