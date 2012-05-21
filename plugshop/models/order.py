@@ -13,7 +13,9 @@ class OrderAbstract(models.Model):
         abstract = True
         verbose_name = _('order')
         verbose_name_plural = _('orders')
-
+    
+    number = models.IntegerField(_('order number'), unique=True, 
+                                editable=False)
     status = models.IntegerField(_('order status'), blank=False, 
                                 choices=settings.STATUS_CHOICES, 
                                 default=settings.STATUS_CHOICES_START)
@@ -22,14 +24,6 @@ class OrderAbstract(models.Model):
     updated_at = models.DateTimeField(_('updated at'), blank=True, null=True)
     delivered_at = models.DateTimeField(_('delivery date'), blank=True, 
                                         null=True)
-                                        
-    def save(self, *args, **kwargs):
-        self.updated_at = datetime.datetime.now()
-        if self.status == settings.STATUS_CHOICES_FINISH:
-            self.delivered_at = datetime.datetime.now()
-
-        return super(load_class(settings.ORDER_MODEL), 
-                                self).save(*args, **kwargs)
     
     def __unicode__(self):
         return str(self.pk)

@@ -66,7 +66,7 @@ class BaseOrderAdmin(admin.ModelAdmin):
         BaseOrderProductsInline,
     )
     list_display = (
-        'id',
+        'number',
         'user',
         'status',
         'created_at',

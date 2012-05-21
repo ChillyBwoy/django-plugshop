@@ -60,9 +60,21 @@ def set_delivered(sender, instance, **kwargs):
         instance.delivered_at = datetime.datetime.now()
     else:
         instance.delivered_at = None
-        
+
 @receiver(pre_save, sender=ORDER_CLASS)
 def set_updated(sender, instance, **kwargs):
     instance.updated_at = datetime.datetime.now()
+
+@receiver(pre_save, sender=ORDER_CLASS)
+def generate_number(sender, instance, **kwargs):
+    if instance.id is None:
+        today = datetime.datetime.now()
+        today_orders = ORDER_CLASS.objects.filter(
+                            created_at__year=today.year,
+                            created_at__month=today.month,
+                            created_at__day=today.day
+                        )
+        num = int("%s%s" % (today.strftime("%y%m%d"), len(today_orders) + 1))
+        instance.number = num
 
 post_save.connect(get_categories, sender=CATEGORY_CLASS)

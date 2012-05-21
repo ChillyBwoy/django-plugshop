@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext as _
+from django.contrib.auth.models import User
 
 from plugshop import settings
 from plugshop.utils import load_class
@@ -10,6 +11,7 @@ SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_MODEL)
 
 NAME_ERROR = _('Name is required')
 EMAIL_ERROR = _('Invalid email address')
+EMAIL_ERROR_EXISTS = _("Email address '%s' already exits, must be unique")
 ADDRESS_ERROR = _('Address is required')
 
 class ProductForm(forms.Form):
@@ -22,9 +24,7 @@ class OrderForm(forms.Form):
                                 error_messages={
                                     'required': NAME_ERROR
                                 }, 
-                                initial="Vasya")
-    first_name = forms.CharField(required=False) 
-    last_name  = forms.CharField(required=False)
+                                initial="")
     email = forms.EmailField(required=True, 
                                 error_messages={
                                     'required': EMAIL_ERROR
@@ -39,6 +39,14 @@ class OrderForm(forms.Form):
     products = forms.ModelMultipleChoiceField(
                                 queryset=PRODUCT_CLASS.objects,
                                 required=True)
+
+    # def clean_email(self):
+    #     email = self.cleaned_data.get('email')
+    #     try:
+    #         user = User.objects.get(email=email)
+    #     except User.DoesNotExist:
+    #         raise forms.ValidationError(EMAIL_ERROR_EXISTS % email)
+    #     return email
 
     def clean_name(self):
         name = self.cleaned_data.get('name').strip()
