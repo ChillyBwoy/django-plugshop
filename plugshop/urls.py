@@ -16,3 +16,6 @@ urlpatterns = patterns('plugshop.views',
             ProductView.as_view(), 
             name='plugshop-product'),
 )
+
+def get_url():
+    pass

@@ -5,12 +5,19 @@
 New order #{{order.number}}
 ===============================
 
+{{user.first_name}} {{user.last_name}} {{user.email}}
+
 {% for item in cart %}
     Product: {{item.product.name}}
     Price: {{item.product.price}}
     Quantity: {{item.quantity}}
     Total: {{item.price_total}}
 {% endfor %}
+{% with order.shipping as shipping %}
+    Shipping: {{shipping.type.name}}
+    Shipping address: {{shipping.address}}
+    Shipping price: {{shipping.type.price}}
+{% endwith %}
 
-Total: {{cart.price_total}}
+Total: {{total}}
 {% endspaceless %}

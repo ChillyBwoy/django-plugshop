@@ -10,6 +10,7 @@ CreateView, FormView
 from django.views.generic.base import TemplateResponseMixin
 from django.utils import simplejson as json
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
@@ -156,11 +157,7 @@ class OrderView(FormView):
     def get_initial(self, *args, **kwargs):
         cart = get_cart(self.request)
         user = self.request.user
-
-        initial = {
-            'products': [c.product for c in cart]
-        }
-
+        initial = {}
         if user.is_authenticated():
             initial.update({
                 'name': "%s %s" % (user.first_name, user.last_name),
@@ -209,14 +206,20 @@ class OrderView(FormView):
         message_html = render_to_string('plugshop/email/order_admin.html', {
             'cart': cart,
             'order': order,
+            'user': user,
+            'total': order.shipping.type.price + cart.price_total(),
         })
         message_text = render_to_string('plugshop/email/order_admin.txt', {
             'cart': cart,
             'order': order,
+            'user': user,
+            'total': order.shipping.type.price + cart.price_total(),
         })
         mail_managers(_('New Order'), message_text, html_message=message_html)
         mail_admins(_('New Order'), message_text, html_message=message_html)
-
+        
+        messages.info(self.request, settings.MESSAGE_SUCCESS)
+        
         cart.empty()
         return super(OrderView, self).form_valid(form)
 

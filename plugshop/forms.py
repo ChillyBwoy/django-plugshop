@@ -32,9 +32,6 @@ class OrderForm(forms.Form):
                                 queryset=SHIPPING_TYPE_CLASS.objects)
     address = forms.CharField(widget=forms.widgets.Textarea(), 
                                 required=False)
-    products = forms.ModelMultipleChoiceField(
-                                queryset=PRODUCT_CLASS.objects,
-                                required=True)
 
     # def clean_email(self):
     #     email = self.cleaned_data.get('email')
