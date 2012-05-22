@@ -15,6 +15,7 @@ from plugshop.models.shipping import *
 from plugshop.models.shipping_type import *
 from plugshop.models.order import *
 from plugshop.models.order_products import *
+from mptt.fields import TreeForeignKey
 
 PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
 CATEGORY_CLASS = load_class(settings.CATEGORY_MODEL)
@@ -23,7 +24,7 @@ ORDER_PRODUCTS_CLASS = load_class(settings.ORDER_PRODUCTS_MODEL)
 SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_MODEL)
 SHIPPING_CLASS = load_class(settings.SHIPPING_MODEL)
 
-PRODUCT_CLASS.add_to_class('category', models.ForeignKey(CATEGORY_CLASS,
+PRODUCT_CLASS.add_to_class('category', TreeForeignKey(CATEGORY_CLASS,
                                         verbose_name=_('category'),
                                         related_name='products',
                                         blank=True,

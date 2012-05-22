@@ -149,6 +149,10 @@ class CartView(TemplateResponseMixin, View):
 
 
 
+class OrderSuccessView(DetailView):
+    template_name = 'plugshop/order_success.html'
+    
+
 class OrderView(FormView):
     template_name = 'plugshop/order_form.html'
     form_class = OrderForm
