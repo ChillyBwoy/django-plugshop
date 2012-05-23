@@ -7,6 +7,7 @@ from plugshop.utils import load_class
 
 PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
 SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_MODEL)
+ORDER_CLASS = load_class(settings.ORDER_MODEL)
 
 NAME_ERROR = _('Name is required')
 EMAIL_ERROR = _('Invalid email address')
@@ -18,7 +19,12 @@ class ProductForm(forms.Form):
     quantity = forms.IntegerField(required=False)
 
 
-class OrderForm(forms.Form):
+class OrderForm(forms.ModelForm):
+    
+    class Meta:
+        model = ORDER_CLASS
+    
+    require_address = False
     
     name = forms.CharField(required=True, 
                                 error_messages={
@@ -63,7 +69,10 @@ class OrderForm(forms.Form):
         
         if shipping_type:
             if shipping_type.require_address:
+                setattr(self, 'require_address', True)
                 if len(address) == 0: 
                     raise forms.ValidationError(ADDRESS_ERROR)
+            else:
+                setattr(self, 'require_address', False)
 
         return address

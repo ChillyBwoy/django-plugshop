@@ -31,6 +31,8 @@ SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_MODEL)
 ORDER_CLASS = load_class(settings.ORDER_MODEL)
 ORDER_PRODUCTS_CLASS = load_class(settings.ORDER_PRODUCTS_MODEL)
 
+ORDER_FORM_CLASS = load_class(settings.ORDER_FORM)
+
 class ProductListView(ListView):
     context_object_name = 'products'
     template_name = 'plugshop/product_list.html'
@@ -92,12 +94,6 @@ class CategoryView(DetailView):
 class CartView(TemplateResponseMixin, View):
     template_name = 'plugshop/cart.html'
 
-    def get_context_data(self, **kwargs):
-        return {
-            'cart': get_cart(self.request) or [],
-            'shipping_type': SHIPPING_TYPE_CLASS.objects.all(),
-        }
-
     def extend_context(self, context):
         return context
         
@@ -106,20 +102,14 @@ class CartView(TemplateResponseMixin, View):
     
     def get(self, request, **kwargs):
         cart = request.cart
-        context = self.get_context_data(**kwargs)
+        context = {}
 
         if request.is_ajax():
-            
-            for k, v in context.items():
-                if isinstance(v, QuerySet):
-                    context[k] = serialize_queryset(v)
-
-            context.update(
-                cart=cart.serialize(),
-            )
-            return HttpResponse(json.dumps(context), content_type='application/json', 
-                                **kwargs)
+            context['cart'] = cart.serialize()
+            return HttpResponse(json.dumps(context), 
+                                    content_type='application/json', **kwargs)
         else:
+            context['form'] = ORDER_FORM_CLASS()
             if len(cart) == 0:
                 return redirect('plugshop-product-list')
             else:
@@ -158,20 +148,19 @@ class CartView(TemplateResponseMixin, View):
 
 class OrderSuccessView(DetailView):
     template_name = 'plugshop/order_success.html'
-    
+
 
 class OrderView(FormView):
     template_name = 'plugshop/order_form.html'
-    form_class = load_class(settings.ORDER_FORM)
+    form_class = ORDER_FORM_CLASS
     success_url = settings.URL_SUCCESS
     
     def get_context_data(self, **kwargs):
         context = super(OrderView, self).get_context_data(**kwargs)
-        context.update(
-            cart=get_cart(self.request) or [],
-            shipping_type=SHIPPING_TYPE_CLASS.objects.all(),
-        )
         return context
+        
+    def get_form(self, form_class):
+        return form_class(**self.get_form_kwargs())
 
     def get_initial(self, *args, **kwargs):
         cart = get_cart(self.request)
@@ -220,7 +209,6 @@ class OrderView(FormView):
                 quantity=c.quantity,
                 order=order
             )
-
 
         message_html = render_to_string('plugshop/email/order_admin.html', {
             'cart': cart,
