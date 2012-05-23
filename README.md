@@ -46,8 +46,6 @@ Models:
         PLUGSHOP_MODELS = {
             'PRODUCT': 'plugshop.models.product.Product',
             'CATEGORY': 'plugshop.models.category.Category',
-            'SHIPPING': 'plugshop.models.shipping.Shipping',
-            'SHIPPING_TYPE': 'plugshop.models.shipping_type.ShippingType',
             'ORDER': 'plugshop.models.order.Order',
             'ORDER_PRODUCTS': 'plugshop.models.order_products.OrderProducts',
         }

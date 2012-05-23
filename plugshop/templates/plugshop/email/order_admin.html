@@ -28,14 +28,6 @@
             {% endfor %}
         </tbody>
         <tfoot>
-            {% with order.shipping as shipping %}
-            <tr>
-                <td>Shipping</td>
-                <td>{{shipping.type.name}}</td>
-                <td>{{shipping.address}}</td>
-                <td>{{shipping.type.price}}</td>
-            </tr>
-            {% endwith %}
             <tr>
                 <td colspan="3">Total</td>
                 <td>{{total}}</td>

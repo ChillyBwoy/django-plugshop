@@ -44,28 +44,14 @@ if is_default_model('CATEGORY'):
     admin.site.register(load_class(settings.CATEGORY_MODEL), BaseCategoryAdmin)
 
 
-class BaseShippingTypeAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'price',
-        'require_address',
-    )
-if is_default_model('SHIPPING_TYPE'):
-    admin.site.register(load_class(settings.SHIPPING_TYPE_MODEL), 
-                                            BaseShippingTypeAdmin)
 
 class BaseOrderProductsInline(admin.TabularInline):
     model = load_class(settings.ORDER_PRODUCTS_MODEL)
     extra = 0
 
-class BaseOrderShippingInline(admin.StackedInline):
-    model = load_class(settings.SHIPPING_MODEL)
-    can_delete = False
-
 class BaseOrderAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     inlines = (
-        BaseOrderShippingInline,
         BaseOrderProductsInline,
     )
     search_fields = ('number', 'user',)

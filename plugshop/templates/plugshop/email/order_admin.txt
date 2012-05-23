@@ -13,11 +13,6 @@ New order #{{order.number}}
     Quantity: {{item.quantity}}
     Total: {{item.price_total}}
 {% endfor %}
-{% with order.shipping as shipping %}
-    Shipping: {{shipping.type.name}}
-    Shipping address: {{shipping.address}}
-    Shipping price: {{shipping.type.price}}
-{% endwith %}
 
 Total: {{total}}
 {% endspaceless %}

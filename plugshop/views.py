@@ -26,8 +26,6 @@ from plugshop.cart import get_cart
 
 PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
 CATEGORY_CLASS = load_class(settings.CATEGORY_MODEL)
-SHIPPING_CLASS = load_class(settings.SHIPPING_MODEL)
-SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_MODEL)
 ORDER_CLASS = load_class(settings.ORDER_MODEL)
 ORDER_PRODUCTS_CLASS = load_class(settings.ORDER_PRODUCTS_MODEL)
 
@@ -178,172 +176,29 @@ class OrderView(FormView):
         cart = get_cart(self.request)
         form_kwargs = super(OrderView, self).get_form_kwargs()
         return form_kwargs
-    
+
     def form_valid(self, form):
         cart = get_cart(self.request)
-
-        user, created = User.objects.get_or_create(
-            email = form.cleaned_data.get('email')
-        )
-
-        if created:
-            user.username = form.cleaned_data.get('email')
-            user.first_name = form.cleaned_data.get('first_name', '')
-            user.last_name = form.cleaned_data.get('last_name', '')
-            user.is_active = False
-            user.save()
-
-        order = ORDER_CLASS.objects.create(
-            user=user
-        )
-
-        shipping = SHIPPING_CLASS.objects.create(
-            order=order,
-            type=form.cleaned_data.get('shipping_type'),
-            address=form.cleaned_data.get('address')
-        )
-
-        for c in cart:
-            ORDER_PRODUCTS_CLASS.objects.create(
-                product=c.product,
-                quantity=c.quantity,
-                order=order
-            )
+        form.save(cart=cart)
 
         message_html = render_to_string('plugshop/email/order_admin.html', {
             'cart': cart,
             'order': order,
             'user': user,
-            'total': order.shipping.type.price + cart.price_total(),
+            'total': cart.price_total(),
         })
         message_text = render_to_string('plugshop/email/order_admin.txt', {
             'cart': cart,
             'order': order,
             'user': user,
-            'total': order.shipping.type.price + cart.price_total(),
+            'total': cart.price_total(),
         })
         mail_managers(_('New Order'), message_text, html_message=message_html)
         mail_admins(_('New Order'), message_text, html_message=message_html)
-        
         messages.info(self.request, settings.MESSAGE_SUCCESS)
-        
         cart.empty()
+        
         return super(OrderView, self).form_valid(form)
 
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form))
-
-
-
-
-"""
-def order(request):
-    cart = request.cart
-
-    #if cart is empty, then say goodbye
-    if len(cart) == 0: return redirect('shop_list')
-
-    try:
-        delivery = Delivery.objects.filter(is_default=True)[0]
-    except IndexError:
-        delivery = None
-
-    context = {
-        'cart': cart,
-        'template': 'base.html'
-    }
-    if request.method == 'POST':
-        form = OrderForm(request.POST, initial=request.POST)
-        context.update(form=form)
-
-        try:
-            delivery = Delivery.objects.get(pk=int(form.data.get('delivery')))
-        except Exception, e:
-            pass
-
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-
-            #if no user was found, then create it
-            try:
-                user = User.objects.get(email=email)
-            except User.DoesNotExist:
-                user, created = User.objects.get_or_create(
-                    username = email,
-                    first_name = form.cleaned_data.get('first_name', ''),
-                    last_name = form.cleaned_data.get('last_name', ''),
-                    is_active = True,
-                    email = form.cleaned_data.get('email')
-                )
-
-            try:
-                profile = user.get_profile()
-            except Profile.DoesNotExist:
-                profile = Profile.objects.create(user=user)
-
-            profile.phone = form.cleaned_data.get('phone')
-            profile.save()
-
-            order = Order.objects.create(
-                user = user,
-                comment = form.cleaned_data.get('comment', '')
-            )
-            order.save()
-
-            #create delivery item with address or None
-            delivery_item = OrderDelivery.objects.create(
-                order = order,
-                delivery = form.cleaned_data.get('delivery'),
-                address = form.cleaned_data.get('address')
-            )
-            delivery_item.save()
-
-            #add products to order
-            for d in cart:
-                order_item = OrderProduct.objects.create(
-                    order = order,
-                    product = d.product,
-                    quantity = d.quantity
-                )
-                order_item.save()
-
-            message_html = render_to_string('mail/user_order.html', {
-                'cart': cart,
-                'address': form.cleaned_data.get('address', ''),
-                'phone': form.cleaned_data.get('phone'),
-                'num': order.num
-            })
-            message_text = strip_tags(message_html)
-            msg = EmailMultiAlternatives(_(u'Заказ на сайте deathstar.ru'), message_text, 'noreply@deathstar.ru', [user.email])
-            msg.attach_alternative(message_html, 'text/html')
-            msg.send()
-
-            message_html = render_to_string('mail/new_order.html', {
-                'cart': cart,
-                'address': form.cleaned_data.get('address', ''),
-                'phone': form.cleaned_data.get('phone'),
-                'user': user,
-                'comment': form.cleaned_data.get('comment', ''),
-                'num': order.num
-            })
-            message_text = strip_tags(message_html)
-            mail_managers(_(u'Новый заказ на сайте deathstar.ru'), message_text, html_message=message_html)
-            mail_admins(_(u'Новый заказ на сайте deathstar.ru'), message_text, html_message=message_html)
-
-            cart.empty()
-            cart.save()
-
-            messages.info(request, _(u"Ваш заказ оформлен. Письмо с инструкциями выслано на адрес %(email)s") % {'email': user.email})
-            return redirect('shop_list')
-    else:
-
-        if delivery:
-            form = OrderForm(initial={
-                'delivery': delivery.pk
-            })
-        else:
-            form = OrderForm()
-
-    context.update(form=form, delivery=delivery)
-    return context
-"""

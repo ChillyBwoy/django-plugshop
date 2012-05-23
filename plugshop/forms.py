@@ -1,52 +1,68 @@
 from django import forms
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
-
 from plugshop import settings
 from plugshop.utils import load_class
 
 PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
-SHIPPING_TYPE_CLASS = load_class(settings.SHIPPING_TYPE_MODEL)
 ORDER_CLASS = load_class(settings.ORDER_MODEL)
-
+ORDER_PRODUCTS_CLASS = load_class(settings.ORDER_PRODUCTS_MODEL)
 NAME_ERROR = _('Name is required')
 EMAIL_ERROR = _('Invalid email address')
 EMAIL_ERROR_EXISTS = _("Email address '%s' already exits, must be unique")
-ADDRESS_ERROR = _('Address is required')
 
 class ProductForm(forms.Form):
     product = forms.ModelChoiceField(queryset=PRODUCT_CLASS.objects)
     quantity = forms.IntegerField(required=False)
 
-
 class OrderForm(forms.ModelForm):
-    
+
     class Meta:
         model = ORDER_CLASS
-    
-    require_address = False
-    
-    name = forms.CharField(required=True, 
-                                error_messages={
-                                    'required': NAME_ERROR
-                                })
-    email = forms.EmailField(required=True, 
-                                error_messages={
-                                    'required': EMAIL_ERROR
-                                })
-    shipping_type = forms.ModelChoiceField(
-                                empty_label=None,
-                                queryset=SHIPPING_TYPE_CLASS.objects)
-    address = forms.CharField(widget=forms.widgets.Textarea(), 
-                                required=False)
+        exclude = (
+            'number', 
+            'status',
+            'created_at',
+            'updated_at',
+            'delivered_at',
+            'user',
+            'products',
+        )
 
-    # def clean_email(self):
-    #     email = self.cleaned_data.get('email')
-    #     try:
-    #         user = User.objects.get(email=email)
-    #     except User.DoesNotExist:
-    #         raise forms.ValidationError(EMAIL_ERROR_EXISTS % email)
-    #     return email
+    name = forms.CharField(required=True, error_messages={
+                                            'required': NAME_ERROR
+                                        })
+    email = forms.EmailField(required=True, error_messages={
+                                            'required': EMAIL_ERROR
+                                        })
+
+    def save(self, commit=True, **kwargs):
+        cart = kwargs.get('cart')
+        
+        user, created = User.objects.get_or_create(
+            email = self.cleaned_data.get('email')
+        )
+        if created:
+            user.username = self.cleaned_data.get('email')
+            user.email = self.cleaned_data.get('email')
+            user.first_name = self.cleaned_data.get('first_name', '')
+            user.last_name = self.cleaned_data.get('last_name', '')
+            user.is_active = False
+            user.save()
+        
+        model = super(OrderForm, self).save(commit=False)
+        model.user = user
+
+        if commit:
+            model.save()
+            for c in cart:
+                ORDER_PRODUCTS_CLASS.objects.create(
+                    product=c.product,
+                    quantity=c.quantity,
+                    order=model
+                )
+                
+        return model
 
     def clean_name(self):
         name = self.cleaned_data.get('name').strip()
@@ -61,18 +77,3 @@ class OrderForm(forms.ModelForm):
         else:
             raise forms.ValidationError(NAME_ERROR)
         return name
-
-    def clean_address(self):
-        cleaned_data = self.cleaned_data
-        shipping_type = cleaned_data.get('shipping_type')
-        address = cleaned_data.get('address', '').strip()
-        
-        if shipping_type:
-            if shipping_type.require_address:
-                setattr(self, 'require_address', True)
-                if len(address) == 0: 
-                    raise forms.ValidationError(ADDRESS_ERROR)
-            else:
-                setattr(self, 'require_address', False)
-
-        return address
