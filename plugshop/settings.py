@@ -6,6 +6,7 @@ MODELS = getattr(settings, 'PLUGSHOP_MODELS', {})
 FORMS = getattr(settings, 'PLUGSHOP_FORMS', {})
 CONFIG = getattr(settings, 'PLUGSHOP_CONFIG', {})
 OPTIONS = getattr(settings, 'PLUGSHOP_OPTIONS', {})
+MESSAGES = getattr(settings, 'PLUGSHOP_MESSAGES', {})
 
 PRODUCT_MODEL_DEFAULT = 'plugshop.models.product.Product'
 PRODUCT_MODEL = MODELS.get('PRODUCT', PRODUCT_MODEL_DEFAULT)
@@ -36,3 +37,5 @@ STATUS_CHOICES = OPTIONS.get('STATUS_CHOICES', (
                         ))
 STATUS_CHOICES_START = STATUS_CHOICES[0][0]
 STATUS_CHOICES_FINISH = STATUS_CHOICES[-1][0]
+
+MESSAGE_SUCCESS = MESSAGES.get('SUCCESS', 'Order created')

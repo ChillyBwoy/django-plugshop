@@ -5,7 +5,9 @@
 New order #{{order.number}}
 ===============================
 
+{% with order.user as user %}
 {{user.first_name}} {{user.last_name}} {{user.email}}
+{% endwith %}
 
 {% for item in cart %}
     Product: {{item.product.name}}

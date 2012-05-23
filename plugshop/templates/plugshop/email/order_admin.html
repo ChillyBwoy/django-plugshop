@@ -7,7 +7,9 @@
 </head>
 <body>
     <h1>New order <b>{{order.number}}</b></h1>
+    {% with order.user as user %}
     <h3>{{user.first_name}} {{user.last_name}} &lt;{{user.email}}&gt;</h3>
+    {% endwith %}
     <table border="0" cellspacing="5" cellpadding="5">
         <thead>
             <tr>

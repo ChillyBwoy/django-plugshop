@@ -1,0 +1,16 @@
+{% spaceless %}
+{% load i18n %}
+{% load pytils_numeral %}
+===============================
+Your order number is {{order.number}}
+===============================
+
+{% for item in cart %}
+    Product: {{item.product.name}}
+    Price: {{item.product.price}}
+    Quantity: {{item.quantity}}
+    Total: {{item.price_total}}
+{% endfor %}
+
+Total: {{total}}
+{% endspaceless %}

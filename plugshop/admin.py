@@ -26,6 +26,10 @@ class BaseProductAdmin(admin.ModelAdmin):
     list_filter = (
         'category',
     )
+    def changelist_view(self, request, extra_context=None):
+        context = {}
+        return super(BaseProductAdmin, self).changelist_view(request, 
+                                                        extra_context=context)
 
 if is_default_model('PRODUCT'):
     admin.site.register(load_class(settings.PRODUCT_MODEL), BaseProductAdmin)
@@ -38,8 +42,15 @@ class BaseCategoryAdmin(MPTTModelAdmin):
     }
     list_display = (
         'name',
+        'get_products',
         'slug',
     )
+
+    def get_products(self, instance):
+        return "<br/>".join(p.name for p in instance.products.all())
+    get_products.allow_tags = True
+    get_products.short_description = _('products')
+    
 if is_default_model('CATEGORY'):
     admin.site.register(load_class(settings.CATEGORY_MODEL), BaseCategoryAdmin)
 

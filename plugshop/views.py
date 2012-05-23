@@ -184,18 +184,18 @@ class OrderView(FormView):
         message_html = render_to_string('plugshop/email/order_admin.html', {
             'cart': cart,
             'order': order,
-            'user': user,
             'total': cart.price_total(),
         })
         message_text = render_to_string('plugshop/email/order_admin.txt', {
             'cart': cart,
             'order': order,
-            'user': user,
             'total': cart.price_total(),
         })
         mail_managers(_('New Order'), message_text, html_message=message_html)
         mail_admins(_('New Order'), message_text, html_message=message_html)
+
         messages.info(self.request, settings.MESSAGE_SUCCESS)
+
         cart.empty()
         
         return super(OrderView, self).form_valid(form)
