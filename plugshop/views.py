@@ -1,4 +1,5 @@
 # encoding: utf-8
+from django.db.models.query import QuerySet
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.shortcuts import get_object_or_404, redirect
 from django.http import Http404, HttpResponse
@@ -19,7 +20,7 @@ mail_admins
 
 from plugshop.utils import serialize_queryset
 from plugshop import settings
-from plugshop.utils import load_class, serialize_model
+from plugshop.utils import load_class, serialize_model, serialize_queryset
 from plugshop.forms import *
 from plugshop.cart import get_cart
 
@@ -94,6 +95,7 @@ class CartView(TemplateResponseMixin, View):
     def get_context_data(self, **kwargs):
         return {
             'cart': get_cart(self.request) or [],
+            'shipping_type': SHIPPING_TYPE_CLASS.objects.all(),
         }
 
     def extend_context(self, context):
@@ -107,6 +109,11 @@ class CartView(TemplateResponseMixin, View):
         context = self.get_context_data(**kwargs)
 
         if request.is_ajax():
+            
+            for k, v in context.items():
+                if isinstance(v, QuerySet):
+                    context[k] = serialize_queryset(v)
+
             context.update(
                 cart=cart.serialize(),
             )
@@ -155,8 +162,16 @@ class OrderSuccessView(DetailView):
 
 class OrderView(FormView):
     template_name = 'plugshop/order_form.html'
-    form_class = OrderForm
-    success_url = '/'
+    form_class = load_class(settings.ORDER_FORM)
+    success_url = settings.URL_SUCCESS
+    
+    def get_context_data(self, **kwargs):
+        context = super(OrderView, self).get_context_data(**kwargs)
+        context.update(
+            cart=get_cart(self.request) or [],
+            shipping_type=SHIPPING_TYPE_CLASS.objects.all(),
+        )
+        return context
 
     def get_initial(self, *args, **kwargs):
         cart = get_cart(self.request)

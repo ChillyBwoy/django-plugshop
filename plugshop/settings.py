@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 from django.conf import settings
 
 MODELS = getattr(settings, 'PLUGSHOP_MODELS', {})
+FORMS = getattr(settings, 'PLUGSHOP_FORMS', {})
 CONFIG = getattr(settings, 'PLUGSHOP_CONFIG', {})
 OPTIONS = getattr(settings, 'PLUGSHOP_OPTIONS', {})
 MESSAGES = getattr(settings, 'PLUGSHOP_MESSAGES', {})
@@ -25,6 +26,9 @@ ORDER_MODEL = MODELS.get('ORDER', ORDER_MODEL_DEFAULT)
 ORDER_PRODUCTS_MODEL_DEFAULT = 'plugshop.models.order_products.OrderProducts'
 ORDER_PRODUCTS_MODEL = MODELS.get('ORDER_PRODUCTS', 
                                     ORDER_PRODUCTS_MODEL_DEFAULT)
+
+ORDER_FORM_DEFAULT = 'plugshop.forms.OrderForm'
+ORDER_FORM = FORMS.get('ORDER', ORDER_FORM_DEFAULT)
 
 REQUEST_NAMESPACE = CONFIG.get('REQUEST_NAMESPACE', 'cart')
 SESSION_NAMESPACE = CONFIG.get('SESSION_NAMESPACE', 'cart')

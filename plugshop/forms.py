@@ -19,6 +19,7 @@ class ProductForm(forms.Form):
 
 
 class OrderForm(forms.Form):
+    
     name = forms.CharField(required=True, 
                                 error_messages={
                                     'required': NAME_ERROR
@@ -59,7 +60,7 @@ class OrderForm(forms.Form):
         cleaned_data = self.cleaned_data
         shipping_type = cleaned_data.get('shipping_type')
         address = cleaned_data.get('address', '').strip()
-
+        
         if shipping_type:
             if shipping_type.require_address:
                 if len(address) == 0: 
