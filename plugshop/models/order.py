@@ -24,6 +24,11 @@ class OrderAbstract(models.Model):
     updated_at = models.DateTimeField(_('updated at'), blank=True, null=True)
     delivered_at = models.DateTimeField(_('delivery date'), blank=True, 
                                         null=True)
+                                        
+    def get_price(self):
+        items = load_class(settings.ORDER_PRODUCTS_MODEL).objects.filter(
+                                                                    order=self)
+        return sum(item.quantity * item.product.price for item in items)
     
     def __unicode__(self):
         return str(self.pk)

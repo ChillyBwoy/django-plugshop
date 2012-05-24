@@ -38,7 +38,7 @@ class OrderForm(forms.ModelForm):
 
     def save(self, commit=True, **kwargs):
         cart = kwargs.get('cart')
-        
+
         user, created = User.objects.get_or_create(
             email = self.cleaned_data.get('email')
         )

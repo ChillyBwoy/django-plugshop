@@ -1,4 +1,5 @@
 # encoding: utf-8
+from django.conf import settings as django_settings
 from django.db.models.query import QuerySet
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.shortcuts import get_object_or_404, redirect
@@ -15,7 +16,7 @@ from django.contrib import messages
 
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
-from django.core.mail import EmailMultiAlternatives, mail_managers, \
+from django.core.mail import EmailMessage, mail_managers, \
 mail_admins
 
 from plugshop.utils import serialize_queryset
@@ -87,7 +88,6 @@ class CategoryView(DetailView):
             categories = categories
         )
         return context
-
 
 class CartView(TemplateResponseMixin, View):
     template_name = 'plugshop/cart.html'
@@ -176,28 +176,37 @@ class OrderView(FormView):
         cart = get_cart(self.request)
         form_kwargs = super(OrderView, self).get_form_kwargs()
         return form_kwargs
+    
+    def notify_managers(self, order):
+        cart = get_cart(self.request)
+        msg = render_to_string('plugshop/email/order_admin.html', {
+            'cart': cart,
+            'order': order,
+            'total': cart.price_total(),
+        })
+        mail_managers(_('New Order'), '', html_message=msg)
+        
+    def notify_customer(self, order):
+        cart = get_cart(self.request)
+        
+        msg = render_to_string('plugshop/email/order_user.html', {
+            'cart': cart,
+            'order': order,
+            'total': cart.price_total(),
+        })
+        mail = EmailMessage(_('New Order'), msg, django_settings.SERVER_EMAIL, [order.user.email])
+        mail.content_subtype = 'html'
+        mail.send()
 
     def form_valid(self, form):
         cart = get_cart(self.request)
-        form.save(cart=cart)
-
-        message_html = render_to_string('plugshop/email/order_admin.html', {
-            'cart': cart,
-            'order': order,
-            'total': cart.price_total(),
-        })
-        message_text = render_to_string('plugshop/email/order_admin.txt', {
-            'cart': cart,
-            'order': order,
-            'total': cart.price_total(),
-        })
-        mail_managers(_('New Order'), message_text, html_message=message_html)
-        mail_admins(_('New Order'), message_text, html_message=message_html)
+        order = form.save(cart=cart)
+        
+        self.notify_managers(order)
+        self.notify_customer(order)
 
         messages.info(self.request, settings.MESSAGE_SUCCESS)
-
         cart.empty()
-        
         return super(OrderView, self).form_valid(form)
 
     def form_invalid(self, form):

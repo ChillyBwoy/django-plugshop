@@ -21,6 +21,7 @@ class BaseProductAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'slug',
+        'price',
         #'category',
     )
     list_filter = (
