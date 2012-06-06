@@ -105,7 +105,7 @@ class CartView(TemplateResponseMixin, View):
         if request.is_ajax():
             context['cart'] = cart.serialize()
             return HttpResponse(json.dumps(context), 
-                                    content_type='application/json', **kwargs)
+                                content_type='application/json', **kwargs)
         else:
             context['form'] = ORDER_FORM_CLASS()
             if len(cart) == 0:
@@ -138,9 +138,12 @@ class CartView(TemplateResponseMixin, View):
 
                 else:
                     raise Http404
-
         cart.save()
-        return redirect('plugshop-cart')
+        if request.is_ajax():
+            return HttpResponse(json.dumps({'cart': cart.serialize()}), 
+                                content_type='application/json', **kwargs)
+        else:
+            return redirect('plugshop-cart')
 
 
 
