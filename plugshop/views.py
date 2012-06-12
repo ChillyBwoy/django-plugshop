@@ -104,10 +104,12 @@ class CartView(TemplateResponseMixin, View):
 
         if request.is_ajax():
             context['cart'] = cart.serialize()
+            context = self.extend_context_ajax(context)
             return HttpResponse(json.dumps(context), 
                                 content_type='application/json', **kwargs)
         else:
             context['form'] = ORDER_FORM_CLASS()
+            context = self.extend_context(context)
             if len(cart) == 0:
                 return redirect('plugshop-product-list')
             else:
