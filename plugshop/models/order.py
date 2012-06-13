@@ -20,10 +20,13 @@ class OrderAbstract(models.Model):
                                 choices=settings.STATUS_CHOICES, 
                                 default=settings.STATUS_CHOICES_START)
     created_at = models.DateTimeField(_('creation date'), blank=False, 
-                                        default=datetime.datetime.now)
-    updated_at = models.DateTimeField(_('updated at'), blank=True, null=True)
+                                        default=datetime.datetime.now,
+                                        editable=False)
+    updated_at = models.DateTimeField(_('updated at'), blank=True, null=True,
+                                        editable=False)
     delivered_at = models.DateTimeField(_('delivery date'), blank=True, 
-                                        null=True)
+                                        null=True,
+                                        editable=False)
                                         
     def get_price(self):
         items = load_class(settings.ORDER_PRODUCTS_MODEL).objects.filter(
