@@ -40,6 +40,7 @@ class OrderAbstract(models.Model):
 if is_default_model('ORDER'):
     class Order(OrderAbstract):
         class Meta:
+            ordering = ['-created_at']
             verbose_name = _('order')
             verbose_name_plural = _('orders')
             app_label = 'plugshop'

@@ -189,7 +189,7 @@ class OrderView(FormView):
             'order': order,
             'total': cart.price_total(),
         })
-        mail_managers(_('New Order'), '', html_message=msg)
+        mail_managers(settings.MESSAGE_NEW_ORDER_ADMIN, '', html_message=msg)
         
     def notify_customer(self, order):
         cart = get_cart(self.request)
@@ -199,7 +199,9 @@ class OrderView(FormView):
             'order': order,
             'total': cart.price_total(),
         })
-        mail = EmailMessage(_('New Order'), msg, django_settings.SERVER_EMAIL, [order.user.email])
+        mail = EmailMessage(settings.MESSAGE_NEW_ORDER_USER, msg, 
+                            django_settings.SERVER_EMAIL, 
+                            [order.user.email])
         mail.content_subtype = 'html'
         mail.send()
 

@@ -60,7 +60,13 @@ def generate_number(sender, instance, **kwargs):
                             created_at__month=today.month,
                             created_at__day=today.day
                         )
-        num = int("%s%s" % (today.strftime("%y%m%d"), len(today_orders) + 1))
+        today_max_num = today_orders.aggregate(models.Max('number'))
+        today_max_num = today_max_num['number__max']
+        if today_max_num is not None:
+            num = today_max_num + 1
+        else:
+            num = int("%s%s" % (today.strftime("%y%m%d"), 
+                                today_orders.count() + 1))
         instance.number = num
 
 post_save.connect(get_categories, sender=CATEGORY_CLASS)
