@@ -159,9 +159,12 @@ class OrderView(DetailView):
         number = self.kwargs.get('number', None)
         order = get_object_or_404(ORDER_CLASS, number=number)
         
-        for o in order.products.select_related().all():
-            print type(o)
-        
+        session_order = self.request.session.get('order', None)
+        if session_order is None:
+            raise Http404
+        elif order.id != session_order.id:
+            raise Http404
+
         return order
 
 class OrderCreateView(FormView):
@@ -234,6 +237,9 @@ class OrderCreateView(FormView):
 
         messages.info(self.request, settings.MESSAGE_SUCCESS)
         cart.empty()
+        
+        self.request.session['order'] = order
+        
         return redirect(order.get_absolute_url())
         #return super(OrderCreateView, self).form_valid(form)
 
