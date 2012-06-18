@@ -8,10 +8,12 @@ class OrderProductsAbstract(models.Model):
         verbose_name = _('order product')
         verbose_name_plural = _('order product')
 
-    quantity = models.PositiveIntegerField(_('quantity'), 
-                                            blank=False, 
-                                            null=False, 
-                                            default=1)
+    quantity = models.PositiveIntegerField(_('quantity'), blank=False, 
+                                            null=False, default=1)
+
+    def price(self):
+        return self.product.price * self.quantity
+    price.short_description = _('Total price')
 
 if is_default_model('ORDER_PRODUCTS'):
     class OrderProducts(OrderProductsAbstract):

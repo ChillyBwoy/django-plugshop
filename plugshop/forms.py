@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
+
 from plugshop import settings
 from plugshop.utils import load_class
 
@@ -49,7 +50,7 @@ class OrderForm(forms.ModelForm):
             user.last_name = self.cleaned_data.get('last_name', '')
             user.is_active = False
             user.save()
-        
+
         model = super(OrderForm, self).save(commit=False)
         model.user = user
 

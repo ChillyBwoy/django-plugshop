@@ -28,14 +28,15 @@ PRODUCT_CLASS.add_to_class('category', TreeForeignKey(CATEGORY_CLASS,
 
 ORDER_CLASS.add_to_class('products', models.ManyToManyField(PRODUCT_CLASS,
                                         through=ORDER_PRODUCTS_CLASS,
-                                        related_name="products",
+                                        related_name='products',
                                         verbose_name=_('products')))
 
 ORDER_CLASS.add_to_class('user', models.ForeignKey(User,
                                         verbose_name=_('user')))
 
 ORDER_PRODUCTS_CLASS.add_to_class('order', models.ForeignKey(ORDER_CLASS,
-                                        verbose_name=_('order')))
+                                        verbose_name=_('order'),
+                                        related_name='ordered_items'))
 
 ORDER_PRODUCTS_CLASS.add_to_class('product', models.ForeignKey(PRODUCT_CLASS, 
                                         verbose_name=_('product')))
@@ -60,13 +61,16 @@ def generate_number(sender, instance, **kwargs):
                             created_at__month=today.month,
                             created_at__day=today.day
                         )
-        today_max_num = today_orders.aggregate(models.Max('number'))
-        today_max_num = today_max_num['number__max']
-        if today_max_num is not None:
-            num = today_max_num + 1
-        else:
-            num = int("%s%s" % (today.strftime("%y%m%d"), 
-                                today_orders.count() + 1))
-        instance.number = num
+
+        today_orders_nums = [0]
+        for o in today_orders:
+            try:
+                num = o.number.split('-')[1]
+            except IndexError:
+                num = o.number[-1]
+            today_orders_nums.append(int(num))
+
+        num = max(today_orders_nums) + 1
+        instance.number = "%s-%s" % (today.strftime("%y%m%d"), num)
 
 post_save.connect(get_categories, sender=CATEGORY_CLASS)

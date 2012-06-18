@@ -28,7 +28,6 @@ REQUEST_NAMESPACE = CONFIG.get('REQUEST_NAMESPACE', 'cart')
 SESSION_NAMESPACE = CONFIG.get('SESSION_NAMESPACE', 'cart')
 URL_PREFIX = CONFIG.get('URL_PREFIX', '')
 
-URL_SUCCESS = OPTIONS.get('URL_SUCCESS', '/')
 STATUS_CHOICES = OPTIONS.get('STATUS_CHOICES', (
                             (1, _('Created')),
                             (2, _('Confirmed')),

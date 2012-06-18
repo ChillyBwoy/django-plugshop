@@ -71,12 +71,10 @@ class BaseOrderAdmin(admin.ModelAdmin):
         'number',
         'user',
         'status',
+        'price_total',
         'created_at',
         'updated_at',
         'delivered_at',
-    )
-    list_editable = (
-        'status',
     )
     list_filter = (
         'status', 

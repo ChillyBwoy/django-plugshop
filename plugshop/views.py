@@ -99,7 +99,7 @@ class CartView(TemplateResponseMixin, View):
         return context
     
     def get(self, request, **kwargs):
-        cart = request.cart
+        cart = get_cart(request)
         context = {}
 
         if request.is_ajax():
@@ -149,21 +149,41 @@ class CartView(TemplateResponseMixin, View):
 
 
 
-class OrderSuccessView(DetailView):
-    template_name = 'plugshop/order_success.html'
+class OrderView(DetailView):
+    model = ORDER_CLASS
+    context_object_name = 'order'
+    template_name = 'plugshop/order_detail.html'
 
+    def get_object(self, *args, **kwargs):
+        user = self.request.user
+        number = self.kwargs.get('number', None)
+        order = get_object_or_404(ORDER_CLASS, number=number)
+        
+        for o in order.products.select_related().all():
+            print type(o)
+        
+        return order
 
-class OrderView(FormView):
+class OrderCreateView(FormView):
     template_name = 'plugshop/order_form.html'
     form_class = ORDER_FORM_CLASS
-    success_url = settings.URL_SUCCESS
+    
+    def get_success_url(self):
+        return '/'
     
     def get_context_data(self, **kwargs):
-        context = super(OrderView, self).get_context_data(**kwargs)
+        context = super(OrderCreateView, self).get_context_data(**kwargs)
         return context
         
     def get_form(self, form_class):
         return form_class(**self.get_form_kwargs())
+        
+    def get(self, request, **kwargs):
+        cart = get_cart(request)
+        if len(cart) == 0:
+            return redirect('plugshop-product-list')
+        else:
+            return super(OrderCreateView, self).get(request, **kwargs)
 
     def get_initial(self, *args, **kwargs):
         cart = get_cart(self.request)
@@ -179,7 +199,7 @@ class OrderView(FormView):
 
     def get_form_kwargs(self):
         cart = get_cart(self.request)
-        form_kwargs = super(OrderView, self).get_form_kwargs()
+        form_kwargs = super(OrderCreateView, self).get_form_kwargs()
         return form_kwargs
     
     def notify_managers(self, order):
@@ -214,7 +234,8 @@ class OrderView(FormView):
 
         messages.info(self.request, settings.MESSAGE_SUCCESS)
         cart.empty()
-        return super(OrderView, self).form_valid(form)
+        return redirect(order.get_absolute_url())
+        #return super(OrderCreateView, self).form_valid(form)
 
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form))

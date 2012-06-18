@@ -14,8 +14,8 @@ class OrderAbstract(models.Model):
         verbose_name = _('order')
         verbose_name_plural = _('orders')
     
-    number = models.IntegerField(_('order number'), unique=True, 
-                                editable=False)
+    number = models.CharField(_('order number'), unique=True, blank=False, 
+                                null=False, max_length=10, editable=False)
     status = models.IntegerField(_('order status'), blank=False, 
                                 choices=settings.STATUS_CHOICES, 
                                 default=settings.STATUS_CHOICES_START)
@@ -28,13 +28,18 @@ class OrderAbstract(models.Model):
                                         null=True,
                                         editable=False)
                                         
-    def get_price(self):
+    def price_total(self):
         items = load_class(settings.ORDER_PRODUCTS_MODEL).objects.filter(
                                                                     order=self)
         return sum(item.quantity * item.product.price for item in items)
+    price_total.short_description = _('Total price')
     
     def __unicode__(self):
         return str(self.pk)
+        
+    @models.permalink
+    def get_absolute_url(self):
+        return ('plugshop-order', None, {'number': self.number})
 
 
 if is_default_model('ORDER'):

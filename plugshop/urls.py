@@ -9,12 +9,13 @@ from plugshop.exceptions import NoUrlFound
 PREFIX = settings.URL_PREFIX
 
 urlpatterns = patterns('plugshop.views',
-    url(r"^$", ProductListView.as_view(), 
-            name='plugshop-product-list'),
-    url(r"^cart/$", CartView.as_view(), 
-            name="plugshop-cart"),
-    url(r"^order/$", OrderView.as_view(), 
-            name="plugshop-order"),
+    url(r"^$", ProductListView.as_view(), name='plugshop-product-list'),
+    url(r"^cart/$", CartView.as_view(), name="plugshop-cart"),
+    
+    url(r"^order/(?P<number>[\-\/\w]+)$", OrderView.as_view(), 
+        name="plugshop-order"),
+    url(r"^order/$", OrderCreateView.as_view(), name="plugshop-order-new"),
+    
     url(r"^(?P<category_path>[\-\/\w]+)/$", CategoryView.as_view(), 
             name='plugshop-category'),
     url(r"^(?P<category_path>[\-\/\w]+)/(?P<slug>[\-\/\w]+)$", 
