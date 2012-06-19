@@ -204,6 +204,12 @@ class OrderCreateView(FormView):
         cart = get_cart(self.request)
         form_kwargs = super(OrderCreateView, self).get_form_kwargs()
         return form_kwargs
+        
+    def get_admin_mail_title(self, order):
+        return settings.MESSAGE_NEW_ORDER_ADMIN
+    
+    def get_customer_mail_title(self, order):
+        return settings.MESSAGE_NEW_ORDER_USER
     
     def notify_managers(self, order):
         cart = get_cart(self.request)
@@ -212,7 +218,7 @@ class OrderCreateView(FormView):
             'order': order,
             'total': cart.price_total(),
         })
-        mail_managers(settings.MESSAGE_NEW_ORDER_ADMIN, '', html_message=msg)
+        mail_managers(self.get_admin_mail_title(order), '', html_message=msg)
         
     def notify_customer(self, order):
         cart = get_cart(self.request)
@@ -222,7 +228,7 @@ class OrderCreateView(FormView):
             'order': order,
             'total': cart.price_total(),
         })
-        mail = EmailMessage(settings.MESSAGE_NEW_ORDER_USER, msg, 
+        mail = EmailMessage(self.get_customer_mail_title(order), msg, 
                             django_settings.SERVER_EMAIL, 
                             [order.user.email])
         mail.content_subtype = 'html'

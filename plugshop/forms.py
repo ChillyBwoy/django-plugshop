@@ -70,8 +70,8 @@ class OrderForm(forms.ModelForm):
         if len(name):
             n = name.split()
             if len(n) > 1:
-                self.cleaned_data['first_name'] = n[0]
-                self.cleaned_data['last_name']  = n[1]
+                self.cleaned_data['first_name'] = " ".join(n[1:])
+                self.cleaned_data['last_name']  = n[0]
             else:
                 self.cleaned_data['first_name'] = name
                 self.cleaned_data['last_name'] = ''
