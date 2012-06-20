@@ -71,7 +71,7 @@ class CategoryListView(ListView):
 class CategoryView(DetailView):
     model = CATEGORY_CLASS
     context_object_name = 'category'
-    template_name = 'plugshop/product_list.html'
+    template_name = 'plugshop/category_detail.html'
 
     def get_object(self, *args, **kwargs):
         path = self.kwargs.get('category_path', None)
