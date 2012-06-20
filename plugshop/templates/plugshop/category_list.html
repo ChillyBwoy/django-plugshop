@@ -1,0 +1,16 @@
+{% extends 'plugshop/base.html' %}
+{% load mptt_tags %}
+
+{% block content %}    
+    <h2>Categories</h2>
+    {% spaceless %}
+    <ul>
+        {% recursetree categories %}
+            <li>
+                <a href="{{ node.get_absolute_url }}">{{node.name}}</a>
+                {% if not node.is_leaf_node %}<ul>{{ children }}</ul>{% endif %}
+            </li>
+        {% endrecursetree %}
+    </ul>
+    {% endspaceless %}
+{% endblock content %}

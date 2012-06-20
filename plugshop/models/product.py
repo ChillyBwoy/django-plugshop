@@ -23,7 +23,7 @@ class ProductAbstract(models.Model):
             category_path = category.get_path()
         except IndexError:
             category_path = "-"
-
+        
         return ('plugshop-product', None, {
             'category_path': category_path,
             'slug': self.slug,

@@ -63,6 +63,11 @@ class ProductView(DetailView):
         return context
 
 
+class CategoryListView(ListView):
+    model = CATEGORY_CLASS
+    context_object_name = 'categories'
+    template_name = 'plugshop/category_list.html'
+
 class CategoryView(DetailView):
     model = CATEGORY_CLASS
     context_object_name = 'category'
