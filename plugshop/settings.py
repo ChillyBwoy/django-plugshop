@@ -1,4 +1,4 @@
-#encoding: utf-8
+# encoding: utf-8
 from django.utils.translation import ugettext as _
 from django.conf import settings
 

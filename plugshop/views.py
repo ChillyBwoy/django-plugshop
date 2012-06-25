@@ -179,7 +179,7 @@ class OrderView(DetailView):
             del self.request.session['order']
         except KeyError:
             pass
-        
+
         return result
 
     def get_object(self, *args, **kwargs):
