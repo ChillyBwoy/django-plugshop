@@ -158,18 +158,34 @@ class OrderView(DetailView):
     model = ORDER_CLASS
     context_object_name = 'order'
     template_name = 'plugshop/order_detail.html'
+    
+    def get(self, request, **kwargs):
+        result = super(OrderView, self).get(request, **kwargs)
+        ctx = self.get_context_data(**kwargs)
+        
+        order = ctx.get('order', None)
+        session_order = self.request.session.get('order', None)
+        
+        if order is None:
+            raise Http404
+
+        if session_order is None:
+            return redirect('plugshop-product-list')
+
+        if order.id != session_order.id:
+            raise Http404
+            
+        try:
+            del self.request.session['order']
+        except KeyError:
+            pass
+        
+        return result
 
     def get_object(self, *args, **kwargs):
         user = self.request.user
         number = self.kwargs.get('number', None)
         order = get_object_or_404(ORDER_CLASS, number=number)
-        
-        session_order = self.request.session.get('order', None)
-        if session_order is None:
-            raise Http404
-        elif order.id != session_order.id:
-            raise Http404
-
         return order
 
 class OrderCreateView(FormView):
