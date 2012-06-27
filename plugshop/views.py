@@ -175,10 +175,10 @@ class OrderView(DetailView):
         if order.id != session_order.id:
             raise Http404
             
-        try:
-            del self.request.session['order']
-        except KeyError:
-            pass
+        # try:
+        #     del self.request.session['order']
+        # except KeyError:
+        #     pass
 
         return result
 
@@ -256,7 +256,11 @@ class OrderCreateView(FormView):
         mail.send()
 
     def form_valid(self, form):
+        from plugshop.signals import order_create
+        
         cart = get_cart(self.request)
+        if len(cart) == 0:
+            raise Http404
         order = form.save(cart=cart)
         
         self.notify_managers(order)
@@ -266,6 +270,8 @@ class OrderCreateView(FormView):
         cart.empty()
         
         self.request.session['order'] = order
+        
+        order_create.send(sender=self, order=order, request=self.request)
         
         return redirect(order.get_absolute_url())
         #return super(OrderCreateView, self).form_valid(form)

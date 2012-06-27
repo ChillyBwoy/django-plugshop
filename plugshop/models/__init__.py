@@ -2,6 +2,7 @@ import datetime
 from django.utils.translation import ugettext as _
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 from plugshop import settings
 from plugshop.utils import load_class, get_categories
@@ -55,22 +56,24 @@ def set_updated(sender, instance, **kwargs):
 @receiver(pre_save, sender=ORDER_CLASS)
 def generate_number(sender, instance, **kwargs):
     if instance.id is None:
-        today = datetime.datetime.now()
-        today_orders = ORDER_CLASS.objects.filter(
-                            created_at__year=today.year,
-                            created_at__month=today.month,
-                            created_at__day=today.day
-                        )
+        
+        now = datetime.datetime.now()
+        hour_from = datetime.datetime(now.year, now.month, now.day, now.hour)
+        hour_till = hour_from + datetime.timedelta(hours=1)
+
+        today_orders = ORDER_CLASS.objects.filter(Q(created_at__gte=hour_from),
+                            Q(created_at__lt=hour_till))
 
         today_orders_nums = [0]
         for o in today_orders:
+            
+            num = str(o.number)[8:]
             try:
-                num = o.number.split('-')[1]
-            except IndexError:
-                num = o.number[-1]
-            today_orders_nums.append(int(num))
+                today_orders_nums.append(int(num))
+            except ValueError:
+                today_orders_nums.append(max(today_orders_nums))
 
         num = max(today_orders_nums) + 1
-        instance.number = "%s-%s" % (today.strftime("%y%m%d"), num)
+        instance.number = "%s%s" % (now.strftime("%y%m%d%H"), num)
 
 post_save.connect(get_categories, sender=CATEGORY_CLASS)
