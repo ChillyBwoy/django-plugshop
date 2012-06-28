@@ -116,7 +116,7 @@ class CartView(TemplateResponseMixin, View):
             context['form'] = ORDER_FORM_CLASS()
             context = self.extend_context(context)
             if len(cart) == 0:
-                return redirect('plugshop-product-list')
+                return redirect('plugshop')
             else:
                 return self.render_to_response(context)
 
@@ -170,15 +170,15 @@ class OrderView(DetailView):
             raise Http404
 
         if session_order is None:
-            return redirect('plugshop-product-list')
+            return redirect('plugshop')
 
         if order.id != session_order.id:
             raise Http404
             
-        # try:
-        #     del self.request.session['order']
-        # except KeyError:
-        #     pass
+        try:
+            del self.request.session['order']
+        except KeyError:
+            pass
 
         return result
 
@@ -205,7 +205,7 @@ class OrderCreateView(FormView):
     def get(self, request, **kwargs):
         cart = get_cart(request)
         if len(cart) == 0:
-            return redirect('plugshop-product-list')
+            return redirect('plugshop')
         else:
             return super(OrderCreateView, self).get(request, **kwargs)
 
