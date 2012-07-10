@@ -134,6 +134,6 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 PLUGSHOP_MODELS = {
-    'PRODUCT': 'testshop.shop.models.Product',
-    'CATEGORY': 'testshop.shop.models.Category',
+    'PRODUCT': 'shop.Product',
+    'CATEGORY': 'shop.Category',
 }

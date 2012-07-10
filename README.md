@@ -44,10 +44,10 @@ Configuration
 Models:
 
         PLUGSHOP_MODELS = {
-            'PRODUCT': 'plugshop.models.product.Product',
-            'CATEGORY': 'plugshop.models.category.Category',
-            'ORDER': 'plugshop.models.order.Order',
-            'ORDER_PRODUCTS': 'plugshop.models.order_products.OrderProducts',
+            'PRODUCT': 'plugshop.Product',
+            'CATEGORY': 'plugshop.Category',
+            'ORDER': 'plugshop.Order',
+            'ORDER_PRODUCTS': 'plugshop.OrderProducts',
         }
 
 Config:
