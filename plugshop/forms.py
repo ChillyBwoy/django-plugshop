@@ -3,11 +3,11 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 
 from plugshop import settings
-from plugshop.utils import load_class
+from plugshop.utils import load_class, get_model
 
-PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
-ORDER_CLASS = load_class(settings.ORDER_MODEL)
-ORDER_PRODUCTS_CLASS = load_class(settings.ORDER_PRODUCTS_MODEL)
+PRODUCT_CLASS = get_model(settings.PRODUCT_MODEL)
+ORDER_CLASS = get_model(settings.ORDER_MODEL)
+ORDER_PRODUCTS_CLASS = get_model(settings.ORDER_PRODUCTS_MODEL)
 NAME_ERROR = _('Name is required')
 EMAIL_ERROR = _('Invalid email address')
 EMAIL_ERROR_EXISTS = _("Email address '%s' already exits, must be unique")

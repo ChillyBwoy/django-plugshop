@@ -4,12 +4,13 @@ import plugshop.utils as utils
 from django.contrib import admin
 from django.utils.translation import ugettext as _
 
+
 from mptt.admin import MPTTModelAdmin
 
 from plugshop import settings
 from plugshop.utils import load_class
 from plugshop.models import *
-from plugshop.utils import is_default_model
+from plugshop.utils import is_default_model, get_model
 
 class BaseProductAdmin(admin.ModelAdmin):
     #change_list_template = 'admin/product/change_list.html'
@@ -33,7 +34,7 @@ class BaseProductAdmin(admin.ModelAdmin):
                                                         extra_context=context)
 
 if is_default_model('PRODUCT'):
-    admin.site.register(load_class(settings.PRODUCT_MODEL), BaseProductAdmin)
+    admin.site.register(get_model(settings.PRODUCT_MODEL), BaseProductAdmin)
 
 class BaseCategoryAdmin(MPTTModelAdmin):
     change_list_template = 'admin/category/change_list.html'
@@ -53,12 +54,13 @@ class BaseCategoryAdmin(MPTTModelAdmin):
     get_products.short_description = _('products')
     
 if is_default_model('CATEGORY'):
-    admin.site.register(load_class(settings.CATEGORY_MODEL), BaseCategoryAdmin)
+    admin.site.register(get_model(settings.CATEGORY_MODEL), 
+                                    BaseCategoryAdmin)
 
 
 
 class BaseOrderProductsInline(admin.TabularInline):
-    model = load_class(settings.ORDER_PRODUCTS_MODEL)
+    model = get_model(settings.ORDER_PRODUCTS_MODEL)
     extra = 0
 
 class BaseOrderAdmin(admin.ModelAdmin):
@@ -81,4 +83,4 @@ class BaseOrderAdmin(admin.ModelAdmin):
         'created_at',
     )
 if is_default_model('ORDER'):
-    admin.site.register(load_class(settings.ORDER_MODEL), BaseOrderAdmin)
+    admin.site.register(get_model(settings.ORDER_MODEL), BaseOrderAdmin)

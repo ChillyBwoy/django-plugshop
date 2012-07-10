@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from plugshop import settings
 from plugshop.utils import is_default_model
 
 class OrderProductsAbstract(models.Model):
@@ -10,6 +11,10 @@ class OrderProductsAbstract(models.Model):
 
     quantity = models.PositiveIntegerField(_('quantity'), blank=False, 
                                             null=False, default=1)
+    order = models.ForeignKey(settings.ORDER_MODEL, verbose_name=_('order'),
+                                related_name='ordered_items')
+    product = models.ForeignKey(settings.PRODUCT_MODEL, 
+                                verbose_name=_('product'))
 
     def price(self):
         return self.product.price * self.quantity

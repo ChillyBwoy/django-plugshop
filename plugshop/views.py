@@ -1,34 +1,28 @@
 # encoding: utf-8
 from django.conf import settings as django_settings
-from django.db.models.query import QuerySet
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.shortcuts import get_object_or_404, redirect
 from django.http import Http404, HttpResponse
 from django.utils.translation import ugettext as _
-from django.utils.decorators import method_decorator
-from django.core import serializers
 from django.views.generic import View, TemplateView, ListView, DetailView,\
 CreateView, FormView
 from django.views.generic.base import TemplateResponseMixin
 from django.utils import simplejson as json
 from django.contrib.auth.models import User
 from django.contrib import messages
-
-from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage, mail_managers, \
 mail_admins
 
-from plugshop.utils import serialize_queryset
 from plugshop import settings
-from plugshop.utils import load_class, serialize_model, serialize_queryset
+from plugshop.utils import load_class, serialize_model, serialize_queryset,\
+get_model
 from plugshop.forms import *
 from plugshop.cart import get_cart
 
-PRODUCT_CLASS = load_class(settings.PRODUCT_MODEL)
-CATEGORY_CLASS = load_class(settings.CATEGORY_MODEL)
-ORDER_CLASS = load_class(settings.ORDER_MODEL)
-ORDER_PRODUCTS_CLASS = load_class(settings.ORDER_PRODUCTS_MODEL)
+PRODUCT_CLASS = get_model(settings.PRODUCT_MODEL)
+CATEGORY_CLASS = get_model(settings.CATEGORY_MODEL)
+ORDER_CLASS = get_model(settings.ORDER_MODEL)
+ORDER_PRODUCTS_CLASS = get_model(settings.ORDER_PRODUCTS_MODEL)
 
 ORDER_FORM_CLASS = load_class(settings.ORDER_FORM)
 

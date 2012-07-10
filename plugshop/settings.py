@@ -8,16 +8,16 @@ CONFIG = getattr(settings, 'PLUGSHOP_CONFIG', {})
 OPTIONS = getattr(settings, 'PLUGSHOP_OPTIONS', {})
 MESSAGES = getattr(settings, 'PLUGSHOP_MESSAGES', {})
 
-PRODUCT_MODEL_DEFAULT = 'plugshop.models.product.Product'
+PRODUCT_MODEL_DEFAULT = 'plugshop.Product'
 PRODUCT_MODEL = MODELS.get('PRODUCT', PRODUCT_MODEL_DEFAULT)
 
-CATEGORY_MODEL_DEFAULT = 'plugshop.models.category.Category'
+CATEGORY_MODEL_DEFAULT = 'plugshop.Category'
 CATEGORY_MODEL = MODELS.get('CATEGORY', CATEGORY_MODEL_DEFAULT)
 
-ORDER_MODEL_DEFAULT = 'plugshop.models.order.Order'
+ORDER_MODEL_DEFAULT = 'plugshop.Order'
 ORDER_MODEL = MODELS.get('ORDER', ORDER_MODEL_DEFAULT)
                 
-ORDER_PRODUCTS_MODEL_DEFAULT = 'plugshop.models.order_products.OrderProducts'
+ORDER_PRODUCTS_MODEL_DEFAULT = 'plugshop.OrderProducts'
 ORDER_PRODUCTS_MODEL = MODELS.get('ORDER_PRODUCTS', 
                                     ORDER_PRODUCTS_MODEL_DEFAULT)
 

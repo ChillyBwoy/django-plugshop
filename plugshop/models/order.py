@@ -1,11 +1,10 @@
 import datetime
 from django.db import models
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 from django.utils.translation import ugettext as _
+from django.contrib.auth.models import User
 
 from plugshop import settings
-from plugshop.utils import load_class, is_default_model
+from plugshop.utils import load_class, is_default_model, get_model
 
 class OrderAbstract(models.Model):
 
@@ -13,7 +12,9 @@ class OrderAbstract(models.Model):
         abstract = True
         verbose_name = _('order')
         verbose_name_plural = _('orders')
-    
+        
+    user = models.ForeignKey(User, related_name='orders', 
+                                    verbose_name=_('user'))
     number = models.CharField(_('order number'), unique=True, blank=False, 
                                 null=False, max_length=10, editable=False)
     status = models.IntegerField(_('order status'), blank=False, 
@@ -27,9 +28,14 @@ class OrderAbstract(models.Model):
     delivered_at = models.DateTimeField(_('delivery date'), blank=True, 
                                         null=True,
                                         editable=False)
+    products = models.ManyToManyField(settings.PRODUCT_MODEL,
+                                        through=settings.ORDER_PRODUCTS_MODEL,
+                                        related_name='products',
+                                        verbose_name=_('products'))
+
                                         
     def price_total(self):
-        items = load_class(settings.ORDER_PRODUCTS_MODEL).objects.filter(
+        items = get_model(settings.ORDER_PRODUCTS_MODEL).objects.filter(
                                                                     order=self)
         return sum(item.quantity * item.product.price for item in items)
     price_total.short_description = _('Total price')
