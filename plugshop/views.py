@@ -233,7 +233,11 @@ class OrderCreateView(FormView):
             'order': order,
             'total': cart.price_total(),
         })
-        mail_managers(self.get_admin_mail_title(order), '', html_message=msg)
+        try:
+            mail_managers(self.get_admin_mail_title(order), '', html_message=msg)
+        except Exception:
+            pass
+
         
     def notify_customer(self, order):
         cart = get_cart(self.request)
@@ -247,7 +251,10 @@ class OrderCreateView(FormView):
                             django_settings.SERVER_EMAIL, 
                             [order.user.email])
         mail.content_subtype = 'html'
-        mail.send()
+        try:
+            mail.send()
+        except Exception:
+            pass
 
     def form_valid(self, form):
         from plugshop.signals import order_create
