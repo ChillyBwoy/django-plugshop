@@ -26,12 +26,12 @@ class HasProduct(template.Node):
 def plusghop_has_product(parser, token, *args, **kwargs):
     return HasProduct(parser, token)
 
-@register.filter
 def plugshop_currency(value):
     if value is None: return ""
 
     v = str(value)[::-1]
     return " ".join([v[i:i+3][::-1] for i in xrange(0, len(v), 3) ][::-1])
+register.filter('plugshop_currency', plugshop_currency)
 
 @register.inclusion_tag('plugshop/tags/action.html')
 def plugshop_action(product, action, quantity=1):
