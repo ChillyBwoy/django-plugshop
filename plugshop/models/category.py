@@ -13,10 +13,7 @@ class CategoryAbstractManager(TreeManager):
     def get_by_path(self, path):
         path_patterns = path.split('/')
         slug = path_patterns[-1]
-        try:
-            return self.get(slug=slug)
-        except ObjectDoesNotExist:
-            raise load_class(settings.CATEGORY_MODEL).DoesNotExist
+        return self.get(slug=slug)
 
 class CategoryAbstract(MPTTModel):
 
