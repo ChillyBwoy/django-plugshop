@@ -2,6 +2,8 @@ import os
 from setuptools import setup, find_packages
 import plugshop 
 
+# python setup.py bdist_egg sdist upload
+
 setup(
     author = "Eugene Cheltsov",
     author_email = "chill.icp@gmail.com",
@@ -12,7 +14,8 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Topic :: Software Development :: Libraries :: Application Frameworks',
+        'Topic :: Software Development :: Libraries :: Application Frameworks\
+:: E-commerce',
     ],
     description = ("A small shop for Django Framework"),
     download_url='',
@@ -22,7 +25,8 @@ setup(
         'django-mptt>=0.5.2',
     ),
     keywords = "plugshop",
-    long_description = open(os.path.join(os.path.dirname(__file__), 'README.md')).read(),
+    long_description = open(os.path.join(os.path.dirname(__file__), 
+                            'README.md')).read(),
     license = "BSD",
     name = "django-plugshop",
     packages = find_packages(exclude=['testshop']),

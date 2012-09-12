@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from plugshop import settings
 from plugshop.utils import is_default_model
 
@@ -10,9 +10,9 @@ class OrderProductsAbstract(models.Model):
         verbose_name_plural = _('order product')
 
     quantity = models.PositiveIntegerField(_('quantity'), blank=False, 
-                                            null=False, default=1)
+                                           null=False, default=1)
     order = models.ForeignKey(settings.ORDER_MODEL, verbose_name=_('order'),
-                                related_name='ordered_items')
+                              related_name='ordered_items')
     product = models.ForeignKey(settings.PRODUCT_MODEL, 
                                 verbose_name=_('product'))
 

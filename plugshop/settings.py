@@ -1,5 +1,5 @@
 # encoding: utf-8
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
 MODELS = getattr(settings, 'PLUGSHOP_MODELS', {})
@@ -19,7 +19,7 @@ ORDER_MODEL = MODELS.get('ORDER', ORDER_MODEL_DEFAULT)
                 
 ORDER_PRODUCTS_MODEL_DEFAULT = 'plugshop.OrderProducts'
 ORDER_PRODUCTS_MODEL = MODELS.get('ORDER_PRODUCTS', 
-                                    ORDER_PRODUCTS_MODEL_DEFAULT)
+                                  ORDER_PRODUCTS_MODEL_DEFAULT)
 
 ORDER_FORM_DEFAULT = 'plugshop.forms.OrderForm'
 ORDER_FORM = FORMS.get('ORDER', ORDER_FORM_DEFAULT)

@@ -3,6 +3,15 @@
     <h2>Cart:</h2>
     {% if request.cart|length %}
     <table border="0" cellspacing="5" cellpadding="5">
+        <thead>
+            <tr>
+                <th>item</th>
+                <th>quantity</th>
+                <th>price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for cart_item in request.cart %}
             <tr>
                 <td>
@@ -36,9 +45,11 @@
                 </td>
             </tr>
         {% endfor %}
+        </tbody>
     </table>
     <div>
-        Total: {{cart.price_total}}
+        <p>Total: {{request.cart.price_total}}</p>
+        <p><a href="{% url plugshop-order-new %}">checkout</a></p>
     </div>
     {% endif %}
     <form action="{% url plugshop-cart %}" method="post">{% csrf_token %}
@@ -47,4 +58,5 @@
             <input type="submit" value="empty">
         </p>
     </form>
+    
 </div>

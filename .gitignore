@@ -1,9 +1,7 @@
 .DS_Store
 *.pyc
 *.sqlite
+*.json
 build
 dist
 *egg-info*
-
-build.sh
-pip.req
