@@ -6,8 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
 
-from plugshop import settings
-from plugshop.utils import load_class, get_categories, is_default_model
+from plugshop.utils import get_categories, is_default_model
 
 class CategoryAbstractManager(TreeManager):
     def get_by_path(self, path):
@@ -15,21 +14,23 @@ class CategoryAbstractManager(TreeManager):
         slug = path_patterns[-1]
         return self.get(slug=slug)
 
+
 class CategoryAbstract(MPTTModel):
 
     objects = CategoryAbstractManager()
 
     class Meta:
         abstract = True
-        verbose_name = _('category')
-        verbose_name_plural = _('categories')
+        verbose_name = _(u'category')
+        verbose_name_plural = _(u'categories')
 
     class MPTTMeta:
         ordering = ['pk', 'lft']
 
-    parent = TreeForeignKey('self', null=True, blank=True)
-    name = models.CharField(_('name'), blank=False, max_length=80)
-    slug = models.SlugField(_('slug'), blank=False, unique=True)
+    parent = TreeForeignKey('self', null=True, blank=True, 
+                            verbose_name=_(u'parent node'))
+    name = models.CharField(_(u'name'), blank=False, max_length=80)
+    slug = models.SlugField(_(u'slug'), blank=False, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -52,8 +53,10 @@ class CategoryAbstract(MPTTModel):
 
 
 if is_default_model('CATEGORY'):
+
     class Category(CategoryAbstract):
+
         class Meta:
-            verbose_name = _('category')
-            verbose_name_plural = _('categories')
+            verbose_name = _(u'category')
+            verbose_name_plural = _(u'categories')
             app_label = 'plugshop'

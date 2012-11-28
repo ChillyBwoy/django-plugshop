@@ -5,11 +5,14 @@ from django.utils.translation import ugettext as _
 
 from plugshop.models import ProductAbstract, CategoryAbstract
 
+
 class Product(ProductAbstract):
-    description = models.TextField(blank=True)
-    created_at = models.DateTimeField(blank=True, null=True, 
-                                                default=datetime.datetime.now)
-    sort = models.PositiveIntegerField(blank=True, null=True, default=1)
+
+    description = models.TextField(_(u'description'), blank=True)
+    created_at = models.DateTimeField(_(u'created at'), auto_now_add=True)
+    sort = models.PositiveIntegerField(_(u'sort'), default=1)
+
 
 class Category(CategoryAbstract):
-    description = models.TextField(blank=True)
+
+    description = models.TextField(_(u'description'), blank=True)
