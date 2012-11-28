@@ -1,5 +1,5 @@
 from django import forms
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
 from plugshop import settings
@@ -26,24 +26,20 @@ class OrderForm(forms.ModelForm):
             'status',
             'created_at',
             'updated_at',
-            'delivered_at',
             'user',
             'products',
         )
 
     name = forms.CharField(required=True, error_messages={
-                                            'required': NAME_ERROR
-                                        })
+                           'required': NAME_ERROR})
     email = forms.EmailField(required=True, error_messages={
-                                            'required': EMAIL_ERROR
-                                        })
+                             'required': EMAIL_ERROR})
 
     def save(self, commit=True, **kwargs):
         cart = kwargs.get('cart')
 
         user, created = User.objects.get_or_create(
-            email = self.cleaned_data.get('email')
-        )
+                                        email=self.cleaned_data.get('email'))
         if created:
             user.username = self.cleaned_data.get('email')
             user.email = self.cleaned_data.get('email')
@@ -61,8 +57,7 @@ class OrderForm(forms.ModelForm):
                 ORDER_PRODUCTS_CLASS.objects.create(
                     product=c.product,
                     quantity=c.quantity,
-                    order=model
-                )
+                    order=model)
                 
         return model
 

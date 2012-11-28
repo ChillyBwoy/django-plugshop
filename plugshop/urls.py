@@ -1,6 +1,6 @@
 # encoding: utf-8
 from django.conf.urls import patterns, url
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from plugshop import settings
 from plugshop.views import *
@@ -37,4 +37,3 @@ def get_url(name):
         raise NoUrlFound(_("No url with name '%s'" % name))
 
     return pattern._regex
-        

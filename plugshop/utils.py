@@ -6,7 +6,8 @@ from django.core.cache import cache
 from django.db.models.loading import get_model as django_get_model
 
 def get_model(path):
-    return django_get_model(*path.split('.'))
+    model = django_get_model(*path.split('.'))
+    return model
 
 def load_class(path):
     module_path, class_name = path.rsplit('.', 1)
@@ -17,7 +18,7 @@ def load_class(path):
 def is_default_model(name):
     model = getattr(settings, "%s_MODEL" % name, None)
     default_model = getattr(settings, "%s_MODEL_DEFAULT" % name, None)
-
+    
     if model is not None and default_model is not None:
         return model == default_model
     else:
@@ -39,5 +40,3 @@ def get_categories(*args, **kwargs):
         categories = get_model(settings.CATEGORY_MODEL).objects.all()
         cache.set('plugshop_categories', categories)
     return categories
-
-

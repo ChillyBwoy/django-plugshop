@@ -1,6 +1,6 @@
 import datetime
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
 from plugshop import settings
@@ -12,7 +12,7 @@ class OrderAbstract(models.Model):
         abstract = True
         verbose_name = _('order')
         verbose_name_plural = _('orders')
-        
+
     user = models.ForeignKey(User, related_name='orders', 
                              verbose_name=_('user'))
     number = models.CharField(_('order number'), unique=True, blank=False, 
@@ -29,6 +29,9 @@ class OrderAbstract(models.Model):
                                       related_name='products',
                                       verbose_name=_('products'))
 
+    def price_total(self):
+        model = get_model(settings.ORDER_PRODUCTS_MODEL)
+        items = model.objects.filter(order=self)
 
     def price_total(self):
         model = get_model(settings.ORDER_PRODUCTS_MODEL)

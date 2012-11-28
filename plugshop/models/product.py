@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from plugshop import settings
 from plugshop.utils import is_default_model, get_categories
@@ -12,8 +12,8 @@ class ProductAbstract(models.Model):
         verbose_name_plural = _('products')
         
     category = TreeForeignKey(settings.CATEGORY_MODEL, blank=True, null=True,
-                                verbose_name=_('category'),
-                                related_name='products')
+                              verbose_name=_('category'),
+                              related_name='products')
     name = models.CharField(_('name'), blank=False, max_length=200)
     slug = models.SlugField(_('slug'), blank=False, unique=True)
     price = models.PositiveIntegerField(_('price'), blank=False)

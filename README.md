@@ -37,12 +37,14 @@ Installation
 * Override default models. Example:
         
         PLUGSHOP_MODELS = {
-            'PRODUCT': 'testshop.myshop.models.Product',
-            'CATEGORY': 'testshop.myshop.models.Category',
+            'PRODUCT': 'myshop.Product',
+            'CATEGORY': 'myshop.Category',
+            'ORDER': 'myshop.Order',
         }
-    
+
 * Run `python manage.py syncdb`
 
+* Profit!
 
 Configuration
 =============
@@ -50,18 +52,24 @@ Configuration
 Models:
 
         PLUGSHOP_MODELS = {
-            'PRODUCT': 'plugshop.models.product.Product',
-            'CATEGORY': 'plugshop.models.category.Category',
-            'ORDER': 'plugshop.models.order.Order',
-            'ORDER_PRODUCTS': 'plugshop.models.order_products.OrderProducts',
+            'PRODUCT': 'plugshop.Product',
+            'CATEGORY': 'plugshop.Category',
+            'ORDER': 'plugshop.Order',
+            'ORDER_PRODUCTS': 'plugshop.OrderProducts',
+        }
+        
+Forms:
+        
+        PLUGSHOP_FORMS = {
+            'ORDER': 'plugshop.forms.OrderForm',
         }
 
 Config:
     
-    
         PLUGSHOP_CONFIG = {
             'REQUEST_NAMESPACE': 'cart',
             'SESSION_NAMESPACE': 'cart',
+            'URL_PREFIX': 'shop/',
         }
 
 Other options:
@@ -72,7 +80,8 @@ Other options:
                 (1, _('Created')),
                 (2, _('Confirmed')),
                 (3, _('Denied')),
-                (4, _('Delivered')),
+                (4, _('Shipped')),
+                (5, _('Completed')),
             ),
         }
     
@@ -84,7 +93,7 @@ Cart
             cart = request.cart
     
 Or
-    
+
         #settings.py
         PLUGSHOP_CONFIG = {
             ...

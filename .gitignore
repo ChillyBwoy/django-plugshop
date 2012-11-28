@@ -5,6 +5,3 @@
 build
 dist
 *egg-info*
-
-build.sh
-pip.req

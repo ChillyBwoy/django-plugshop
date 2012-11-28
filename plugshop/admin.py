@@ -2,7 +2,7 @@
 import plugshop.utils as utils
 
 from django.contrib import admin
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from mptt.admin import MPTTModelAdmin
 
@@ -52,7 +52,6 @@ class BaseCategoryAdmin(MPTTModelAdmin):
     get_products.allow_tags = True
     get_products.short_description = _(u'products')
 
-
 if is_default_model('CATEGORY'):
     admin.site.register(get_model(settings.CATEGORY_MODEL), BaseCategoryAdmin)
 
@@ -75,7 +74,6 @@ class BaseOrderAdmin(admin.ModelAdmin):
         'price_total',
         'created_at',
         'updated_at',
-        'delivered_at',
     )
     list_filter = (
         'status', 

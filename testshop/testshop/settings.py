@@ -10,8 +10,11 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, "../../"))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+
 ADMINS = (
-    #('Your Name', 'your_email@example.com'),
+    ('Your Name', 'your_email@example.com'),
 )
 INTERNAL_IPS = ('127.0.0.1',)
 
@@ -30,7 +33,7 @@ LANGUAGE_CODE = 'en-en'
 SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+USE_TZ = False
 
 MEDIA_ROOT = ''
 MEDIA_URL = ''
@@ -134,6 +137,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 PLUGSHOP_MODELS = {
-    'PRODUCT': 'testshop.shop.models.Product',
-    'CATEGORY': 'testshop.shop.models.Category',
+    'PRODUCT': 'shop.Product',
+    'CATEGORY': 'shop.Category',
+    'ORDER': 'shop.Order',
 }

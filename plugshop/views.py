@@ -2,7 +2,7 @@
 from django.conf import settings as django_settings
 from django.shortcuts import get_object_or_404, redirect
 from django.http import Http404, HttpResponse
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View, TemplateView, ListView, DetailView,\
 CreateView, FormView
 from django.views.generic.base import TemplateResponseMixin
@@ -10,8 +10,7 @@ from django.utils import simplejson as json
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.template.loader import render_to_string
-from django.core.mail import EmailMessage, mail_managers, \
-mail_admins
+from django.core.mail import EmailMessage, mail_managers, mail_admins
 
 from plugshop import settings
 from plugshop.utils import load_class, serialize_model, serialize_queryset,\
@@ -61,6 +60,7 @@ class CategoryListView(ListView):
     model = CATEGORY_CLASS
     context_object_name = 'categories'
     template_name = 'plugshop/category_list.html'
+
 
 class CategoryView(DetailView):
     model = CATEGORY_CLASS
@@ -212,7 +212,6 @@ class OrderCreateView(FormView):
                 'name': "%s %s" % (user.first_name, user.last_name),
                 'email': user.email
             })
-
         return initial
 
     def get_form_kwargs(self):
@@ -233,12 +232,9 @@ class OrderCreateView(FormView):
             'order': order,
             'total': cart.price_total(),
         })
-        try:
-            mail_managers(self.get_admin_mail_title(order), '', html_message=msg)
-        except Exception:
-            pass
+        mail_managers(self.get_admin_mail_title(order), '', 
+                      html_message=msg)
 
-        
     def notify_customer(self, order):
         cart = get_cart(self.request)
         
@@ -248,13 +244,9 @@ class OrderCreateView(FormView):
             'total': cart.price_total(),
         })
         mail = EmailMessage(self.get_customer_mail_title(order), msg, 
-                            django_settings.SERVER_EMAIL, 
-                            [order.user.email])
+                            django_settings.SERVER_EMAIL, [order.user.email])
         mail.content_subtype = 'html'
-        try:
-            mail.send()
-        except Exception:
-            pass
+        mail.send()
 
     def form_valid(self, form):
         from plugshop.signals import order_create
