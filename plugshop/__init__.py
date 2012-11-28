@@ -1,5 +1,3 @@
-__version__ = '0.4.0'
-
 import datetime
 from django.db.models import Q
 

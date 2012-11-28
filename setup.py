@@ -1,6 +1,5 @@
 import os
 from setuptools import setup, find_packages
-import plugshop 
 
 # python setup.py bdist_egg sdist upload
 
@@ -32,6 +31,6 @@ setup(
     packages = find_packages(exclude=['testshop']),
     platforms = ['OS Independent'],
     url = "https://github.com/ChillyBwoy/django-plugshop",
-    version = plugshop.__version__,
+    version = '0.4.0',
     zip_safe = False
 )
