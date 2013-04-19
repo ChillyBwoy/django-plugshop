@@ -31,6 +31,6 @@ setup(
     packages = find_packages(exclude=['testshop']),
     platforms = ['OS Independent'],
     url = "https://github.com/ChillyBwoy/django-plugshop",
-    version = '0.4.0.1',
+    version = '0.4.0.2',
     zip_safe = False
 )
