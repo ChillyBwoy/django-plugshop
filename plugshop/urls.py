@@ -34,6 +34,6 @@ def get_url(name):
     try:
         pattern = patterns[0]
     except IndexError:
-        raise NoUrlFound(_("No url with name '%s'" % name))
+        raise NoUrlFound(_("No url with name '%s'") % name)
 
     return pattern._regex
