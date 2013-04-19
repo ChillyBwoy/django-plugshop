@@ -13,8 +13,8 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Topic :: Software Development :: Libraries :: Application Frameworks\
-:: E-commerce',
+        'Topic :: Office/Business :: Financial :: Point-Of-Sale',
+        'Topic :: Software Development :: Libraries :: Application Frameworks',
     ],
     description = ("A small shop for Django Framework"),
     download_url='',
