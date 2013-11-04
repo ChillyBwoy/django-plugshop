@@ -1,6 +1,8 @@
 Django Plugshop
 ===============
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ChillyBwoy/django-plugshop/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 A set of useless abstract models
 
 Requirements
