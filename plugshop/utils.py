@@ -40,11 +40,3 @@ def serialize_model(instance):
 
 def serialize_queryset(queryset):
     return [serialize_model(item) for item in queryset]
-
-
-def get_categories(*args, **kwargs):
-    categories = cache.get('plugshop_categories')
-    if categories is None:
-        categories = get_model(settings.CATEGORY_MODEL).objects.all()
-        cache.set('plugshop_categories', categories)
-    return categories

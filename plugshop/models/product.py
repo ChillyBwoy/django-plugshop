@@ -26,8 +26,7 @@ class ProductAbstract(models.Model):
     @models.permalink
     def get_absolute_url(self):
         category = self.category
-        
-        return ('plugshop-product', None, {
+        return ('plugshop:product', None, {
             'category_slug': category.slug,
             'slug': self.slug,
         })

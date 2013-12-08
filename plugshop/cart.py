@@ -7,6 +7,10 @@ from plugshop.utils import serialize_model
 from plugshop.signals import cart_append, cart_remove, cart_empty, cart_save
 
 
+class CartStorage(object):
+    pass
+
+
 class CartItem(object):
 
     def __init__(self, product, price=0, quantity=1):
@@ -21,12 +25,12 @@ class CartItem(object):
 
 class Cart(object):
 
-    def __init__(self, request, name):
-        self.request = request
+    def __init__(self, storage, name):
+        self.storage = storage
         self.name = name
         self.goods = []
 
-        for item, price, quantity in request.session.get(self.name, []):
+        for item, price, quantity in storage.get(self.name, []):
             self.append(item, price, quantity, stop_signal=True)
 
     def __iter__(self):
@@ -49,7 +53,7 @@ class Cart(object):
         return self._get_product(product) or False
 
     def save(self, stop_signal=False):
-        self.request.session[self.name] = tuple(
+        self.storage[self.name] = tuple(
             (item.product, item.price, item.quantity) for item in self.goods)
         if not stop_signal:
             cart_save.send(sender=self)

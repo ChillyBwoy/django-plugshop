@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.signals import post_save
 
-from plugshop.utils import get_categories, is_default_model
+from plugshop.utils import is_default_model
 
 
 class CategoryAbstract(models.Model):
