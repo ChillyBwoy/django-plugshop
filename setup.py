@@ -20,8 +20,7 @@ setup(
     download_url='',
     include_package_data = True,
     install_requires = (
-        'Django>=1.4',
-        'django-mptt>=0.5.2',
+        'Django>=1.5',
     ),
     keywords = "plugshop",
     long_description = open(os.path.join(os.path.dirname(__file__), 

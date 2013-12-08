@@ -25,6 +25,7 @@ ORDER_PRODUCTS_CLASS = get_model(settings.ORDER_PRODUCTS_MODEL)
 
 ORDER_FORM_CLASS = load_class(settings.ORDER_FORM)
 
+
 class ProductListView(ListView):
     context_object_name = 'products'
     template_name = 'plugshop/product_list.html'
@@ -37,6 +38,7 @@ class ProductListView(ListView):
             categories = categories
         )
         return context
+
 
 class ProductView(DetailView):
     model = PRODUCT_CLASS
@@ -87,6 +89,7 @@ class CategoryView(DetailView):
             categories = categories
         )
         return context
+
 
 class CartView(TemplateResponseMixin, View):
     template_name = 'plugshop/cart.html'
@@ -182,6 +185,7 @@ class OrderView(DetailView):
         order = get_object_or_404(ORDER_CLASS, number=number)
         return order
 
+
 class OrderCreateView(FormView):
     template_name = 'plugshop/order_form.html'
     form_class = ORDER_FORM_CLASS
@@ -218,35 +222,6 @@ class OrderCreateView(FormView):
         cart = get_cart(self.request)
         form_kwargs = super(OrderCreateView, self).get_form_kwargs()
         return form_kwargs
-        
-    def get_admin_mail_title(self, order):
-        return settings.MESSAGE_NEW_ORDER_ADMIN
-    
-    def get_customer_mail_title(self, order):
-        return settings.MESSAGE_NEW_ORDER_USER
-    
-    def notify_managers(self, order):
-        cart = get_cart(self.request)
-        msg = render_to_string('plugshop/email/order_admin.html', {
-            'cart': cart,
-            'order': order,
-            'total': cart.price_total(),
-        })
-        mail_managers(self.get_admin_mail_title(order), '', 
-                      html_message=msg)
-
-    def notify_customer(self, order):
-        cart = get_cart(self.request)
-        
-        msg = render_to_string('plugshop/email/order_user.html', {
-            'cart': cart,
-            'order': order,
-            'total': cart.price_total(),
-        })
-        mail = EmailMessage(self.get_customer_mail_title(order), msg, 
-                            django_settings.SERVER_EMAIL, [order.user.email])
-        mail.content_subtype = 'html'
-        mail.send()
 
     def form_valid(self, form):
         from plugshop.signals import order_create
@@ -255,19 +230,11 @@ class OrderCreateView(FormView):
         if len(cart) == 0:
             raise Http404
         order = form.save(cart=cart)
-        
-        self.notify_managers(order)
-        self.notify_customer(order)
-
-        messages.info(self.request, settings.MESSAGE_SUCCESS)
         cart.empty()
-        
         self.request.session['order'] = order
-        
+
         order_create.send(sender=self, order=order, request=self.request)
-        
         return redirect(order.get_absolute_url())
-        #return super(OrderCreateView, self).form_valid(form)
 
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form))

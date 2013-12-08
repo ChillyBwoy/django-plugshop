@@ -10,30 +10,19 @@ PREFIX = settings.URL_PREFIX
 
 urlpatterns = patterns('plugshop.views',
     url(r'^$', ProductListView.as_view(), name='plugshop'),
-    url(r'^products/$', ProductListView.as_view(), name='plugshop-product-list'),
-    
+    url(r'^products/$', ProductListView.as_view(), name='products'),
+
     #categories
-    url(r'^categories/$', CategoryListView.as_view(), 
-        name='plugshop-caterory-list'),
-    url(r'^products/(?P<category_path>[\-\/\w]+)/$', CategoryView.as_view(), 
-        name='plugshop-category'),
-        
+    url(r'^categories/$', CategoryListView.as_view(), name='categories'),
+    url(r'^products/(?P<category_path>[\-\/\w]+)/$', 
+        CategoryView.as_view(), name='category'),
+
     #products
-    url(r'^products/(?P<category_path>[\-\/\w]+)/(?P<slug>[\-\/\w]+)$', 
-        ProductView.as_view(), 
-        name='plugshop-product'),
+    url(r'^products/(?P<category_slug>[\-\/\w]+)/(?P<slug>[\-\/\w]+)$', 
+        ProductView.as_view(), name='product'),
         
-    url(r'^cart/$', CartView.as_view(), name='plugshop-cart'),
-    url(r'^order/(?P<number>[\-\/\w]+)$', OrderView.as_view(), 
-        name='plugshop-order'),
-    url(r'^order/$', OrderCreateView.as_view(), name='plugshop-order-new'),
+    url(r'^cart/$', CartView.as_view(), name='cart'),
+    url(r'^order/(?P<number>[\-\/\w]+)$', 
+        OrderView.as_view(), name='order'),
+    url(r'^order/$', OrderCreateView.as_view(), name='order-new'),
 )
-
-def get_url(name):
-    patterns = filter(lambda x: x.name == name, urlpatterns)
-    try:
-        pattern = patterns[0]
-    except IndexError:
-        raise NoUrlFound(_("No url with name '%s'") % name)
-
-    return pattern._regex

@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
+
 from django import forms
+from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
 
 from plugshop import settings
 from plugshop.utils import get_model
+
 
 PRODUCT_CLASS = get_model(settings.PRODUCT_MODEL)
 ORDER_CLASS = get_model(settings.ORDER_MODEL)
@@ -11,6 +14,7 @@ ORDER_PRODUCTS_CLASS = get_model(settings.ORDER_PRODUCTS_MODEL)
 NAME_ERROR = _(u'Name is required')
 EMAIL_ERROR = _(u'Invalid email address')
 EMAIL_ERROR_EXISTS = _(u"Email address '%s' already exits, must be unique")
+
 
 class ProductForm(forms.Form):
     product = forms.ModelChoiceField(queryset=PRODUCT_CLASS.objects)
@@ -36,8 +40,8 @@ class OrderForm(forms.ModelForm):
                              'required': EMAIL_ERROR})
 
     def save(self, commit=True, **kwargs):
+        User = get_user_model()
         cart = kwargs.get('cart')
-
         user, created = User.objects.get_or_create(
                                         email=self.cleaned_data.get('email'))
         if created:

@@ -100,7 +100,6 @@ INSTALLED_APPS = (
     
     'django.contrib.admin',
     
-    'mptt',
     'debug_toolbar',
     'plugshop',
     

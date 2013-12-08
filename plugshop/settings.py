@@ -1,4 +1,5 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
+
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
@@ -37,7 +38,3 @@ STATUS_CHOICES = OPTIONS.get('STATUS_CHOICES', (
                         ))
 STATUS_CHOICES_START = STATUS_CHOICES[0][0]
 STATUS_CHOICES_FINISH = STATUS_CHOICES[-1][0]
-
-MESSAGE_SUCCESS = MESSAGES.get('SUCCESS', 'Order created')
-MESSAGE_NEW_ORDER_USER = MESSAGES.get('NEW_ORDER_USER', 'New Order')
-MESSAGE_NEW_ORDER_ADMIN = MESSAGES.get('NEW_ORDER_ADMIN', 'New Order')

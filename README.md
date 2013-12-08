@@ -9,7 +9,6 @@ Requirements
 ============
 
 1. [django](https://github.com/django/django/) 1.4 or greater
-2. [django-mptt](https://github.com/django-mptt/django-mptt/)
 
 Installation
 ============
