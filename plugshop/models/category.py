@@ -12,7 +12,7 @@ class CategoryAbstract(models.Model):
 
     name = models.CharField(_(u'name'), max_length=140)
     slug = models.SlugField(_(u'slug'), unique=True)
-    
+
     class Meta:
         abstract = True
         verbose_name = _(u'category')
@@ -26,8 +26,7 @@ class CategoryAbstract(models.Model):
         return ('plugshop:category', None, {'slug': self.slug})
 
 
-
-if is_default_model('CATEGORY'):
+if is_default_model('Category'):
 
     class Category(CategoryAbstract):
 

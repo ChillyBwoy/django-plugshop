@@ -39,7 +39,7 @@ if is_default_model('CATEGORY'):
 
 
 class BaseOrderProductsInline(admin.TabularInline):
-    model = get_model(settings.ORDER_PRODUCTS_MODEL)
+    model = get_model(settings.ORDERPRODUCTS_MODEL)
     extra = 0
 
 

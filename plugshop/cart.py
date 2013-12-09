@@ -31,7 +31,7 @@ class Cart(object):
         self.goods = []
 
         for item, price, quantity in storage.get(self.name, []):
-            self.append(item, price, quantity, stop_signal=True)
+            self.append(item, price, quantity)
 
     def __iter__(self):
         return iter(self.goods)
@@ -41,7 +41,7 @@ class Cart(object):
         
     def total(self):
         return (sum(c.quantity for c in self.goods), 
-                sum(p.price_total for p in self.goods))
+                sum(p.price for p in self.goods))
 
     def _get_product(self, product):
         try:
@@ -52,41 +52,22 @@ class Cart(object):
     def has_product(self, product):
         return self._get_product(product) or False
 
-    def save(self, stop_signal=False):
+    def save(self):
         self.storage[self.name] = tuple(
             (item.product, item.price, item.quantity) for item in self.goods)
-        if not stop_signal:
-            cart_save.send(sender=self)
     
-    def append(self, product, price=0, quantity=1, stop_signal=False):
+    def add(self, product, price=0, quantity=1):
         item = self._get_product(product)
         if item:
             self.goods[self.index(item)].quantity += quantity
-        else:
-            super(Cart, self).append(item)
-        
-        if not stop_signal:
-            cart_append.send(sender=self, item=item or product, 
-                                price=price, quantity=quantity)
     
-    def remove(self, product, quantity=None, **kwargs):
+    def remove(self, product, quantity=None):
         item = self._get_product(product)
-        if item:
-            if quantity:
-                if item.quantity > quantity:
-                    self[self.index(item)].quantity -= quantity
-                else:
-                    super(Cart, self).remove(item)
-            else:
-                super(Cart, self).remove(item)
+        if item and quantity and item.quantity > quantity:
+            self[self.index(item)].quantity -= quantity
 
-        if not kwargs.get('stop_signal', None):
-            cart_remove.send(sender=self, item=item, quantity=quantity)
-
-    def empty(self, stop_signal=False):
+    def empty(self):
         self.goods = []
-        if not stop_signal:
-            cart_empty.send(sender=self)
     
     # def serialize(self):
     #     data = {

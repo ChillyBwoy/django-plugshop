@@ -22,8 +22,8 @@ def load_class(path):
 
 
 def is_default_model(name):
-    model = getattr(settings, "%s_MODEL" % name, None)
-    default_model = getattr(settings, "%s_MODEL_DEFAULT" % name, None)
+    model = getattr(settings, "%s_MODEL" % name.upper(), None)
+    default_model = getattr(settings, "%s_MODEL_DEFAULT" % name.upper(), None)
     
     if model is not None and default_model is not None:
         return model == default_model

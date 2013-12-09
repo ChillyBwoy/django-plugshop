@@ -35,7 +35,6 @@ class ProductAbstract(models.Model):
 if is_default_model('PRODUCT'):
 
     class Product(ProductAbstract):
-
         class Meta:
             app_label = 'plugshop'
             verbose_name  = _('product')
