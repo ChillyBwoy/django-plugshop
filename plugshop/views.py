@@ -1,27 +1,25 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
+
 from django.conf import settings as django_settings
-from django.shortcuts import get_object_or_404, redirect
 from django.http import Http404, HttpResponse
-from django.utils.translation import ugettext_lazy as _
-from django.views.generic import View, TemplateView, ListView, DetailView,\
-CreateView, FormView
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import (View, TemplateView, ListView, DetailView, 
+                                    CreateView, FormView)
 from django.views.generic.base import TemplateResponseMixin
 from django.utils import simplejson as json
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage, mail_managers, mail_admins
+from django.utils.translation import ugettext_lazy as _
 
 from plugshop import settings
-from plugshop.utils import load_class, serialize_model, serialize_queryset,\
-get_model
-from plugshop.forms import *
 from plugshop.cart import get_cart
+from plugshop.forms import *
+from plugshop.utils import (load_class, serialize_model, serialize_queryset, 
+                            get_model)
+
 
 PRODUCT_CLASS = get_model(settings.PRODUCT_MODEL)
 CATEGORY_CLASS = get_model(settings.CATEGORY_MODEL)
 ORDER_CLASS = get_model(settings.ORDER_MODEL)
-ORDER_PRODUCTS_CLASS = get_model(settings.ORDER_PRODUCTS_MODEL)
+ORDERPRODUCT_CLASS = get_model(settings.ORDERPRODUCT_MODEL)
 
 ORDER_FORM_CLASS = load_class(settings.ORDER_FORM)
 
@@ -192,10 +190,6 @@ class OrderCreateView(FormView):
     
     def get_success_url(self):
         return '/'
-    
-    def get_context_data(self, **kwargs):
-        context = super(OrderCreateView, self).get_context_data(**kwargs)
-        return context
         
     def get_form(self, form_class):
         return form_class(**self.get_form_kwargs())

@@ -10,7 +10,7 @@ from plugshop.utils import get_model
 
 PRODUCT_CLASS = get_model(settings.PRODUCT_MODEL)
 ORDER_CLASS = get_model(settings.ORDER_MODEL)
-ORDER_PRODUCTS_CLASS = get_model(settings.ORDER_PRODUCTS_MODEL)
+ORDERPRODUCT_CLASS = get_model(settings.ORDERPRODUCT_MODEL)
 NAME_ERROR = _(u'Name is required')
 EMAIL_ERROR = _(u'Invalid email address')
 EMAIL_ERROR_EXISTS = _(u"Email address '%s' already exits, must be unique")
@@ -58,11 +58,10 @@ class OrderForm(forms.ModelForm):
         if commit:
             model.save()
             for c in cart:
-                ORDER_PRODUCTS_CLASS.objects.create(
+                ORDERPRODUCT_CLASS.objects.create(
                     product=c.product,
                     quantity=c.quantity,
                     order=model)
-                
         return model
 
     def clean_name(self):

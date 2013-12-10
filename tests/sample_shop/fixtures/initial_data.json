@@ -1,163 +1,103 @@
 [
   {
     "pk": 1,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 8,
       "name": "Books",
-      "parent": null,
-      "level": 0,
-      "lft": 1,
-      "tree_id": 1,
       "slug": "books"
     }
   },
   {
     "pk": 5,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 3,
       "name": "Textbooks",
-      "parent": 1,
-      "level": 1,
-      "lft": 2,
-      "tree_id": 1,
       "slug": "textbooks"
     }
   },
   {
     "pk": 6,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 5,
       "name": "Audiobooks",
-      "parent": 1,
-      "level": 1,
-      "lft": 4,
-      "tree_id": 1,
       "slug": "audiobooks"
     }
   },
   {
     "pk": 7,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 7,
       "name": "Magazines",
-      "parent": 1,
-      "level": 1,
-      "lft": 6,
-      "tree_id": 1,
       "slug": "magazines"
     }
   },
   {
     "pk": 2,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 8,
       "name": "Electronics",
-      "parent": null,
-      "level": 0,
-      "lft": 1,
-      "tree_id": 2,
       "slug": "electronics"
     }
   },
   {
     "pk": 8,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 3,
       "name": "Video Games",
-      "parent": 2,
-      "level": 1,
-      "lft": 2,
-      "tree_id": 2,
       "slug": "video-games"
     }
   },
   {
     "pk": 9,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 5,
       "name": "Car Electronics",
-      "parent": 2,
-      "level": 1,
-      "lft": 4,
-      "tree_id": 2,
       "slug": "car-electronics"
     }
   },
   {
     "pk": 10,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 7,
       "name": "Musical Instruments",
-      "parent": 2,
-      "level": 1,
-      "lft": 6,
-      "tree_id": 2,
       "slug": "musical-instruments"
     }
   },
   {
     "pk": 4,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 8,
       "name": "Sports",
-      "parent": null,
-      "level": 0,
-      "lft": 1,
-      "tree_id": 4,
       "slug": "sports"
     }
   },
   {
     "pk": 11,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 3,
       "name": "Fitness",
-      "parent": 4,
-      "level": 1,
-      "lft": 2,
-      "tree_id": 4,
       "slug": "fitness"
     }
   },
   {
     "pk": 12,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 5,
       "name": "Bikes",
-      "parent": 4,
-      "level": 1,
-      "lft": 4,
-      "tree_id": 4,
       "slug": "bikes"
     }
   },
   {
     "pk": 13,
-    "model": "shop.category",
+    "model": "plugshop.category",
     "fields": {
-      "rght": 7,
       "name": "Snowboards",
-      "parent": 4,
-      "level": 1,
-      "lft": 6,
-      "tree_id": 4,
       "slug": "snowboards"
     }
   },
   {
     "pk": 1,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 5,
       "price": 15,
@@ -167,7 +107,7 @@
   },
   {
     "pk": 2,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 5,
       "price": 20,
@@ -177,7 +117,7 @@
   },
   {
     "pk": 3,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 5,
       "price": 35,
@@ -187,7 +127,7 @@
   },
   {
     "pk": 4,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 6,
       "price": 25,
@@ -197,7 +137,7 @@
   },
   {
     "pk": 5,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 6,
       "price": 18,
@@ -207,7 +147,7 @@
   },
   {
     "pk": 6,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 7,
       "price": 20,
@@ -217,7 +157,7 @@
   },
   {
     "pk": 7,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 8,
       "price": 40,
@@ -227,7 +167,7 @@
   },
   {
     "pk": 8,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 8,
       "price": 360,
@@ -237,7 +177,7 @@
   },
   {
     "pk": 9,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 8,
       "price": 50,
@@ -247,7 +187,7 @@
   },
   {
     "pk": 10,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 9,
       "price": 130,
@@ -257,7 +197,7 @@
   },
   {
     "pk": 11,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 11,
       "price": 170,
@@ -267,7 +207,7 @@
   },
   {
     "pk": 12,
-    "model": "shop.product",
+    "model": "sample_shop.product",
     "fields": {
       "category": 10,
       "price": 300,

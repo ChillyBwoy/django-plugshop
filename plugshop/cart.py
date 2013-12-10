@@ -1,89 +1,84 @@
 # -*- coding: utf-8 -*-
 
+from collections import namedtuple
 from django.utils import simplejson as json
 
 from plugshop import settings
 from plugshop.utils import serialize_model
-from plugshop.signals import cart_append, cart_remove, cart_empty, cart_save
+from plugshop.signals import cart_add, cart_remove, cart_empty, cart_save
 
 
-class CartStorage(object):
-    pass
+CartItem = namedtuple('CartItem', ['product', 'price', 'quantity'])
 
-
-class CartItem(object):
-
-    def __init__(self, product, price=0, quantity=1):
-        self._product = product
-        self._price = price
-        self._quantity = quantity
-
-    @property
-    def price(self):
-        return self._price * self._quantity
 
 
 class Cart(object):
 
     def __init__(self, storage, name):
-        self.storage = storage
-        self.name = name
-        self.goods = []
-
-        for item, price, quantity in storage.get(self.name, []):
-            self.append(item, price, quantity)
+        self._storage = storage
+        self._name = name
+        self._goods = []
+        self.restore()
 
     def __iter__(self):
-        return iter(self.goods)
+        return iter(self._goods)
 
     def __len__(self): 
-        return len(self.goods)
+        return len(self._goods)
         
-    def total(self):
-        return (sum(c.quantity for c in self.goods), 
-                sum(p.price for p in self.goods))
-
     def _get_product(self, product):
         try:
-            return filter(lambda x: x.product.pk == product.pk, self.goods)[0]
+            return [p for p in self._goods if p.product is product][0]
         except IndexError:
             return None
+
+    def add(self, product, price=0, quantity=1, **kwargs):
+        item = self._get_product(product)
+        if item:
+            index = self._goods.index(item)
+            cart_item = self._goods[index]
+            self._goods[index] = CartItem(cart_item.product, cart_item.price, 
+                                            cart_item.quantity + quantity)
+        else:
+            self._goods.append(CartItem(product, price, quantity))
+        if not kwargs.pop('stop_signal', False):
+            cart_add.send(sender=self, item=item or product, price=price, 
+                            quantity=quantity)
+    
+    @property
+    def total_quantity(self):
+        return sum(p.quantity for p in self._goods)
+
+    @property
+    def total_price(self):
+        return sum(p.price * p.quantity for p in self._goods)
 
     def has_product(self, product):
         return self._get_product(product) or False
 
     def save(self):
-        self.storage[self.name] = tuple(
-            (item.product, item.price, item.quantity) for item in self.goods)
-    
-    def add(self, product, price=0, quantity=1):
+        self._storage[self._name] = tuple((item.product, item.price, 
+                                        item.quantity) for item in self._goods)
+        return self._storage
+        
+    def restore(self):
+        for item, price, quantity in self._storage.get(self._name, []):
+            self.add(item, price, quantity, stop_signal=True)
+
+    def remove(self, product, quantity=0):
         item = self._get_product(product)
         if item:
-            self.goods[self.index(item)].quantity += quantity
-    
-    def remove(self, product, quantity=None):
-        item = self._get_product(product)
-        if item and quantity and item.quantity > quantity:
-            self[self.index(item)].quantity -= quantity
+            if quantity and item.quantity > quantity:
+                index = self._goods.index(item)
+                cart_item = self._goods[index]
+                self._goods[index] = CartItem(cart_item.product, 
+                                            cart_item.price, 
+                                            cart_item.quantity - quantity)
+            else:
+                self._goods.remove(item)
 
     def empty(self):
-        self.goods = []
-    
-    # def serialize(self):
-    #     data = {
-    #         'products': self.get_products(),
-    #         'price_total': self.price_total(),
-    #         'goods_total': len(self)
-    #     }
-    #     return data
-    # 
-    # def get_products(self):
-    # 
-    #     return [{'product': serialize_model(item.product),
-    #             'price': item.price,
-    #             'price_total': item.price_total(),
-    #             'quantity': item.quantity} for item in self.goods]
-
+        self._goods = []
 
 def get_cart(request):
     return getattr(request, settings.REQUEST_NAMESPACE, None)
