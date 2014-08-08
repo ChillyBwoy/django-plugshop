@@ -3,9 +3,8 @@
 from django.conf import settings as django_settings
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import (View, TemplateView, ListView, DetailView, 
+from django.views.generic import (TemplateView, ListView, DetailView, 
                                     CreateView, FormView)
-from django.views.generic.base import TemplateResponseMixin
 from django.utils import simplejson as json
 from django.utils.translation import ugettext_lazy as _
 
@@ -29,31 +28,11 @@ class ProductListView(ListView):
     template_name = 'plugshop/product_list.html'
     model = PRODUCT_CLASS
 
-    def get_context_data(self, **kwargs):
-        context = super(ProductListView, self).get_context_data(**kwargs)
-        categories = CATEGORY_CLASS.objects.all()
-        context.update(
-            categories = categories
-        )
-        return context
-
 
 class ProductView(DetailView):
     model = PRODUCT_CLASS
     context_object_name = 'product'
     template_name = 'plugshop/product_detail.html'
-    
-    def get_object(self, *args, **kwargs):
-        slug = self.kwargs.get('slug', None)
-        return get_object_or_404(PRODUCT_CLASS, slug=slug)
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(ProductView, self).get_context_data(**kwargs)
-        product = context.get('product')
-        context.update(
-            category=product.category
-        )
-        return context
 
 
 class CategoryListView(ListView):
@@ -67,29 +46,8 @@ class CategoryView(DetailView):
     context_object_name = 'category'
     template_name = 'plugshop/category_detail.html'
 
-    def get_object(self, *args, **kwargs):
-        path = self.kwargs.get('category_path', None)
-        try:
-            return CATEGORY_CLASS.objects.get_by_path(path)
-        except CATEGORY_CLASS.DoesNotExist:
-            raise Http404
 
-    def get_context_data(self, **kwargs):
-        context = super(CategoryView, self).get_context_data(**kwargs)
-        category = context.get('category')
-        
-        category_list = [category] + list(category.get_children())
-        products = PRODUCT_CLASS.objects.filter(category__in=category_list)
-
-        categories = CATEGORY_CLASS.objects.all()
-        context.update(
-            products = products,
-            categories = categories
-        )
-        return context
-
-
-class CartView(TemplateResponseMixin, View):
+class CartView(TemplateView):
     template_name = 'plugshop/cart.html'
 
     def extend_context(self, context):
@@ -111,7 +69,7 @@ class CartView(TemplateResponseMixin, View):
             context['form'] = ORDER_FORM_CLASS()
             context = self.extend_context(context)
             if len(cart) == 0:
-                return redirect('plugshop')
+                return redirect('plugshop:products')
             else:
                 return self.render_to_response(context)
 

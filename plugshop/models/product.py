@@ -17,8 +17,6 @@ class ProductAbstract(models.Model):
 
     class Meta:
         abstract = True
-        verbose_name  = _('product')
-        verbose_name_plural = _('products')
 
     def __unicode__(self):
         return self.name
@@ -27,14 +25,14 @@ class ProductAbstract(models.Model):
     def get_absolute_url(self):
         category = self.category
         return ('plugshop:product', None, {
-            'category_slug': category.slug,
-            'slug': self.slug,
-        })
+                    'category_slug': category.slug,
+                    'slug': self.slug})
 
 
 if is_default_model('PRODUCT'):
 
     class Product(ProductAbstract):
+
         class Meta:
             app_label = 'plugshop'
             verbose_name  = _('product')

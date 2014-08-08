@@ -15,8 +15,6 @@ class OrderProductAbstract(models.Model):
 
     class Meta:
         abstract = True
-        verbose_name = _('order product')
-        verbose_name_plural = _('order product')
 
     @property
     def price(self):

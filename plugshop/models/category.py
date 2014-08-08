@@ -15,8 +15,6 @@ class CategoryAbstract(models.Model):
 
     class Meta:
         abstract = True
-        verbose_name = _(u'category')
-        verbose_name_plural = _(u'categories')
 
     def __unicode__(self):
         return self.name

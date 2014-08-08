@@ -12,11 +12,10 @@ from plugshop.utils import is_default_model, get_model
 
 
 class OrderAbstract(models.Model):
-
     user = models.ForeignKey(get_user_model(), related_name='orders', 
                              verbose_name=_('user'))
-    number = models.CharField(_('order number'), unique=True, blank=False, 
-                              null=False, max_length=10, editable=False)
+    number = models.CharField(_('order number'), unique=True, 
+                                max_length=10, editable=False)
     status = models.IntegerField(_('order status'), blank=False, 
                                  choices=settings.STATUS_CHOICES, 
                                  default=settings.STATUS_CHOICES_START)
@@ -29,13 +28,11 @@ class OrderAbstract(models.Model):
 
     class Meta:
         abstract = True
-        verbose_name = _('order')
-        verbose_name_plural = _('orders')
     
     @property
     def price_total(self):
-        model = get_model(settings.ORDERPRODUCT_MODEL)
-        items = model.objects.filter(order=self)
+        OrderProduct = get_model(settings.ORDERPRODUCT_MODEL)
+        items = OrderProduct.objects.filter(order=self)
         return sum(item.quantity * item.product.price for item in items)
 
     def __unicode__(self):
@@ -43,7 +40,7 @@ class OrderAbstract(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('plugshop-order', None, {'number': self.number})
+        return ('plugshop:order', None, {'number': self.number})
 
 
 if is_default_model('Order'):
