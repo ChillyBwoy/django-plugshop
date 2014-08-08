@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
@@ -12,6 +14,7 @@ NAME_ERROR = _(u'Name is required')
 EMAIL_ERROR = _(u'Invalid email address')
 EMAIL_ERROR_EXISTS = _(u"Email address '%s' already exits, must be unique")
 
+
 class ProductForm(forms.Form):
     product = forms.ModelChoiceField(queryset=PRODUCT_CLASS.objects)
     quantity = forms.IntegerField(required=False)
@@ -22,7 +25,7 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = ORDER_CLASS
         exclude = (
-            'number', 
+            'number',
             'status',
             'created_at',
             'updated_at',
@@ -39,7 +42,7 @@ class OrderForm(forms.ModelForm):
         cart = kwargs.get('cart')
 
         user, created = User.objects.get_or_create(
-                                        email=self.cleaned_data.get('email'))
+            email=self.cleaned_data.get('email'))
         if created:
             user.username = self.cleaned_data.get('email')
             user.email = self.cleaned_data.get('email')
@@ -58,7 +61,7 @@ class OrderForm(forms.ModelForm):
                     product=c.product,
                     quantity=c.quantity,
                     order=model)
-                
+
         return model
 
     def clean_name(self):
@@ -67,7 +70,7 @@ class OrderForm(forms.ModelForm):
             n = name.split()
             if len(n) > 1:
                 self.cleaned_data['first_name'] = " ".join(n[1:])
-                self.cleaned_data['last_name']  = n[0]
+                self.cleaned_data['last_name'] = n[0]
             else:
                 self.cleaned_data['first_name'] = name
                 self.cleaned_data['last_name'] = ''

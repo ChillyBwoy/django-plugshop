@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import datetime
+
 from django.db.models import Q
 
 from plugshop import settings
@@ -11,6 +14,7 @@ PRODUCT_CLASS = get_model(settings.PRODUCT_MODEL)
 CATEGORY_CLASS = get_model(settings.CATEGORY_MODEL)
 ORDER_CLASS = get_model(settings.ORDER_MODEL)
 ORDER_PRODUCTS_CLASS = get_model(settings.ORDER_PRODUCTS_MODEL)
+
 
 @receiver(pre_save, sender=ORDER_CLASS)
 def set_delivered(sender, instance, **kwargs):

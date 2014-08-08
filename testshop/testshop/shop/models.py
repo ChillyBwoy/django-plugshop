@@ -1,5 +1,5 @@
-# encoding: utf-8
-import datetime
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,7 +15,8 @@ class Product(ProductAbstract):
 class Category(CategoryAbstract):
     description = models.TextField(_(u'description'), blank=True)
     sort = models.PositiveIntegerField(blank=True, null=True, default=1)
-    
+
+
 class Order(OrderAbstract):
     city = models.CharField(_('city'), max_length=80)
     address = models.TextField(_('address'), )

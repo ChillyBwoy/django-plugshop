@@ -1,5 +1,4 @@
-#encoding: utf-8
-import plugshop.utils as utils
+# -*- coding: utf-8 -*-
 
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
@@ -10,12 +9,13 @@ from plugshop import settings
 from plugshop.models import *
 from plugshop.utils import is_default_model, get_model
 
+
 class BaseProductAdmin(admin.ModelAdmin):
     #change_list_template = 'admin/product/change_list.html'
     inlines = ()
     search_fields = ('name',)
     prepopulated_fields = {
-        'slug': ('name',) 
+        'slug': ('name',)
     }
     list_display = (
         'name',
@@ -26,14 +26,15 @@ class BaseProductAdmin(admin.ModelAdmin):
     list_filter = (
         'category',
     )
-    
+
     def changelist_view(self, request, extra_context=None):
         ctx = {}
-        return super(BaseProductAdmin, self).changelist_view(
-                                                    request, extra_context=ctx)
+        return super(BaseProductAdmin, self).changelist_view(request,
+                                                             extra_context=ctx)
 
 if is_default_model('PRODUCT'):
     admin.site.register(get_model(settings.PRODUCT_MODEL), BaseProductAdmin)
+
 
 class BaseCategoryAdmin(MPTTModelAdmin):
     change_list_template = 'admin/category/change_list.html'
@@ -76,7 +77,7 @@ class BaseOrderAdmin(admin.ModelAdmin):
         'updated_at',
     )
     list_filter = (
-        'status', 
+        'status',
         'created_at',
     )
 

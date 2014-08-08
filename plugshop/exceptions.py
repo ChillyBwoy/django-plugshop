@@ -1,4 +1,5 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
+
 
 class NoUrlFound(Exception):
     def __init__(self, msg):
