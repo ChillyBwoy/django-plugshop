@@ -1,14 +1,12 @@
 Django Plugshop
 ===============
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ChillyBwoy/django-plugshop/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 A set of useless abstract models
 
 Requirements
 ============
 
-1. [django](https://github.com/django/django/) 1.4 or greater
+1. [django](https://github.com/django/django/) >= 1.4, <=1.5
 2. [django-mptt](https://github.com/django-mptt/django-mptt/)
 
 Installation
@@ -29,7 +27,7 @@ Installation
             'django.core.context_processors.request',
             # ...
         )
-        
+
 * Add URL-patterns:
 
         urlpatterns = patterns('',  
@@ -37,7 +35,7 @@ Installation
         )
 
 * Override default models. Example:
-        
+
         PLUGSHOP_MODELS = {
             'PRODUCT': 'myshop.Product',
             'CATEGORY': 'myshop.Category',
@@ -59,15 +57,15 @@ Models:
             'ORDER': 'plugshop.Order',
             'ORDER_PRODUCTS': 'plugshop.OrderProducts',
         }
-        
+
 Forms:
-        
+
         PLUGSHOP_FORMS = {
             'ORDER': 'plugshop.forms.OrderForm',
         }
 
 Config:
-    
+
         PLUGSHOP_CONFIG = {
             'REQUEST_NAMESPACE': 'cart',
             'SESSION_NAMESPACE': 'cart',
@@ -86,14 +84,14 @@ Other options:
                 (5, _('Completed')),
             ),
         }
-    
+
 Cart
 ====
 
         #views.py
         def my_view(request):
             cart = request.cart
-    
+
 Or
 
         #settings.py
@@ -102,7 +100,7 @@ Or
             'REQUEST_NAMESPACE': 'my_cart_namespace',
             ...
         }
-        
+
         #views.py
         def my_view(request):
             cart = request.my_cart_namespace

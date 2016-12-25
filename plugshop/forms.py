@@ -41,15 +41,17 @@ class OrderForm(forms.ModelForm):
     def save(self, commit=True, **kwargs):
         cart = kwargs.get('cart')
 
+        email = self.cleaned_data.get('email')
+        first_name = self.cleaned_data.get('first_name', '')
+        last_name = self.cleaned_data.get('last_name', '')
+
         user, created = User.objects.get_or_create(
-            email=self.cleaned_data.get('email'))
-        if created:
-            user.username = self.cleaned_data.get('email')
-            user.email = self.cleaned_data.get('email')
-            user.first_name = self.cleaned_data.get('first_name', '')
-            user.last_name = self.cleaned_data.get('last_name', '')
-            user.is_active = False
-            user.save()
+            username=email, defaults={
+                'email': email,
+                'first_name': first_name,
+                'last_name': last_name,
+                'is_active': False
+            })
 
         model = super(OrderForm, self).save(commit=False)
         model.user = user
